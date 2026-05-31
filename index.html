@@ -3,31 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn how to buy a home together with co-owners. Calculate splits, explore timelines, and understand legal options.">
-    <title>Coown - Shared Home Ownership Made Simple</title>
+    <meta name="description" content="A transparent, math-driven guide to home co-ownership. Prepared by Jared, Melinda, and Nelson Carter.">
+    <title>A Premium Co-Ownership Investment Guide - Jared, Melinda, and Nelson Carter</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Top Navigation Header -->
     <header class="header">
         <div class="container navbar">
             <a href="#" class="logo" id="logo-link">
-                <!-- Double roof home SVG representing co-ownership -->
+                <!-- House sharing silhouette representing mutual partnership -->
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3L19 9.3zM12 5.5l6 5.4v7.1h-2v-6H8v6H6v-7.1l6-5.4z"/>
                     <path d="M17 3.5l3.5 3.15V15h-1.5V7.85l-2-1.8V3.5h-2v1.05l-1-0.9V2.5h3v1z" opacity="0.75"/>
                 </svg>
-                <span>Coown</span>
+                <span>Carter Co-Ownership Guide</span>
             </a>
             
             <nav>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#" class="nav-link active">Home</a></li>
-                    <li><a href="#benefits" class="nav-link">Benefits</a></li>
-                    <li><a href="#timeline" class="nav-link">How It Works</a></li>
-                    <li><a href="#calculator" class="nav-link">Calculator</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#" class="nav-link active">Proposal</a></li>
+                    <li><a href="#strategy" class="nav-link">The Strategy</a></li>
+                    <li><a href="#adu" class="nav-link">ADU Living</a></li>
+                    <li><a href="#calculator" class="nav-link">Equalization Math</a></li>
+                    <li><a href="#timeline" class="nav-link">Exit Refinance</a></li>
+                    <li><a href="#properties" class="nav-link">Property Data</a></li>
                 </ul>
             </nav>
 
@@ -48,8 +49,8 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                <a href="#calculator" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Calculate Split</a>
-                <button class="hamburger" id="hamburger" aria-label="Open mobile navigation">
+                <a href="#calculator" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Run Calculator</a>
+                <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -58,292 +59,541 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-grid">
-            <div class="hero-content reveal active">
-                <h1>Co-own your home. <br><span class="text-gradient">Secure your future.</span></h1>
-                <p>Unlock the housing market with friends, partners, or family. By combining purchasing power, you can afford a home you love today, build equity, and share living expenses transparently.</p>
-                <div class="hero-buttons">
-                    <a href="#calculator" class="btn btn-accent">Calculate Your Share</a>
-                    <a href="#timeline" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white; background: transparent;">How It Works</a>
-                </div>
-            </div>
-            <div class="hero-image-container reveal active">
-                <img src="assets/coownership_hero.png" alt="Modern co-ownership homes" class="hero-image">
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section id="benefits" class="section">
+    <!-- Personal Letter / Greeting Hero -->
+    <section class="section letter-section">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Why Co-ownership?</h2>
-                <p>Purchasing a home with others is a practical, modern path to financial independence and community-centric living.</p>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card reveal">
-                    <div class="benefit-icon">
-                        <!-- Affordability Icon -->
-                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
-                        </svg>
-                    </div>
-                    <h3>Immediate Affordability</h3>
-                    <p>Pool your deposits and buying power to afford a larger home, better neighborhoods, or lower monthly payments than you could alone.</p>
+            <div class="letter-card">
+                <div class="letter-header">
+                    <span class="letter-meta">A Private Proposal for Joint Real Estate Investment</span>
                 </div>
-                <div class="benefit-card reveal">
-                    <div class="benefit-icon">
-                        <!-- Equity Icon -->
-                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-                        </svg>
-                    </div>
-                    <h3>Build Shared Equity</h3>
-                    <p>Redirect money away from rental landlords and into monthly equity accumulation, sharing the property appreciation over time.</p>
+                <div class="letter-greeting">Dear Family & Friends,</div>
+                <div class="letter-body">
+                    <p>We came up with this plan because the traditional path to homeownership in our current market forces families to settle for significantly less than what is actually possible.</p>
+                    <p>Jared has been actively investing in Utah real estate with his family since 2017 (currently serving as a 33% partner in Heber, Herriman, and Ogden residential portfolios and on the board of a 64-unit development in Heber). Through these ventures, we have seen firsthand that real estate remains incredibly resilient and profitable. We are ready to apply these same professional wealth-building strategies to our personal housing.</p>
+                    <p>After analyzing the financial mechanics of our dream home, we realized that the most efficient and risk-averse path forward is a highly structured, 5-year partnership that helps two families achieve their ultimate housing goals.</p>
+                    <p>This page serves as an introduction to this concept. It transparently outlines the market math, the daily logistics, the legal safeguards, and the exact 5-year exit strategy. We invite you to read through it, analyze the numbers, and see if we can build something exceptional together.</p>
                 </div>
-                <div class="benefit-card reveal">
-                    <div class="benefit-icon">
-                        <!-- Community Icon -->
-                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                        </svg>
-                    </div>
-                    <h3>Shared Responsibilities</h3>
-                    <p>Divide the load of home repairs, property taxes, insurance, and daily maintenance dynamically to make owning stress-free.</p>
+                <div class="letter-signature">
+                    <div class="letter-names">Jared, Melinda, and Nelson Carter</div>
+                    <div style="font-size: 0.85rem; color: var(--color-text-muted);">May 2026</div>
+                </div>
+                <div class="letter-ps">
+                    <strong>P.S.</strong> We put this in writing so you can review it completely pressure-free. We know this type of arrangement is unique, and above all, we value our relationship with you. If it is a fit, we are thrilled to take this journey together; if not, there are absolutely no worries—we extend this invitation with love and respect.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="timeline" class="section">
+    <!-- Section 1: The Strategy & Buying Dirt -->
+    <section id="strategy" class="section">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>The Co-ownership Journey</h2>
-                <p>Steps to successfully purchase and manage a shared home, ensuring clear expectations and peace of mind.</p>
+            <div class="section-header">
+                <h2>1. The Strategy: Maximizing Purchasing Power</h2>
+                <p>The path to premium homeownership does not have to be delayed by decades. By pooling resources today, two families can immediately acquire a turnkey, high-end asset in a safe neighborhood and skip overpriced, entry-level properties.</p>
             </div>
             
-            <div class="timeline">
-                <div class="timeline-item timeline-left reveal">
-                    <div class="timeline-content">
-                        <h3><span class="timeline-number">1</span> Align Goals</h3>
-                        <p>Partner selection and financial matching. Have transparent discussions about budgets, credit standings, and long-term plans for the property.</p>
-                    </div>
-                </div>
-                <div class="timeline-item timeline-right reveal">
-                    <div class="timeline-content">
-                        <h3><span class="timeline-number">2</span> Draft Legal Agreements</h3>
-                        <p>Establish a legal co-ownership agreement detailing equity split, exit strategies (e.g. if someone wants to sell), and rules for hosting guests or renting rooms.</p>
-                    </div>
-                </div>
-                <div class="timeline-item timeline-left reveal">
-                    <div class="timeline-content">
-                        <h3><span class="timeline-number">3</span> Secure Financing</h3>
-                        <p>Apply for a joint mortgage. Many lenders support fractional co-ownership loans, or joint tenancy mortgages where all buyers are listed.</p>
-                    </div>
-                </div>
-                <div class="timeline-item timeline-right reveal">
-                    <div class="timeline-content">
-                        <h3><span class="timeline-number">4</span> Buy and Manage</h3>
-                        <p>Finalize the closing, move in, and set up a joint bank account for expenses to automate bills, utilities, and emergency maintenance reserves.</p>
-                    </div>
-                </div>
+            <p>This strategy works due to a fundamental market reality: <strong>house quality does not scale linearly with cost.</strong> In Utah's current real estate market, entry-level single-family homes (starting around $375,000) represent the highest demand and the lowest relative value. They tend to be older, smaller, and located in less secure or slower-appreciating areas.</p>
+            
+            <p>However, if we double our budget to $750,000, the resulting home is disproportionately superior—gaining substantially more than double the square footage, build quality, and neighborhood security. Because a massive pool of buyers are fighting over the cheapest homes, those properties are significantly overpriced. Larger, premium homes with accessory dwelling units (ADUs) or dual living spaces remain more sanely priced. By leveraging our combined buying power, we bypass the competitive bottom-tier market entirely.</p>
+            
+            <h3 style="margin: var(--space-md) 0 var(--space-xs) 0;">The Golden Rule: Buy Dirt</h3>
+            <p>A fundamental rule of property investment is that <strong>structures depreciate, while land appreciates.</strong> The physical building itself ages and requires maintenance, but the dirt underneath is the true vehicle for wealth creation. To maximize capital growth, we must maximize land ownership. This is why townhomes and condos struggle to match the long-term ROI of a single-family home on an actual lot.</p>
+            
+            <!-- Matrix Table -->
+            <div class="comparison-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Financial Metric</th>
+                            <th>Renting ($1,850/mo)</th>
+                            <th>Buying a Townhome ($375k)</th>
+                            <th>Buying an Entry SFH ($350k)</th>
+                            <th class="highlight-col">Co-Owning a Premium SFH ($750k Total)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Daily Reality</strong></td>
+                            <td>100% interest to landlord</td>
+                            <td>Sluggish growth, high HOA dues</td>
+                            <td>Compromised location, constant DIY maintenance</td>
+                            <td class="highlight-col">Premium turnkey home, high safety, total privacy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5-Year Cash Outlay</strong></td>
+                            <td>$111,000 (Non-recoverable)</td>
+                            <td>HOA Dues: $12,000+ (Non-recoverable)</td>
+                            <td>High repair and maintenance costs</td>
+                            <td class="highlight-col">Shared maintenance, $0 HOA fees</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Historical Appreciation</strong></td>
+                            <td>0%</td>
+                            <td>Capped at ~3.5% annually</td>
+                            <td>~4.5% annually</td>
+                            <td class="highlight-col">5.0%+ annually (Premium Asset)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Equity Gained (5 Yrs)</strong></td>
+                            <td>$0</td>
+                            <td>~$70,000</td>
+                            <td>~$85,000 - $90,000</td>
+                            <td class="highlight-col"><strong>$100,000+ (Per Family)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Financial Result</strong></td>
+                            <td>Capital Loss: -$111,000</td>
+                            <td>Sluggish growth suppressed by HOA</td>
+                            <td>Modest growth offset by maintenance drain</td>
+                            <td class="highlight-col"><strong>Disproportionate wealth growth & quality of life</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- Calculator Section -->
-    <section id="calculator" class="section calc-section">
+    <!-- Section 2: HOA Analysis -->
+    <section id="hoa" class="section section-alt">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Co-ownership Split Calculator</h2>
-                <p>Estimate joint mortgage totals and balance your group's shares. Adjust individual percentage contributions below and see the proportional math update live.</p>
+            <div class="section-header">
+                <h2>2. HOAs: Analyzing Non-Recoverable Costs</h2>
+                <p>When comparing a single-family home to a townhome or condo, Homeowner Association (HOA) fees are often brushed off as just another monthly bill. In reality, they are a massive anchor on wealth and purchasing power.</p>
             </div>
             
-            <div class="calc-grid reveal">
-                <!-- Left panel: Inputs -->
-                <div class="calc-card">
+            <div class="hoa-grid">
+                <div class="hoa-card">
+                    <h3>
+                        <!-- Icon representation -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM13 16h-2v2h2v-2zm0-6h-2v4h2v-4z"/></svg>
+                        The Buying Power Trap
+                    </h3>
+                    <p>Lenders calculate loan approval based on the total monthly payment. At current interest rates, a seemingly minor $195/month HOA fee eliminates roughly $25,000 to $30,000 in mortgage borrowing power. You pay the exact same amount out of pocket, but you are buying up to $30,000 less actual property.</p>
+                </div>
+                
+                <div class="hoa-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.36 10.04L20.5 9l-2.12-2.12-1.04 1.14c-1.3-1.07-2.94-1.78-4.75-1.97V3h-3v3.05c-1.81.19-3.45.9-4.75 1.97L3.8 6.88 1.68 9l1.14 1.04c-1.07 1.3-1.78 2.94-1.97 4.75H2v3h.85c.19 1.81.9 3.45 1.97 4.75l-1.14 1.04 2.12 2.12 1.04-1.14c1.3 1.07 2.94 1.78 4.75 1.97V23h3v-3.05c1.81-.19 3.45-.9 4.75-1.97l1.04 1.14 2.12-2.12-1.14-1.04c1.07-1.3 1.78-2.94 1.97-4.75H22v-3h-.85c-.19-1.81-.9-3.45-1.97-4.75zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                        The Zero-Equity Black Hole
+                    </h3>
+                    <p>Every dollar paid to an HOA is a non-equity cost. Over a short 5-year timeline, a $195/mo fee burns $11,700 in pure cash. This is a compounding loss, as those funds could have otherwise been building home equity and generating interest.</p>
+                </div>
+
+                <div class="hoa-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        Bureaucratic Inefficiency
+                    </h3>
+                    <p>When HOA boards manage community funds, they are spending other people's money. As a result, there is little to no incentive to be highly efficient. Boards routinely approve bloated vendor contracts, hire expensive third-party management companies, and fund unnecessary projects.</p>
+                </div>
+
+                <div class="hoa-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                        The Uncapped Liability
+                    </h3>
+                    <p>While a fixed-rate mortgage locks in your core housing cost for decades, HOA boards continually raise monthly dues to cover master insurance premiums, inflation, and sudden "special assessments" for mismanaged community repairs.</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: var(--space-md); text-align: center; font-style: italic;">By targeting a premium single-family home and avoiding an HOA entirely, we lock in monthly costs and ensure every dollar spent builds our own wealth.</p>
+        </div>
+    </section>
+
+    <!-- Section 3: Living Logistics & ADU Visual -->
+    <section id="adu" class="section">
+        <div class="container split-layout">
+            <div>
+                <div class="section-header" style="margin-bottom: var(--space-md);">
+                    <h2>3. Dual Living: Two Homes, One Partnership</h2>
+                    <p>This is not a roommate situation. It is a formal business partnership designed to launch both families forward while preserving complete spatial privacy.</p>
+                </div>
+                <p>We will target a property designed specifically with two separate, fully private living spaces (e.g., a primary residence with a professional basement Accessory Dwelling Unit, or ADU). Each family enjoys:</p>
+                
+                <ul class="checklist-ul" style="margin-bottom: var(--space-md);">
+                    <li><strong>Separate Entryways:</strong> Completely independent front doors (zero shared indoor access).</li>
+                    <li><strong>Fully Equipped Kitchens:</strong> Separate cooking spaces, stoves, and refrigerators.</li>
+                    <li><strong>Private Laundry:</strong> Independent washer/dryer sets for each unit.</li>
+                    <li><strong>Acoustic Privacy:</strong> Built-in soundproofing between levels to ensure quiet, stress-free daily living.</li>
+                </ul>
+
+                <p>To ensure this arrangement remains completely professional, we will divide the property's management duties into two distinct, equal roles: <strong>The Financial Administrator</strong> (handles the joint books, calculating the mortgage, taxes, utilities, and supplying digital receipts) and <strong>The Property Manager</strong> (manages physical maintenance, lawn care scheduling, HVAC servicing, and vendor repairs).</p>
+            </div>
+            
+            <!-- Real ADU Image -->
+            <div class="adu-image-box">
+                <img src="assets/basement_adu.jpg" alt="Ideal setup: single-family home with a private daylight basement ADU layout.">
+                <div class="adu-image-caption">Visualizing the ideal ADU configuration: Independent private entrance, daylight window layouts, and separate living zones.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Rent Equalization & Calculator -->
+    <section id="calculator" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>4. The Financial Architecture & Equalization</h2>
+                <p>To ensure absolute fairness, we choose an ownership split from the beginning (like 50/50 or 60/40) which governs down payments and joint bills. But how do we balance the difference in value between the main house and the ADU?</p>
+            </div>
+            
+            <p>The main house is inherently larger and more valuable than the basement ADU. To keep the living situation completely fair, a <strong>monthly rent appraisal is performed on both spaces by a professional third-party.</strong> Based on our ownership split, a <strong>Fair Living Contribution (or rent equalization payment)</strong> is calculated. The partner living in the main house pays the other partner this monthly adjustment, ensuring that the total value received from the property (living space value plus cash received) matches everyone's precise ownership percentage.</p>
+
+            <div class="calc-grid" style="margin-top: var(--space-lg);">
+                <!-- Calculator Inputs -->
+                <div class="calc-panel-left">
+                    <div class="calc-subheading">Equalization Inputs</div>
                     <form class="calc-form" onsubmit="return false;">
-                        <div class="calc-group">
+                        <div class="input-group">
                             <label for="home-price">Home Price</label>
-                            <div class="calc-input-wrapper">
-                                <span class="calc-prefix">$</span>
-                                <input type="number" id="home-price" value="650000" min="0" step="5000">
+                            <div class="input-wrapper">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="home-price" value="750000" min="0" step="5000">
                             </div>
                         </div>
-                        
-                        <div class="calc-group">
+
+                        <div class="input-group">
                             <label for="down-payment">Down Payment (%)</label>
-                            <div class="calc-input-wrapper">
-                                <span class="calc-prefix">%</span>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">%</span>
                                 <input type="number" id="down-payment" value="20" min="0" max="100">
                             </div>
                         </div>
 
-                        <div class="calc-group">
+                        <div class="input-group">
                             <label for="interest-rate">Interest Rate (%)</label>
-                            <div class="calc-input-wrapper">
-                                <span class="calc-prefix">%</span>
-                                <input type="number" id="interest-rate" value="6.5" min="0" max="25" step="0.1">
+                            <div class="input-wrapper">
+                                <span class="input-prefix">%</span>
+                                <input type="number" id="interest-rate" value="6.25" min="0" step="0.05">
                             </div>
                         </div>
 
-                        <div class="calc-group">
+                        <div class="input-group">
                             <label for="loan-term">Loan Term</label>
-                            <div class="calc-input-wrapper">
-                                <span class="calc-prefix">Yrs</span>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">Yrs</span>
                                 <input type="number" id="loan-term" value="30" min="5" max="40">
                             </div>
                         </div>
 
-                        <div class="calc-group calc-group-full">
-                            <label for="monthly-expenses">Monthly Bills & HOA Fees (Insurance, taxes, etc.)</label>
-                            <div class="calc-input-wrapper">
-                                <span class="calc-prefix">$</span>
+                        <div class="input-group calc-full">
+                            <label for="monthly-expenses">Monthly Partnership Bills (Property Tax, Insurance, reserves)</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">$</span>
                                 <input type="number" id="monthly-expenses" value="800" min="0" step="50">
                             </div>
                         </div>
 
-                        <div class="calc-group calc-group-full" style="margin-top: var(--space-sm);">
-                            <h4 style="margin-bottom: var(--space-xs);">Adjust Partner Shares</h4>
-                            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">Slide to adjust how the total monthly expenses are split. The sliders automatically distribute the remainder.</p>
-                            
-                            <div class="partners-container">
-                                <div class="partner-row">
-                                    <span class="partner-name">Partner A</span>
-                                    <input type="range" id="partner-a-share" min="0" max="100" value="40">
-                                    <span id="partner-a-share-value" style="font-weight: 700; text-align: right;">40%</span>
+                        <!-- Split Selection -->
+                        <div class="input-group calc-full">
+                            <label>Ownership Split (Governs Down Payment & Joint Bills)</label>
+                            <div class="split-selector">
+                                <div class="split-option active" data-split="50-50">50% / 50% Split</div>
+                                <div class="split-option" data-split="60-40">60% (Main) / 40% (ADU)</div>
+                            </div>
+                        </div>
+
+                        <!-- Rent Appraisal Inputs -->
+                        <div class="input-group calc-full appraisal-group">
+                            <label style="margin-bottom: var(--space-xs); font-weight: 700; color: var(--color-primary);">Rental Appraisals (Used for Equalization)</label>
+                            <div class="appraisal-inputs">
+                                <div class="input-group">
+                                    <label for="rent-main">Main House Appraisal</label>
+                                    <div class="input-wrapper">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="rent-main" value="2200" min="0" step="50">
+                                    </div>
                                 </div>
-                                <div class="partner-row">
-                                    <span class="partner-name">Partner B</span>
-                                    <input type="range" id="partner-b-share" min="0" max="100" value="30">
-                                    <span id="partner-b-share-value" style="font-weight: 700; text-align: right;">30%</span>
-                                </div>
-                                <div class="partner-row">
-                                    <span class="partner-name">Partner C</span>
-                                    <input type="range" id="partner-c-share" min="0" max="100" value="30">
-                                    <span id="partner-c-share-value" style="font-weight: 700; text-align: right;">30%</span>
+                                <div class="input-group">
+                                    <label for="rent-adu">ADU Unit Appraisal</label>
+                                    <div class="input-wrapper">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="rent-adu" value="1400" min="0" step="50">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <!-- Right panel: Live Outputs -->
-                <div class="calc-results-card">
+                <!-- Calculator Outputs -->
+                <div class="calc-panel-right">
                     <div>
-                        <h3>Monthly Estimates</h3>
+                        <h3>Mathematically Fair Split</h3>
                         
-                        <div class="result-total">
-                            <div class="result-total-label">Total Monthly Payment</div>
-                            <div class="result-total-value" id="total-monthly-payment">$4,085</div>
+                        <div class="output-row-total">
+                            <div class="output-label-total">Total Monthly Mortgage & Joint Bills</div>
+                            <div class="output-value-total" id="total-monthly-payment">$4,495</div>
                         </div>
                         
-                        <div class="result-splits-container">
-                            <div class="result-split-item">
-                                <span class="result-split-label">Partner A Pays</span>
-                                <span class="result-split-value" id="partner-a-monthly">$1,634</span>
+                        <div class="outputs-splits">
+                            <div class="output-split-item">
+                                <span class="output-split-label">Main House Base Share</span>
+                                <span class="output-split-val" id="main-base-payment">$2,248</span>
                             </div>
-                            <div class="result-split-item">
-                                <span class="result-split-label">Partner B Pays</span>
-                                <span class="result-split-value" id="partner-b-monthly">$1,226</span>
+                            <div class="output-split-item">
+                                <span class="output-split-label">ADU Unit Base Share</span>
+                                <span class="output-split-val" id="adu-base-payment">$2,248</span>
                             </div>
-                            <div class="result-split-item">
-                                <span class="result-split-label">Partner C Pays</span>
-                                <span class="result-split-value" id="partner-c-monthly">$1,226</span>
+                        </div>
+                        
+                        <!-- Equalization Output Box -->
+                        <div class="equalization-badge-card">
+                            <div class="equalization-badge-title">Rent Equalization Payment</div>
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.7);" id="equalization-direction">Main House pays ADU:</span>
+                                <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #FFFFFF;" id="equalization-amount">$400 / mo</span>
+                            </div>
+                            <div class="equalization-badge-title">Final Net Payments</div>
+                            <div class="outputs-splits" style="background: rgba(0,0,0,0.25); padding: 8px; margin-top: 4px;">
+                                <div class="output-split-item" style="padding: 2px 0;">
+                                    <span class="output-split-label" style="font-size: 0.8rem;" id="main-name-label">Main House Net Out-of-Pocket</span>
+                                    <span class="output-split-val" style="font-size: 1rem;" id="main-net-payment">$2,648</span>
+                                </div>
+                                <div class="output-split-item" style="padding: 2px 0; border: none;">
+                                    <span class="output-split-label" style="font-size: 0.8rem;" id="adu-name-label">ADU Resident Net Out-of-Pocket</span>
+                                    <span class="output-split-val" style="font-size: 1rem;" id="adu-net-payment">$1,848</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div style="margin-top: var(--space-xl); font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.4;">
-                        * Estimates include principal, interest, taxes, and specified home insurance / HOA bills. Property appreciation or legal drafting costs are not calculated here.
+                    <div style="font-size: 0.8rem; color: rgba(250,247,240,0.65); line-height: 1.4; margin-top: var(--space-md);">
+                        <strong>Rent Equalization formula:</strong> We calculate each party's fair value share. The partner occupying more appraisal value pays the difference to the other, guaranteeing that net utility splits map strictly back to ownership shares.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section">
+    <!-- Section 5: Refinancing Exit Strategy Timeline -->
+    <section id="timeline" class="section">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Frequently Asked Questions</h2>
-                <p>Answers to common questions surrounding home co-ownership legalities and logistics.</p>
+            <div class="section-header">
+                <h2>5. The 5-Year Exit & Refinance Math</h2>
+                <p>The ultimate goal isn't to share one property forever—it is to use it as a springboard. Move the slider below to see how appreciation and principal paydown build refinancing capacity to fund a buyout at Year 5.</p>
             </div>
             
-            <div class="faq-container reveal">
-                <div class="faq-item">
-                    <button class="faq-question-btn">
-                        <h3>What legal agreement do we need?</h3>
-                        <span class="faq-toggle-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>You should draft a custom <strong>Co-ownership Agreement</strong> (or Tenants-in-Common Agreement) with a real estate attorney. This documents each person's equity stake, who handles maintenance bills, how properties are managed, and what happens if someone wants to move out or sell their portion.</p>
+            <p>Our exit strategy allows either partner to trigger a buyout at the 5-year mark. The staying partner refinances the property to cash out the leaving partner's equity (which equals their half-share of the original down payment plus half of the accumulated home appreciation). The timeline below shows the mathematical feasibility of this buyout based on a starting home value of <strong>$800,000</strong>, a <strong>$75,000 down payment</strong>, a <strong>6.25% mortgage rate</strong>, and a **5.0% annual appreciation**.</p>
+            
+            <div class="timeline-slider-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                    <h4 style="font-size: 1.15rem; color: var(--color-primary);">Select Project Year:</h4>
+                    <span id="timeline-year-badge" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-secondary);">Year 5.0</span>
+                </div>
+                
+                <!-- Slider Axis -->
+                <div class="slider-timeline-axis">
+                    <input type="range" id="timeline-range" min="0" max="10" value="5" step="1" style="margin-bottom: 6px;">
+                    <div class="timeline-axis-ticks">
+                        <span>Year 0 (Closing)</span>
+                        <span>Year 1</span>
+                        <span>Year 2</span>
+                        <span>Year 3</span>
+                        <span>Year 4</span>
+                        <span>Year 5 (Target Exit)</span>
+                        <span>Year 6</span>
+                        <span>Year 7</span>
+                        <span>Year 8</span>
+                        <span>Year 9</span>
+                        <span>Year 10</span>
                     </div>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question-btn">
-                        <h3>How are mortgages structured?</h3>
-                        <span class="faq-toggle-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Most groups get a standard joint mortgage. This means you are "jointly and severally liable," meaning the lender holds everyone responsible for the full balance. If one partner defaults, the others are legally responsible for the mortgage payments. Some specialized lenders offer fractional loans, but joint mortgages are the most common.</p>
+                <!-- Results boxes -->
+                <div class="timeline-results-grid">
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Home Value</span>
+                        <span class="timeline-data-value" id="tl-home-value">$1,021,025</span>
                     </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question-btn">
-                        <h3>What happens if a co-owner wants to sell?</h3>
-                        <span class="faq-toggle-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>An exit strategy is the most crucial part of your legal contract. Usually, the agreement grants the remaining owners a "right of first refusal" to buy out the departing partner's equity based on an independent valuation. If they cannot or do not want to buy them out, the agreement usually outlines timelines to list the home on the open market.</p>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Remaining Mortgage</span>
+                        <span class="timeline-data-value" id="tl-mortgage-left">$676,695</span>
                     </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question-btn">
-                        <h3>How is title or deed ownership split?</h3>
-                        <span class="faq-toggle-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-                            </svg>
-                        </span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Co-owners typically choose to hold title as <strong>Tenants in Common (TIC)</strong> rather than Joint Tenants. TIC allows you to hold unequal shares of the home (e.g. 50%, 30%, and 20%) matching your down payment split, and allows you to pass your share to heirs in a will rather than it automatically transferring to the other co-owners.</p>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Total Joint Equity</span>
+                        <span class="timeline-data-value" id="tl-joint-equity">$344,330</span>
+                    </div>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Leaving Partner Share</span>
+                        <span class="timeline-data-value" id="tl-buyout-needed" style="color: var(--color-secondary);">$172,165</span>
+                    </div>
+                    
+                    <!-- LTV Feasibility status -->
+                    <div class="timeline-status-card">
+                        <div style="text-align: left;">
+                            <h5 style="margin-bottom: 2px;">Refinancing Buyout Feasibility</h5>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0;" id="tl-status-desc">
+                                At 90% LTV, we can borrow up to <strong>$242,227</strong> to cash out the departing partner.
+                            </p>
+                        </div>
+                        
+                        <div style="display: flex; gap: var(--space-xs);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">90% LTV</span>
+                                <span class="status-badge status-yes" id="ltv-90-badge">Yes</span>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">80% LTV</span>
+                                <span class="status-badge status-no" id="ltv-80-badge">No</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section cta-section">
-        <div class="container reveal">
-            <h2>Ready to buy together?</h2>
-            <p>Get tips, legal checklists, and calculators directly in your inbox. Subscribe to our newsletter to stay updated on modern home co-ownership trends.</p>
+    <!-- Section 6: Real Property Showcase -->
+    <section id="properties" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>6. Local Davis County Property Analysis</h2>
+                <p>To ground this proposal in reality, we have tracked and rated real MLS listings in North Davis County that perfectly fit our co-ownership criteria.</p>
+            </div>
             
-            <form class="newsletter-form" id="newsletter-form" action="#" method="POST">
-                <input type="email" placeholder="Enter your email address" required aria-label="Email Address">
-                <button type="submit" class="btn btn-secondary" style="border: none;">Subscribe</button>
-            </form>
-            <div class="newsletter-feedback" id="newsletter-feedback"></div>
+            <p>These homes feature large overall square footage, zero HOA fees (or minor neighborhood HOAs), and layouts highly suitable for converting to or currently housing independent basement ADU living spaces.</p>
+            
+            <div class="prop-grid">
+                <!-- Property 1 Kaysville -->
+                <div class="prop-card">
+                    <div class="prop-img-wrapper">
+                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2151129_23ef4540cfd9ad1a6d2d698470a18cf8_69dfaf037b4e5.jpg" alt="1453 S 400 E, Kaysville, UT 84037">
+                        <span class="prop-rating-tag">Rating: 4.4 / 5</span>
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">$680,000</div>
+                        <div class="prop-address">1453 S 400 E<br>Kaysville, UT 84037</div>
+                        <div class="prop-meta-grid">
+                            <span>📐 4,080 Sq. Ft.</span>
+                            <span>🌳 0.18 Acres</span>
+                            <span>🏠 Built in 2002</span>
+                            <span>🚫 HOA: $0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 2 Clinton -->
+                <div class="prop-card">
+                    <div class="prop-img-wrapper">
+                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2152933_2af9c1d506df911485de3cef8e85c14e_69ea54a816c50.jpg" alt="1333 N 1590 W, Clinton, UT 84015">
+                        <span class="prop-rating-tag">Rating: 4.65 / 5</span>
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">$695,000</div>
+                        <div class="prop-address">1333 N 1590 W<br>Clinton, UT 84015</div>
+                        <div class="prop-meta-grid">
+                            <span>📐 3,927 Sq. Ft.</span>
+                            <span>🌳 0.37 Acres</span>
+                            <span>🏠 Built in 2005</span>
+                            <span>🚫 HOA: $0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property 3 Syracuse -->
+                <div class="prop-card">
+                    <div class="prop-img-wrapper">
+                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2156837_347f4963a1bef5a6fe47cf27a0fa84ae_69ff8f8f429e4.jpg" alt="1372 S Homestead Ln, Syracuse, UT 84075">
+                        <span class="prop-rating-tag">Rating: 4.6 / 5</span>
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">$750,000</div>
+                        <div class="prop-address">1372 S Homestead Ln<br>Syracuse, UT 84075</div>
+                        <div class="prop-meta-grid">
+                            <span>📐 4,852 Sq. Ft.</span>
+                            <span>🌳 0.31 Acres</span>
+                            <span>🏠 Built in 2019</span>
+                            <span>📝 HOA: $30/mo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Mutual Safeguards & Operating Agreement -->
+    <section id="safeguards" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>7. Safeguards: Building a Bulletproof Partnership</h2>
+                <p>Entering into a joint venture is a significant decision. The greatest risk isn't the real estate market—it is unstated expectations. We establish total trust on paper before a single dollar changes hands.</p>
+            </div>
+            
+            <div class="checklist-container">
+                <div class="checklist-box">
+                    <h3>The Good Neighbor Playbook</h3>
+                    <p>Before closing, we collaboratively document daily household logistics to remove social ambiguity and prevent awkward conversations:</p>
+                    <ul class="checklist-ul">
+                        <li><strong>Driveway Parking:</strong> Assigned slots for family vehicles and guest guidelines.</li>
+                        <li><strong>Yard Care & Landscaping:</strong> Pre-agreed division of seasonal mowing, weeding, and snow removal labor.</li>
+                        <li><strong>Pet Etiquette:</strong> Muted boundaries for pet areas and waste clean-up expectations.</li>
+                        <li><strong>Quiet Hours:</strong> Respectful sound thresholds for evenings and weekend mornings.</li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-box">
+                    <h3>Airtight Legal Operating Agreement</h3>
+                    <p>A custom contract drafted by a specialized real estate attorney to protect both families' capital and exit rights:</p>
+                    <ul class="checklist-ul">
+                        <li><strong>Open-Book Financials:</strong> Mutual sharing of credit scores, income ratios, and bank statements.</li>
+                        <li><strong>Emergency Safety Net:</strong> If a partner misses a payment, the other covers it and receives a pre-agreed, weighted equity increase.</li>
+                        <li><strong>The Ultimate Default Boundary:</strong> If a partner misses 6 payments within a 12-month window, they vacate the unit and forfeit equity.</li>
+                        <li><strong>Buyout Protocol:</strong> Legally locking in ownership shares, appraisal guidelines, and exit triggers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Exit Strategies (FAQ and Contact) -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>8. Frequently Asked Questions & Exit Scenarios</h2>
+                <p>Transparent answers on how we handle changing life circumstances and the end of the 5-year timeline.</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question-btn">
+                        <h3>What happens at the 5-year mark if both of us want to stay?</h3>
+                        <span class="faq-toggle-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We execute the <strong>Valuation Buyout Protocol</strong>. One partner names a single dollar value for the property. The other partner has the absolute right to either buy the first partner out at that exact price, or accept that price and be bought out themselves. This mechanism forces the pricing partner to select a perfectly fair, market-accurate number, as they may be forced to accept it themselves.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question-btn">
+                        <h3>What if only one partner wants to move?</h3>
+                        <span class="faq-toggle-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The staying partner buys out the leaving partner's equity share at a fair market valuation (established by a professional third-party appraisal). The leaving partner receives their accumulated equity (down payment share + appreciation + principal paydown share) in cash, which they can use to buy their next home.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question-btn">
+                        <h3>How does the Co-Sign Guarantee work?</h3>
+                        <span class="faq-toggle-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>To ensure the leaving partner transition is successful, if the leaving partner maintains a perfect 5-year payment history, the staying partner guarantees to co-sign on their new home loan if needed. The staying partner leverages their personal income and the newly vacant ADU's rental stream to help the leaving partner qualify for premier, top-tier financing.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question-btn">
+                        <h3>Are there details on title deeds?</h3>
+                        <span class="faq-toggle-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Owners hold the title as <strong>Tenants in Common (TIC)</strong>. Unlike joint tenancy, TIC lets us specify unequal ownership shares (like 60/40) on the deed itself, reflecting our contributions, and allows each partner to pass their share of the home to their heirs in their will.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -357,43 +607,29 @@
                             <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3L19 9.3zM12 5.5l6 5.4v7.1h-2v-6H8v6H6v-7.1l6-5.4z"/>
                             <path d="M17 3.5l3.5 3.15V15h-1.5V7.85l-2-1.8V3.5h-2v1.05l-1-0.9V2.5h3v1z" opacity="0.75"/>
                         </svg>
-                        <span>Coown</span>
+                        <span>Carter Co-Ownership</span>
                     </a>
-                    <p style="margin-top: var(--space-xs);">Helping co-buyers, friends, and families build property equity together securely and transparently.</p>
+                    <p style="margin-top: var(--space-xs);">A transparent, math-driven guide prepared by Jared, Melinda, and Nelson Carter to analyze home co-ownership logistics and refinancing feasibility.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Explore</h4>
+                    <h4>Documents</h4>
                     <ul class="footer-links">
-                        <li><a href="#benefits">Benefits</a></li>
-                        <li><a href="#timeline">How It Works</a></li>
-                        <li><a href="#calculator">Calculator</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="context/Co-Ownership Guide.pdf" target="_blank">Download Guide PDF</a></li>
+                        <li><a href="context/Premium Family Co-Ownership Guide - Elegant Text Edition.docx" target="_blank">Word Version (.docx)</a></li>
+                        <li><a href="context/Co-Ownership Exit Plan.xlsx" target="_blank">Download Exit Math (.xlsx)</a></li>
+                        <li><a href="context/Property Data (Co-Ownership Route).xlsx" target="_blank">Property Sheet (.xlsx)</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Legal Checklists</a></li>
-                        <li><a href="#">Sample Agreement</a></li>
-                        <li><a href="#">Mortgage Rates</a></li>
-                        <li><a href="#">Partner Worksheets</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:info@coown.net">info@coown.net</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Partnerships</a></li>
-                    </ul>
+                    <h4>Disclaimers</h4>
+                    <p style="font-size: 0.8rem; line-height: 1.5; color: var(--color-text-muted);">This website is prepared for private discussion with family and friends. It does not constitute formal financial, legal, or investment advice. Any purchase should involve independent legal counsel.</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Coown. All rights reserved.</p>
-                <div class="footer-legal-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Disclaimer</a>
+                <p>&copy; 2026 Jared, Melinda, and Nelson Carter. All rights reserved.</p>
+                <div class="footer-links" style="flex-direction: row; gap: var(--space-md);">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
                 </div>
             </div>
         </div>
