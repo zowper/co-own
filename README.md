@@ -1,4 +1,4 @@
-# Coown: Home Co-ownership Informational Platform
+# Co-own: Home Co-ownership Informational Platform
 
 A premium, modern informational website built with Vanilla HTML5, CSS3, and JavaScript, designed to help friends, families, and partners navigate the co-ownership journey. This project is structured to be deployed easily onto GitHub Pages.
 

@@ -1,38 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Theme Toggle
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('sun-icon');
-    const moonIcon = document.getElementById('moon-icon');
-    
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-    });
-
-    // 2. Mobile Navigation Menu
+    // 1. Mobile Navigation Menu & Overlay Trigger
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -61,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. FAQ Accordion
+    // 2. FAQ Accordion Toggles
     const faqItems = document.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
@@ -83,20 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Rent Equalization Calculator
+    // 3. Rent Equalization Calculator
     const homePriceInput = document.getElementById('home-price');
     const downPaymentInput = document.getElementById('down-payment');
     const interestRateInput = document.getElementById('interest-rate');
     const loanTermInput = document.getElementById('loan-term');
     const expensesInput = document.getElementById('monthly-expenses');
     
-    // Rent Appraisals
     const rentMainInput = document.getElementById('rent-main');
     const rentAduInput = document.getElementById('rent-adu');
 
-    // Split buttons
     const splitOptions = document.querySelectorAll('.split-option');
-    let currentSplit = '50-50'; // Default split
+    let currentSplit = '50-50'; // Default 50/50 split
 
     splitOptions.forEach(opt => {
         opt.addEventListener('click', () => {
@@ -107,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Output Elements
     const totalMonthlyOutput = document.getElementById('total-monthly-payment');
     const mainBaseOutput = document.getElementById('main-base-payment');
     const aduBaseOutput = document.getElementById('adu-base-payment');
@@ -126,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const appraisalMain = parseFloat(rentMainInput.value) || 0;
         const appraisalAdu = parseFloat(rentAduInput.value) || 0;
 
-        // 1. Calculate Mortgage
+        // Calculate Monthly Mortgage
         const downPaymentAmount = homePrice * (downPaymentPercent / 100);
         const loanAmount = homePrice - downPaymentAmount;
 
@@ -143,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const totalMonthlyCost = monthlyMortgage + monthlyExpenses;
 
-        // 2. Base split factors
+        // Determine splits
         let shareMain = 0.5;
         let shareAdu = 0.5;
 
@@ -155,38 +119,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainBaseShare = totalMonthlyCost * shareMain;
         const aduBaseShare = totalMonthlyCost * shareAdu;
 
-        // 3. Rent Equalization Payment math:
-        // Total utility consumed = appraisalMain + appraisalAdu
-        // Each family is entitled to their ownership share of the total utility:
-        // Main entitled: (Main + ADU) * shareMain
-        // ADU entitled: (Main + ADU) * shareAdu
-        // Difference represents what Main House consumed in excess (or deficit) of entitlement.
+        // Rent Equalization Calculation:
+        // Total utility = appraisalMain + appraisalAdu
+        // Entitled Main = Total * shareMain
+        // Entitled ADU = Total * shareAdu
+        // Diff = Entitled Main - appraisalMain
         const totalUtility = appraisalMain + appraisalAdu;
         const entitledMain = totalUtility * shareMain;
-        const entitledAdu = totalUtility * shareAdu;
-
-        // Positive means Main House consumed more than entitled, so they pay ADU.
+        
         const equalizationPayment = entitledMain - appraisalMain; 
         
         let displayEqualization = 0;
-        let directionText = "No payment needed";
+        let directionText = "Balanced split:";
         let mainNet = mainBaseShare;
         let aduNet = aduBaseShare;
 
         if (equalizationPayment < 0) {
-            // Main consumed more than entitled. Pay ADU.
+            // Main consumed more than entitled (appraisalMain > entitledMain). Main pays ADU.
             displayEqualization = Math.abs(equalizationPayment);
             directionText = "Main House pays ADU:";
             mainNet = mainBaseShare + displayEqualization;
             aduNet = aduBaseShare - displayEqualization;
         } else if (equalizationPayment > 0) {
-            // ADU consumed more than entitled relative to split. Pay Main.
+            // ADU consumed more than entitled. ADU pays Main.
             displayEqualization = Math.abs(equalizationPayment);
             directionText = "ADU pays Main House:";
             mainNet = mainBaseShare - displayEqualization;
             aduNet = aduBaseShare + displayEqualization;
-        } else {
-            directionText = "Balanced split:";
         }
 
         // Render Outputs
@@ -199,22 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
         aduNetOutput.textContent = '$' + Math.round(aduNet).toLocaleString();
     }
 
-    // Attach Calculator Event Listeners
     [homePriceInput, downPaymentInput, interestRateInput, loanTermInput, expensesInput, rentMainInput, rentAduInput].forEach(input => {
         input.addEventListener('input', calculateEqualization);
     });
 
     calculateEqualization();
 
-    // 5. Refinancing Timeline Data (from Excel exit plan sheet)
+    // 4. Refinancing Timeline Slider
     const timelineData = [
         { year: 0, val: 800000, loan: 725000, equity: 75000, buyout: 37500, l90: -5000, a90: false, l80: -85000, a80: false },
         { year: 1, val: 840000, loan: 716504, equity: 123496, buyout: 57500, l90: 39496, a90: false, l80: -44504, a80: false },
         { year: 2, val: 882000, loan: 707463, equity: 174537, buyout: 78500, l90: 86337, a90: true, l80: -1863, a80: false },
         { year: 3, val: 926100, loan: 697839, equity: 228261, buyout: 100550, l90: 135651, a90: true, l80: 43041, a80: false },
         { year: 4, val: 972405, loan: 687596, equity: 284809, buyout: 123703, l90: 187568, a90: true, l80: 90328, a80: false },
-        { year: 5, val: 1021025, loan: 676695, equity: 344330, buyout: 148013, l90: 242228, a90: true, l80: 140125, a80: false }, // Close but short at 80%
-        { year: 6, val: 1072077, loan: 665092, equity: 406985, buyout: 173538, l90: 299776, a90: true, l80: 192569, a80: true },  // Both Yes
+        { year: 5, val: 1021025, loan: 676695, equity: 344330, buyout: 148013, l90: 242228, a90: true, l80: 140125, a80: false },
+        { year: 6, val: 1072077, loan: 665092, equity: 406985, buyout: 173538, l90: 299776, a90: true, l80: 192569, a80: true },
         { year: 7, val: 1125680, loan: 652744, equity: 472936, buyout: 200340, l90: 360369, a90: true, l80: 247801, a80: true },
         { year: 8, val: 1181964, loan: 639600, equity: 542364, buyout: 228482, l90: 424168, a90: true, l80: 305971, a80: true },
         { year: 9, val: 1241063, loan: 625612, equity: 615451, buyout: 258031, l90: 491345, a90: true, l80: 367238, a80: true },
@@ -242,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tlJointEquity.textContent = '$' + Math.round(data.equity).toLocaleString();
         tlBuyoutNeeded.textContent = '$' + Math.round(data.buyout).toLocaleString();
 
-        // 90% LTV badge check
+        // Update badges
         if (data.a90) {
             ltv90Badge.textContent = "Yes";
             ltv90Badge.className = "status-badge status-yes";
@@ -251,7 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ltv90Badge.className = "status-badge status-no";
         }
 
-        // 80% LTV badge check
         if (data.a80) {
             ltv80Badge.textContent = "Yes";
             ltv80Badge.className = "status-badge status-yes";
@@ -260,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ltv80Badge.className = "status-badge status-no";
         }
 
-        // Status description updates
+        // Description text updates
         let statusHtml = "";
         if (data.year === 0) {
             statusHtml = "Initial purchase closing. No refinance capacity built yet.";
@@ -286,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTimeline(parseInt(e.target.value));
         });
         
-        // Initialize Year 5
         updateTimeline(5);
     }
 });
