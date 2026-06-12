@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const navOverlay = document.getElementById('nav-overlay');
+    const closeSidebarBtn = document.getElementById('close-sidebar-btn');
 
     // Create and append sliding indicator background
     const indicator = document.createElement('div');
@@ -61,6 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', () => {
+            if (hamburger) hamburger.classList.remove('active');
+            if (sidebarContainer) sidebarContainer.classList.remove('active');
+            if (navOverlay) navOverlay.classList.remove('active');
+        });
+    }
+
     if (navOverlay) {
         navOverlay.addEventListener('click', () => {
             if (hamburger) hamburger.classList.remove('active');
@@ -68,6 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
             navOverlay.classList.remove('active');
         });
     }
+
+    // Automatically close mobile sidebar on page scroll (main window scroll, not sidebar scroll)
+    window.addEventListener('scroll', (e) => {
+        if (sidebarContainer && sidebarContainer.classList.contains('active')) {
+            if (e.target === document || e.target === window || e.target === document.body) {
+                if (hamburger) hamburger.classList.remove('active');
+                sidebarContainer.classList.remove('active');
+                if (navOverlay) navOverlay.classList.remove('active');
+            }
+        }
+    }, { passive: true });
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {

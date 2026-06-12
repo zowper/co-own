@@ -271,6 +271,14 @@ p {
     flex-direction: column;
 }
 
+.sidebar-header-wrapper {
+    display: block;
+}
+
+.close-sidebar-btn {
+    display: none;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -2291,16 +2299,20 @@ input[type="range"]::-webkit-slider-thumb:hover {
         white-space: nowrap;
     }
     
+    .nav-overlay {
+        z-index: 1002;
+    }
+
     .sidebar-container {
         position: fixed;
-        top: 70px;
-        right: -280px;
+        top: 0;
+        right: -300px;
         width: 280px;
-        height: calc(100vh - 70px);
+        height: 100vh;
         background-color: var(--color-surface);
         border-left: 1px solid var(--color-border);
         border-right: none;
-        z-index: 999;
+        z-index: 1003;
         transition: right var(--transition-normal);
         display: flex;
         flex-direction: column;
@@ -2314,13 +2326,63 @@ input[type="range"]::-webkit-slider-thumb:hover {
         right: 0;
     }
     
+    .sidebar-header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-border);
+    }
+    
     .sidebar-top .logo {
-        display: none;
+        display: flex !important;
+        margin-bottom: 0;
+    }
+    
+    .close-sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--color-text-main);
+        cursor: pointer;
+        padding: 6px;
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    
+    .close-sidebar-btn:hover {
+        background-color: rgba(90, 122, 104, 0.08);
+        color: var(--color-primary);
     }
     
     .sidebar-bottom .theme-toggle-btn {
         display: none;
     }
+
+    /* Staggered slide-in animations for navigation items inside the mobile drawer */
+    .sidebar-container .nav-menu li {
+        opacity: 0;
+        transform: translateX(15px);
+        transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .sidebar-container.active .nav-menu li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .sidebar-container.active .nav-menu li:nth-child(1) { transition-delay: 0.05s; }
+    .sidebar-container.active .nav-menu li:nth-child(2) { transition-delay: 0.10s; }
+    .sidebar-container.active .nav-menu li:nth-child(3) { transition-delay: 0.15s; }
+    .sidebar-container.active .nav-menu li:nth-child(4) { transition-delay: 0.20s; }
+    .sidebar-container.active .nav-menu li:nth-child(5) { transition-delay: 0.25s; }
+    .sidebar-container.active .nav-menu li:nth-child(6) { transition-delay: 0.30s; }
+    .sidebar-container.active .nav-menu li:nth-child(7) { transition-delay: 0.35s; }
+    .sidebar-container.active .nav-menu li:nth-child(8) { transition-delay: 0.40s; }
     
     .main-content {
         width: 100%;
