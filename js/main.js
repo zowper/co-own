@@ -316,35 +316,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Global timeline data array calculated dynamically
     let dynamicTimelineData = [];
+    let globalMonthlyExpenses = 800;
 
     function calculateEqualization() {
         const partnerAName = 'Upstairs Family';
         const partnerBName = 'Downstairs Family';
         
-        const splitA = parseInt(splitSlider.value) || 50;
+        const splitA = splitSlider ? (parseInt(splitSlider.value) || 50) : 50;
         const splitB = 100 - splitA;
 
         // Update slider labels
-        splitLabelA.textContent = `${partnerAName}: ${splitA}%`;
-        splitLabelB.textContent = `${partnerBName}: ${splitB}%`;
+        if (splitLabelA) splitLabelA.textContent = `${partnerAName}: ${splitA}%`;
+        if (splitLabelB) splitLabelB.textContent = `${partnerBName}: ${splitB}%`;
 
         // Update list labels
-        mainBaseLabel.textContent = `${partnerAName} Base Share`;
-        aduBaseLabel.textContent = `${partnerBName} Base Share`;
+        if (mainBaseLabel) mainBaseLabel.textContent = `${partnerAName} Base Share`;
+        if (aduBaseLabel) aduBaseLabel.textContent = `${partnerBName} Base Share`;
 
-        const homePrice = parseFloat(homePriceInput.value) || 0;
-        const downPaymentPercent = parseFloat(downPaymentInput.value) || 0;
-        const interestRate = parseFloat(interestRateInput.value) || 0;
-        const loanTerm = parseInt(loanTermInput.value) || 30;
-        const monthlyExpenses = parseFloat(expensesInput.value) || 0;
+        const homePrice = timelineHomeValueInput ? (parseFloat(timelineHomeValueInput.value) || 0) : 750000;
+        const downPaymentPercent = timelineDownPaymentInput ? (parseFloat(timelineDownPaymentInput.value) || 0) : 20;
+        const interestRate = 6.25;
+        const loanTerm = 30;
+        const monthlyExpenses = globalMonthlyExpenses;
 
-        const appraisalMain = parseFloat(rentMainInput.value) || 0;
-        const appraisalDownstairs = parseFloat(rentAduInput.value) || 0;
-
-        // Sync timeline inputs with main inputs (programmatic assignments do not trigger user 'input' events)
-        if (timelineHomeValueInput) timelineHomeValueInput.value = homePrice;
-        if (timelineDownPaymentInput) timelineDownPaymentInput.value = downPaymentPercent;
-        if (appreciationRateInput && timelineAppreciationInput) timelineAppreciationInput.value = parseFloat(appreciationRateInput.value) || 0;
+        const appraisalMain = rentMainInput ? (parseFloat(rentMainInput.value) || 0) : 0;
+        const appraisalDownstairs = rentAduInput ? (parseFloat(rentAduInput.value) || 0) : 0;
 
         // Calculate Monthly Mortgage
         const downPaymentAmount = homePrice * (downPaymentPercent / 100);
@@ -396,17 +392,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Render Outputs
-        totalMonthlyOutput.textContent = '$' + Math.round(totalMonthlyCost).toLocaleString();
-        mainBaseOutput.textContent = '$' + Math.round(mainBaseShare).toLocaleString();
-        aduBaseOutput.textContent = '$' + Math.round(downstairsBaseShare).toLocaleString();
-        equalizationAmountOutput.textContent = '$' + Math.round(displayEqualization).toLocaleString() + ' / mo';
-        equalizationDirectionOutput.textContent = directionText;
-        mainNetOutput.textContent = '$' + Math.round(mainNet).toLocaleString();
-        downstairsNetOutput.textContent = '$' + Math.round(downstairsNet).toLocaleString();
+        if (totalMonthlyOutput) totalMonthlyOutput.textContent = '$' + Math.round(totalMonthlyCost).toLocaleString();
+        if (mainBaseOutput) mainBaseOutput.textContent = '$' + Math.round(mainBaseShare).toLocaleString();
+        if (aduBaseOutput) aduBaseOutput.textContent = '$' + Math.round(downstairsBaseShare).toLocaleString();
+        if (equalizationAmountOutput) equalizationAmountOutput.textContent = '$' + Math.round(displayEqualization).toLocaleString() + ' / mo';
+        if (equalizationDirectionOutput) equalizationDirectionOutput.textContent = directionText;
+        if (mainNetOutput) mainNetOutput.textContent = '$' + Math.round(mainNet).toLocaleString();
+        if (downstairsNetOutput) downstairsNetOutput.textContent = '$' + Math.round(downstairsNet).toLocaleString();
 
         // Dynamic output labels for final shares
-        document.getElementById('main-name-label').textContent = `${partnerAName} Net Out-of-Pocket`;
-        document.getElementById('downstairs-name-label').textContent = `${partnerBName} Net Out-of-Pocket`;
+        const mainNameLabel = document.getElementById('main-name-label');
+        if (mainNameLabel) mainNameLabel.textContent = `${partnerAName} Net Out-of-Pocket`;
+        const downstairsNameLabel = document.getElementById('downstairs-name-label');
+        if (downstairsNameLabel) downstairsNameLabel.textContent = `${partnerBName} Net Out-of-Pocket`;
 
         // Update Share Bar Visuals
         const mainBar = document.getElementById('segment-main-bar');
@@ -460,10 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Generate and update exit timeline math dynamically
-        const appreciationRate = parseFloat(appreciationRateInput.value) || 5.0;
+        const appreciationRate = timelineAppreciationInput ? (parseFloat(timelineAppreciationInput.value) || 5.0) : 5.0;
         generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, splitA, appreciationRate);
         
-        const currentYearVal = parseInt(tlRange.value) || 5;
+        const currentYearVal = tlRange ? (parseInt(tlRange.value) || 5) : 5;
         updateTimeline(currentYearVal);
     }
 
@@ -528,19 +526,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (timelineHomeValueInput) {
         timelineHomeValueInput.addEventListener('input', (e) => {
-            if (homePriceInput) homePriceInput.value = e.target.value;
             calculateEqualization();
         });
     }
     if (timelineDownPaymentInput) {
         timelineDownPaymentInput.addEventListener('input', (e) => {
-            if (downPaymentInput) downPaymentInput.value = e.target.value;
             calculateEqualization();
         });
     }
     if (timelineAppreciationInput) {
         timelineAppreciationInput.addEventListener('input', (e) => {
-            if (appreciationRateInput) appreciationRateInput.value = e.target.value;
             calculateEqualization();
         });
     }
@@ -825,7 +820,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prop = PROPERTIES_DATA.find(p => p.mls === mls);
                 if (prop) {
                     // Populate Price
-                    homePriceInput.value = prop.price;
+                    if (timelineHomeValueInput) {
+                        timelineHomeValueInput.value = prop.price;
+                    }
                     
                     // Estimate rental appraisals
                     // Main house is estimated at ~0.293% of property price
@@ -837,12 +834,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const estMain = Math.round(prop.price * estMainRatio);
                     const estAdu = Math.round(prop.price * estAduRatio);
                     
-                    rentMainInput.value = estMain;
-                    rentAduInput.value = estAdu;
+                    if (rentMainInput) rentMainInput.value = estMain;
+                    if (rentAduInput) rentAduInput.value = estAdu;
 
                     // Add HOA fee to monthly reserve if there is one
                     const hoaVal = prop.hoa_fee || 0;
-                    expensesInput.value = 800 + hoaVal;
+                    globalMonthlyExpenses = 800 + hoaVal;
+                    if (expensesInput) {
+                        expensesInput.value = 800 + hoaVal;
+                    }
                     
                     // Trigger calculation
                     calculateEqualization();

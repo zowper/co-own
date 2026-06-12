@@ -1040,9 +1040,8 @@ p {
 
 /* Calculator Style */
 .calc-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-xl);
+    display: flex;
+    justify-content: center;
     align-items: stretch;
 }
 
@@ -1052,6 +1051,8 @@ p {
     border-radius: var(--radius-md);
     padding: var(--space-lg);
     box-shadow: var(--shadow-md);
+    width: 100%;
+    max-width: 650px;
 }
 
 .calc-panel-right {
