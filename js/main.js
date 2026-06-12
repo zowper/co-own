@@ -511,8 +511,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const l90 = (0.90 * val) - loan;
             const l80 = (0.80 * val) - loan;
 
-            const canBuyoutA = l80 >= buyoutA;
-            const canBuyoutB = l80 >= buyoutB;
+            // Helper to determine checkmarks based on LTV feasibility
+            const getCheckmarkHtml = (buyoutAmt, l80Val, l90Val) => {
+                if (l80Val >= buyoutAmt) {
+                    return '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓✓</span>';
+                } else if (l90Val >= buyoutAmt) {
+                    return '<span class="buyout-checkmark" title="90% LTV loan is sufficient to buy out this owner">✓</span>';
+                }
+                return '';
+            };
 
             let buyoutText = "";
             let buyoutHtml = "";
@@ -521,22 +528,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (splitA === 50) {
                 const formattedVal = '$' + Math.round(buyoutB).toLocaleString();
                 buyoutText = formattedVal;
-                buyoutHtml = formattedVal + (canBuyoutB ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
+                buyoutHtml = formattedVal + getCheckmarkHtml(buyoutB, l80, l90);
                 buyoutVal = buyoutB;
             } else {
                 const higher = Math.max(buyoutA, buyoutB);
                 const lower = Math.min(buyoutA, buyoutB);
-                const isHigherA = buyoutA >= buyoutB;
-                const canBuyoutHigher = isHigherA ? canBuyoutA : canBuyoutB;
-                const canBuyoutLower = isHigherA ? canBuyoutB : canBuyoutA;
 
                 const formattedHigher = '$' + Math.round(higher).toLocaleString();
                 const formattedLower = '$' + Math.round(lower).toLocaleString();
 
                 buyoutText = formattedHigher + ' or ' + formattedLower;
                 
-                const htmlHigher = formattedHigher + (canBuyoutHigher ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
-                const htmlLower = formattedLower + (canBuyoutLower ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
+                const htmlHigher = formattedHigher + getCheckmarkHtml(higher, l80, l90);
+                const htmlLower = formattedLower + getCheckmarkHtml(lower, l80, l90);
 
                 buyoutHtml = `${htmlHigher} <span style="font-size: 0.9rem; color: var(--color-text-muted); font-weight: normal;">or</span> ${htmlLower}`;
                 buyoutVal = higher;
