@@ -538,9 +538,34 @@
                 <p>The goal of this co-ownership is to serve as a springboard for both families, not a permanent sharing arrangement. Move the slider below to see how home appreciation and paying down the mortgage principal build the value needed to fund a clean buyout at Year 5.</p>
             </div>
             
-            <p>At the 5-year mark, either family can choose to exit. The staying family refinances the home to cash out the leaving family's equity (their share of the down payment, principal paid off, and accumulated home appreciation). Below is a year-by-year look at how this buyout remains financially feasible over time, based on the numbers in the calculator above.</p>
+            <p>At the 5-year mark, either family can choose to exit. The staying family refinances the home to cash out the leaving family's equity (their share of the down payment, principal paid off, and accumulated home appreciation). Below is a year-by-year look at how this buyout remains financially feasible over time, based on the exit parameters configured below.</p>
             
             <div class="timeline-slider-container">
+                <!-- Timeline Input Parameters -->
+                <div class="timeline-inputs-grid">
+                    <div class="input-group">
+                        <label for="timeline-home-value">Starting Home Value</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="timeline-home-value" value="750000" min="0" step="5000">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="timeline-down-payment">Down Payment Percentage</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">%</span>
+                            <input type="number" id="timeline-down-payment" value="20" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="timeline-appreciation">Estimated Average Appreciation</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">%</span>
+                            <input type="number" id="timeline-appreciation" value="5.0" min="0" max="20" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
                     <h4 style="font-size: 1.15rem; color: var(--color-primary); font-weight: 500;">Select Project Year:</h4>
                     <span id="timeline-year-badge" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-accent);">Year 5.0</span>

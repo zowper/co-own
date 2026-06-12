@@ -295,6 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const appreciationRateInput = document.getElementById('appreciation-rate');
     const splitSlider = document.getElementById('split-slider');
     
+    // 5-Year Exit & Refinance inputs
+    const timelineHomeValueInput = document.getElementById('timeline-home-value');
+    const timelineDownPaymentInput = document.getElementById('timeline-down-payment');
+    const timelineAppreciationInput = document.getElementById('timeline-appreciation');
+    
     const splitLabelA = document.getElementById('split-label-a');
     const splitLabelB = document.getElementById('split-label-b');
     
@@ -335,6 +340,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const appraisalMain = parseFloat(rentMainInput.value) || 0;
         const appraisalDownstairs = parseFloat(rentAduInput.value) || 0;
+
+        // Sync timeline inputs with main inputs (programmatic assignments do not trigger user 'input' events)
+        if (timelineHomeValueInput) timelineHomeValueInput.value = homePrice;
+        if (timelineDownPaymentInput) timelineDownPaymentInput.value = downPaymentPercent;
+        if (appreciationRateInput && timelineAppreciationInput) timelineAppreciationInput.value = parseFloat(appreciationRateInput.value) || 0;
 
         // Calculate Monthly Mortgage
         const downPaymentAmount = homePrice * (downPaymentPercent / 100);
@@ -515,6 +525,25 @@ document.addEventListener('DOMContentLoaded', () => {
             input.addEventListener('input', calculateEqualization);
         }
     });
+
+    if (timelineHomeValueInput) {
+        timelineHomeValueInput.addEventListener('input', (e) => {
+            if (homePriceInput) homePriceInput.value = e.target.value;
+            calculateEqualization();
+        });
+    }
+    if (timelineDownPaymentInput) {
+        timelineDownPaymentInput.addEventListener('input', (e) => {
+            if (downPaymentInput) downPaymentInput.value = e.target.value;
+            calculateEqualization();
+        });
+    }
+    if (timelineAppreciationInput) {
+        timelineAppreciationInput.addEventListener('input', (e) => {
+            if (appreciationRateInput) appreciationRateInput.value = e.target.value;
+            calculateEqualization();
+        });
+    }
 
     const tlRange = document.getElementById('timeline-range');
     const tlYearBadge = document.getElementById('timeline-year-badge');

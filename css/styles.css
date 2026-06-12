@@ -1283,6 +1283,17 @@ p {
 }
 
 /* Refinancing Timeline Component */
+.timeline-inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    background-color: var(--color-surface-alt);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
 .timeline-slider-container {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
