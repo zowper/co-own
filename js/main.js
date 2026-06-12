@@ -19,11 +19,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1. Mobile Navigation Menu & Overlay Trigger
+    // 1. Navigation Menu, Overlay, & Sliding Indicator Setup
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const navOverlay = document.getElementById('nav-overlay');
+
+    // Create and append sliding indicator background
+    const indicator = document.createElement('div');
+    indicator.className = 'nav-indicator';
+    if (navMenu) {
+        navMenu.appendChild(indicator);
+    }
+
+    let isScrollingFromClick = false;
+    let scrollTimeout = null;
+
+    // Update indicator size and position
+    function updateNavIndicator() {
+        const activeLink = navMenu ? navMenu.querySelector('.nav-link.active') : null;
+        if (activeLink && indicator) {
+            const linkRect = activeLink.getBoundingClientRect();
+            const menuRect = navMenu.getBoundingClientRect();
+            
+            // Position coordinates relative to parent navMenu
+            const x = linkRect.left - menuRect.left + navMenu.scrollLeft;
+            const y = linkRect.top - menuRect.top + navMenu.scrollTop;
+            
+            indicator.style.width = `${linkRect.width}px`;
+            indicator.style.height = `${linkRect.height}px`;
+            indicator.style.transform = `translate(${x}px, ${y}px)`;
+            indicator.style.opacity = '1';
+        } else if (indicator) {
+            indicator.style.opacity = '0';
+        }
+    }
 
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
@@ -45,8 +75,102 @@ document.addEventListener('DOMContentLoaded', () => {
             
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
+            
+            // Instantly update the indicator position
+            updateNavIndicator();
+            
+            // Pause scroll-spy updates temporarily during smooth scrolling
+            isScrollingFromClick = true;
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrollingFromClick = false;
+            }, 850);
         });
     });
+
+    // Map the nav links to their corresponding section elements for Scroll Spy
+    const sectionsToWatch = [];
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+            const section = document.querySelector(href);
+            if (section) {
+                sectionsToWatch.push({
+                    link: link,
+                    section: section
+                });
+            }
+        }
+    });
+
+    function spyScroll() {
+        if (isScrollingFromClick) return;
+
+        const scrollPosition = window.scrollY + 120; // offset for header height and safety margin
+        const isAtBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 15;
+        
+        let currentActive = null;
+
+        if (isAtBottom && sectionsToWatch.length > 0) {
+            currentActive = sectionsToWatch[sectionsToWatch.length - 1];
+        } else {
+            for (let i = 0; i < sectionsToWatch.length; i++) {
+                const item = sectionsToWatch[i];
+                if (item.section.offsetTop <= scrollPosition) {
+                    currentActive = item;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        // Default to the first section (Proposal) if none matched yet
+        if (!currentActive && sectionsToWatch.length > 0) {
+            currentActive = sectionsToWatch[0];
+        }
+
+        if (currentActive) {
+            let changed = false;
+            navLinks.forEach(link => {
+                if (link === currentActive.link) {
+                    if (!link.classList.contains('active')) {
+                        link.classList.add('active');
+                        changed = true;
+                    }
+                } else {
+                    if (link.classList.contains('active')) {
+                        link.classList.remove('active');
+                        changed = true;
+                    }
+                }
+            });
+
+            if (changed) {
+                updateNavIndicator();
+            }
+        }
+    }
+
+    // Scroll, Resize, and Transition listeners
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(spyScroll);
+    });
+
+    window.addEventListener('resize', () => {
+        window.requestAnimationFrame(updateNavIndicator);
+    });
+
+    if (navMenu) {
+        navMenu.addEventListener('transitionend', () => {
+            updateNavIndicator();
+        });
+    }
+
+    // Initialize indicator position on page load
+    setTimeout(() => {
+        spyScroll();
+        updateNavIndicator();
+    }, 100);
 
     // 2. FAQ Accordion Toggles
     const faqItems = document.querySelectorAll('.faq-item');
