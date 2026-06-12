@@ -554,6 +554,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 val: val,
                 loan: loan,
                 equity: equity,
+                buyoutA: buyoutA,
+                buyoutB: buyoutB,
+                splitA: splitA,
+                splitB: 100 - splitA,
                 buyout: buyoutVal,
                 buyoutText: buyoutText,
                 buyoutHtml: buyoutHtml,
@@ -605,6 +609,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const ltv90Badge = document.getElementById('ltv-90-badge');
     const ltv80Badge = document.getElementById('ltv-80-badge');
 
+    function getLtvBuyoutStatus(ltvLabel, ltvLimit, buyoutA, buyoutB, splitA) {
+        const splitB = 100 - splitA;
+        if (splitA === 50) {
+            if (ltvLimit >= buyoutA) {
+                return `${ltvLabel} can buy out both owners.`;
+            } else {
+                return `${ltvLabel} cannot buy out either owner.`;
+            }
+        } else {
+            const buyoutSmall = Math.min(buyoutA, buyoutB);
+            const buyoutLarge = Math.max(buyoutA, buyoutB);
+            const pctSmall = Math.min(splitA, splitB);
+            const pctLarge = Math.max(splitA, splitB);
+
+            if (ltvLimit >= buyoutLarge) {
+                return `${ltvLabel} can buy out both owners.`;
+            } else if (ltvLimit >= buyoutSmall) {
+                return `${ltvLabel} can buy out the ${pctSmall}% owner but not the ${pctLarge}% owner.`;
+            } else {
+                return `${ltvLabel} cannot buy out either owner.`;
+            }
+        }
+    }
+
     function updateTimeline(yearIdx) {
         const data = dynamicTimelineData[yearIdx];
         if (!data) return;
@@ -653,25 +681,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Description text updates
-        let statusHtml = "";
-        if (data.year === 0) {
-            statusHtml = "Initial purchase closing. No refinance capacity built yet.";
-        } else {
-            const borrowLimit90 = Math.round(data.l90);
-            if (data.a90) {
-                statusHtml = `At 90% LTV, a refinance allows borrowing up to <strong>$${borrowLimit90.toLocaleString()}</strong> in cash, which is <strong>fully sufficient</strong> to fund the leaving family's <strong>${data.buyoutText}</strong> buyout.`;
-                if (data.a80) {
-                    const borrowLimit80 = Math.round(data.l80);
-                    statusHtml += ` Even at a conservative 80% LTV, we have <strong>$${borrowLimit80.toLocaleString()}</strong> in borrow capacity, easily covering the buyout.`;
-                } else {
-                    const shortfall80 = data.l80 < 0 ? Math.abs(data.l80) + data.buyout : data.buyout - data.l80;
-                    statusHtml += ` An 80% LTV refinance is currently short by $${Math.round(shortfall80).toLocaleString()}.`;
-                }
-            } else {
-                const shortfall90 = data.l90 < 0 ? Math.abs(data.l90) + data.buyout : data.buyout - data.l90;
-                statusHtml = `Refinancing is not yet viable. Available cash is short of the needed buyout amount by $${Math.round(shortfall90).toLocaleString()}.`;
-            }
-        }
+        const line1 = getLtvBuyoutStatus("A 90% LTV loan", data.l90, data.buyoutA, data.buyoutB, data.splitA);
+        const line2 = getLtvBuyoutStatus("An 80% LTV loan", data.l80, data.buyoutA, data.buyoutB, data.splitA);
+        const note = "Note: A single green checkmark appears once a 90% LTV loan is feasible and two green checkmarks appear when an 80% LTV loan is feasible.";
+        
+        const statusHtml = `${line1}<br><br>${line2}<br><br><span style="font-style: italic;">${note}</span>`;
         tlStatusDesc.innerHTML = statusHtml;
     }
 
