@@ -456,7 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedPrice = '$' + prop.price.toLocaleString();
         const formattedLot = prop.lot_size.toFixed(2) + ' Acres';
         const formattedHoa = prop.hoa_fee > 0 ? `📝 HOA: $${prop.hoa_fee}/mo` : '🚫 HOA: $0';
-        const displayRating = prop.avg_rating ? `${prop.avg_rating} / 5` : 'N/A';
         
         let badgesHtml = '';
         if (prop.adu === 'Yes') {
@@ -478,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="prop-card">
                 <div class="prop-img-wrapper">
                     <img src="${prop.photo_url}" alt="${prop.street}, ${prop.city}, UT" loading="lazy">
-                    <span class="prop-rating-tag">Rating: ${displayRating}</span>
+                    <span class="prop-rating-tag" title="Jared: ${prop.jared_rating || 'N/A'}★, Gemini: ${prop.gemini_rating || 'N/A'}★">★ ${prop.avg_rating || 'N/A'}</span>
                 </div>
                 <div class="prop-details">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -491,6 +490,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="prop-address">${prop.street}<br>${prop.city}, UT</div>
                     
+                    <div class="rating-breakdown-details" style="font-size: 0.78rem; color: var(--color-text-muted); margin-top: 4px; margin-bottom: 8px; background: rgba(90, 122, 104, 0.05); padding: 4px 8px; border-radius: 4px; display: flex; justify-content: space-between;">
+                        <span>👤 Jared: <strong>${prop.jared_rating || 'N/A'}★</strong></span>
+                        <span>🤖 Gemini: <strong>${prop.gemini_rating || 'N/A'}★</strong></span>
+                        <span>⭐ Avg: <strong>${prop.avg_rating || 'N/A'}★</strong></span>
+                    </div>
+
                     <div class="prop-badge-container">
                         ${badgesHtml}
                     </div>
@@ -502,12 +507,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>${formattedHoa}</span>
                     </div>
                     
-                    <a href="${utahRealEstateUrl}" target="_blank" rel="noopener" class="prop-action-btn">
-                        View on UtahRealEstate.com
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-                        </svg>
-                    </a>
+                    <div style="display: flex; flex-direction: column; gap: 6px; margin-top: var(--space-sm);">
+                        <a href="${utahRealEstateUrl}" target="_blank" rel="noopener" class="prop-action-btn" style="margin-top: 0;">
+                            View on UtahRealEstate.com
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                            </svg>
+                        </a>
+                        <button type="button" class="prop-calc-load-btn" data-mls="${prop.mls}">
+                            <span>Load into Calculator</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zm-4 8H7v-2h4v2zm0-4H7v-2h4v2zm0-4H7V7h4v2z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -541,6 +554,56 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         attachCompareListeners();
+        attachPropertyLoaderListeners();
+    }
+
+    function attachPropertyLoaderListeners() {
+        const loadBtns = document.querySelectorAll('.prop-calc-load-btn');
+        loadBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const mls = btn.getAttribute('data-mls');
+                const prop = PROPERTIES_DATA.find(p => p.mls === mls);
+                if (prop) {
+                    // Populate Price
+                    homePriceInput.value = prop.price;
+                    
+                    // Estimate rental appraisals
+                    // Main house is estimated at ~0.293% of property price
+                    // ADU basement is estimated at ~0.187% of property price
+                    // If no ADU, basement appraisal is lower (~0.15% of property price)
+                    const estMainRatio = 0.00293;
+                    const estAduRatio = prop.adu === 'Yes' ? 0.00187 : 0.0015;
+                    
+                    const estMain = Math.round(prop.price * estMainRatio);
+                    const estAdu = Math.round(prop.price * estAduRatio);
+                    
+                    rentMainInput.value = estMain;
+                    rentAduInput.value = estAdu;
+
+                    // Add HOA fee to monthly reserve if there is one
+                    const hoaVal = prop.hoa_fee || 0;
+                    expensesInput.value = 800 + hoaVal;
+                    
+                    // Trigger calculation
+                    calculateEqualization();
+                    
+                    // Smooth scroll to calculator section
+                    const calcSection = document.getElementById('calculator');
+                    if (calcSection) {
+                        calcSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    
+                    // Highlight flash animation on the calculator panel
+                    const calcPanel = document.querySelector('.calc-panel-left');
+                    if (calcPanel) {
+                        calcPanel.classList.add('highlight-flash');
+                        setTimeout(() => {
+                            calcPanel.classList.remove('highlight-flash');
+                        }, 1000);
+                    }
+                }
+            });
+        });
     }
 
     function filterAndSortProperties() {

@@ -1105,8 +1105,8 @@
                         <p class="contract-para"><strong>THIS CO-OWNERSHIP AGREEMENT</strong> (the "Agreement") is drafted on this 31st day of May, 2026, to establish a formal joint-ownership property framework between:</p>
                         
                         <p class="contract-para" style="margin-left: 20px;">
-                            <strong>PARTY A:</strong> Jared Carter, Melinda Carter, and Nelson Carter (collectively the "Carter Partners") residing in Utah, and<br>
-                            <strong>PARTY B:</strong> ________________________ (the "Co-Owner Partners") residing in Utah.
+                            <strong>PARTY A:</strong> <span id="dyn-party-a-names">Jared Carter, Melinda Carter, and Nelson Carter</span> (collectively the "Carter Partners") residing in Utah, and<br>
+                            <strong>PARTY B:</strong> <span id="dyn-party-b-names">________________________</span> (the "Co-Owner Partners") residing in Utah.
                         </p>
                         
                         <p class="contract-para">The parties are referred to individually as a "Co-owner" and collectively as the "Co-owners" or "Partners".</p>
@@ -1144,7 +1144,7 @@
                         
                         <p class="contract-para"><strong>Section 1.2 - Ownership Shares.</strong> The default ownership shares for the Property are selected at closing. The two standard options are outlined in the table below:</p>
                         
-                        <table class="contract-table">
+                        <table class="contract-table" id="contract-shares-table">
                             <thead>
                                 <tr>
                                     <th>Option</th>
@@ -1208,11 +1208,11 @@
                         <p class="contract-para"><strong>Section 2.2 - Division of Operational Roles.</strong> To maintain professional management standards and avoid ambiguity, management duties are split into two designated roles:</p>
                         
                         <p class="contract-para" style="margin-left: 20px;">
-                            <strong>Role 1: The Financial Administrator (Carter Partners).</strong> Responsible for holding the joint accounts, executing monthly mortgage and escrow payments, maintaining digital utility and tax receipts, calculating the monthly equalization adjustments, and presenting a transparent monthly statement to both parties.
+                            <strong>Role 1: The Financial Administrator (<span class="dyn-party-a-short">Carter Partners</span>).</strong> Responsible for holding the joint accounts, executing monthly mortgage and escrow payments, maintaining digital utility and tax receipts, calculating the monthly equalization adjustments, and presenting a transparent monthly statement to both parties.
                         </p>
                         
                         <p class="contract-para" style="margin-left: 20px;">
-                            <strong>Role 2: The Property Manager (Co-Owner Partners).</strong> Responsible for scheduling routine physical maintenance, managing lawn care and snow removal vendors, coordinating HVAC filter changes, scheduling sprinkler blow-outs, and obtaining repair estimates for joint review.
+                            <strong>Role 2: The Property Manager (<span class="dyn-party-b-short-label">Co-Owner Partners</span>).</strong> Responsible for scheduling routine physical maintenance, managing lawn care and snow removal vendors, coordinating HVAC filter changes, scheduling sprinkler blow-outs, and obtaining repair estimates for joint review.
                         </p>
 
                         <p class="contract-para"><strong>Section 2.3 - Joint Maintenance Reserve.</strong> The Financial Administrator shall establish a joint maintenance savings account. Each partner shall deposit a monthly contribution proportional to their ownership percentage (aggregating to $200/mo minimum) to fund general maintenance, shared structural repairs, and emergency repairs.</p>
@@ -1252,6 +1252,7 @@
                             <strong>Rent Adjustment Payment = (R<sub>Main</sub> + R<sub>ADU</sub>) &times; S<sub>ADU_Occupant</sub> - R<sub>ADU</sub></strong><br>
                             <em>(The occupant of the Main House shall pay the occupant of the ADU this calculated monthly difference).</em>
                         </div>
+                        <div id="dyn-eq-card-placeholder"></div>
 
                         <p class="contract-para"><strong>Section 3.4 - Net Payment Adjustments.</strong> The adjustment payment shall be added directly to the monthly mortgage allocation statement. The Main House occupant shall deposit their base mortgage share PLUS the equalization payment into the joint account. The ADU occupant shall deposit their base mortgage share MINUS the equalization payment. This net offset ensures that value is distributed exactly in accordance with ownership shares.</p>
                     </div>
@@ -1326,21 +1327,21 @@
                         
                         <div class="sig-block-grid">
                             <!-- Party A signature box -->
-                            <div class="sig-container">
-                                <div class="sig-stamp-name" style="font-family: var(--font-cursive-1); color: var(--ds-blue); font-size: 2.2rem; line-height: 1;">Jared Carter</div>
+                            <div class="sig-container" id="sig-container-party-a">
+                                <div class="sig-stamp-name" id="stamp-party-a-name" style="font-family: var(--font-cursive-1); color: var(--ds-blue); font-size: 2.2rem; line-height: 1;">Jared Carter</div>
                                 <div class="sig-stamp-seal" style="font-size: 0.7rem; border-left: 1.5px solid var(--ds-blue); padding-left: 6px; margin-top: 3px; color: var(--ds-text-muted);">
-                                    DocuSigned by: Jared Carter<br>
+                                    DocuSigned by: <span id="stamp-party-a-seal-name">Jared Carter</span><br>
                                     ID: 76F90E1D2D5B48B...<br>
                                     Date: May 31, 2026
                                 </div>
                                 <div class="sig-line">
-                                    <span>Jared Carter (Party A Representative)</span>
+                                    <span id="label-party-a-rep">Jared Carter (Party A Representative)</span>
                                     <span>Date</span>
                                 </div>
                             </div>
                             
                             <!-- Party B signature box (Signable) -->
-                            <div class="sig-container" id="party-b-sig-box">
+                            <div class="sig-container" id="sig-container-party-b">
                                 <div class="sign-here-tab" id="sign-tab" onclick="openSigModal()">
                                     <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
                                         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
@@ -1352,7 +1353,7 @@
                                     <div class="sig-stamp-name" id="stamp-display-name" style="font-family: var(--font-cursive-1);">Guest Co-Owner</div>
                                     <img id="stamp-display-image" style="display: none; max-height: 55px; max-width: 250px; object-fit: contain; margin-bottom: 2px; filter: contrast(1.2) sepia(0.2) hue-rotate(180deg);" alt="Signature">
                                     <div class="sig-stamp-seal" id="stamp-display-meta">
-                                        DocuSigned by: Guest Co-Owner<br>
+                                        DocuSigned by: <span id="stamp-display-seal-name">Guest Co-Owner</span><br>
                                         ID: 9A01B2C3D4E5F6A...<br>
                                         Date: May 31, 2026
                                     </div>
@@ -1482,6 +1483,142 @@
         let selectedCursiveFont = "var(--font-cursive-1)"; // Default Caveat
         let sigMode = "font"; // Default mode
 
+        function hydrateContract() {
+            // Load variables from localStorage
+            const partnerAName = localStorage.getItem('coown_partner_a_name') || 'Jared Carter, Melinda Carter, and Nelson Carter';
+            const partnerBName = localStorage.getItem('coown_partner_b_name') || 'Guest Co-Owner';
+            
+            const homePrice = parseFloat(localStorage.getItem('coown_home_price')) || 750000;
+            const downPaymentPct = parseFloat(localStorage.getItem('coown_down_payment_pct')) || 20;
+            const downPaymentAmt = parseFloat(localStorage.getItem('coown_down_payment_amt')) || (homePrice * downPaymentPct / 100);
+            const interestRate = parseFloat(localStorage.getItem('coown_interest_rate')) || 6.25;
+            const loanTerm = parseFloat(localStorage.getItem('coown_loan_term')) || 30;
+            const monthlyExpenses = parseFloat(localStorage.getItem('coown_monthly_expenses')) || 800;
+            const appraisalMain = parseFloat(localStorage.getItem('coown_appraisal_main')) || 2200;
+            const appraisalAdu = parseFloat(localStorage.getItem('coown_appraisal_adu')) || 1400;
+            const splitA = parseInt(localStorage.getItem('coown_split_a')) || 50;
+            const splitB = parseInt(localStorage.getItem('coown_split_b')) || 50;
+            const totalMonthlyCost = parseFloat(localStorage.getItem('coown_total_monthly_cost')) || 4495;
+            const mainBaseShare = parseFloat(localStorage.getItem('coown_main_base_share')) || 2248;
+            const aduBaseShare = parseFloat(localStorage.getItem('coown_adu_base_share')) || 2248;
+            const equalizationPayment = parseFloat(localStorage.getItem('coown_equalization_payment')) || 400;
+            const equalizationDirection = localStorage.getItem('coown_equalization_direction') || 'Main House pays ADU:';
+            const mainNet = parseFloat(localStorage.getItem('coown_main_net')) || 2648;
+            const aduNet = parseFloat(localStorage.getItem('coown_adu_net')) || 1848;
+
+            // Extract contact short/first names for inline referencing
+            const cleanShortName = (name) => name.split('&')[0].split(',')[0].trim();
+            const partnerAShort = cleanShortName(partnerAName);
+            const partnerBShort = cleanShortName(partnerBName);
+
+            // 1. Update Page 1 Names
+            const dynPartyANames = document.getElementById('dyn-party-a-names');
+            const dynPartyBNames = document.getElementById('dyn-party-b-names');
+            if (dynPartyANames) dynPartyANames.textContent = partnerAName;
+            if (dynPartyBNames) dynPartyBNames.textContent = partnerBName;
+
+            // Update modal input values so they match their customized names by default!
+            const modalInputName = document.getElementById('modal-input-name');
+            if (modalInputName) {
+                modalInputName.value = partnerBName;
+            }
+
+            // 2. Update Page 2 Table of Shares
+            const contractSharesTable = document.getElementById('contract-shares-table');
+            if (contractSharesTable) {
+                const dpA = downPaymentAmt * (splitA / 100);
+                const dpB = downPaymentAmt * (splitB / 100);
+                
+                contractSharesTable.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Partner / Occupancy</th>
+                            <th>Ownership Share</th>
+                            <th>Down Payment Share</th>
+                            <th>Base Monthly Payment</th>
+                            <th>Net Monthly Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Party A (${partnerAShort} — Main House)</strong></td>
+                            <td><strong>${splitA}%</strong></td>
+                            <td>$${Math.round(dpA).toLocaleString()}</td>
+                            <td>$${Math.round(mainBaseShare).toLocaleString()}/mo</td>
+                            <td style="font-weight: 600; color: var(--ds-blue);">$${Math.round(mainNet).toLocaleString()}/mo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Party B (${partnerBShort} — ADU Unit)</strong></td>
+                            <td><strong>${splitB}%</strong></td>
+                            <td>$${Math.round(dpB).toLocaleString()}</td>
+                            <td>$${Math.round(aduBaseShare).toLocaleString()}/mo</td>
+                            <td style="font-weight: 600; color: var(--ds-blue);">$${Math.round(aduNet).toLocaleString()}/mo</td>
+                        </tr>
+                        <tr style="font-weight: bold; background-color: rgba(9, 99, 172, 0.05); border-top: 2px solid var(--ds-border);">
+                            <td>Total Joint Venture</td>
+                            <td>100%</td>
+                            <td>$${Math.round(downPaymentAmt).toLocaleString()}</td>
+                            <td>$${Math.round(totalMonthlyCost).toLocaleString()}/mo</td>
+                            <td>$${Math.round(totalMonthlyCost).toLocaleString()}/mo</td>
+                        </tr>
+                    </tbody>
+                `;
+            }
+
+            // 3. Update Page 3 Short names in roles
+            document.querySelectorAll('.dyn-party-a-short').forEach(el => el.textContent = partnerAName);
+            document.querySelectorAll('.dyn-party-b-short-label').forEach(el => el.textContent = partnerBName);
+
+            // 4. Update Page 4 Equalization computation card
+            const dynEqCardPlaceholder = document.getElementById('dyn-eq-card-placeholder');
+            if (dynEqCardPlaceholder) {
+                const totalRentAppraisal = appraisalMain + appraisalAdu;
+                const entitledValB = totalRentAppraisal * (splitB / 100);
+                
+                // Construct result text
+                let resultText = '';
+                if (equalizationPayment === 0) {
+                    resultText = "No equalization payment required (fully balanced).";
+                } else {
+                    const directionNameFrom = equalizationDirection.includes(partnerAShort) || equalizationDirection.includes('Main') ? partnerAShort : partnerBShort;
+                    const directionNameTo = equalizationDirection.includes(partnerAShort) || equalizationDirection.includes('Main') ? partnerBShort : partnerAShort;
+                    resultText = `<strong>${directionNameFrom}</strong> pays <strong>${directionNameTo}</strong> an adjustment of <strong>$${Math.round(equalizationPayment).toLocaleString()} / month</strong>.`;
+                }
+
+                dynEqCardPlaceholder.innerHTML = `
+                    <div style="background-color: var(--ds-blue-light); border: 1.5px solid rgba(9, 99, 172, 0.2); border-radius: 4px; padding: 15px; margin: 15px 0; font-size: 0.9rem; line-height: 1.5;">
+                        <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--ds-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Live Rental Equalization Adjustment</h4>
+                        <ul style="list-style: none; padding-left: 0; margin-bottom: 8px;">
+                            <li>• Main House Rental Value Appraisal (R<sub>Main</sub>): <strong>$${appraisalMain.toLocaleString()}/mo</strong></li>
+                            <li>• ADU Unit Rental Value Appraisal (R<sub>ADU</sub>): <strong>$${appraisalAdu.toLocaleString()}/mo</strong></li>
+                            <li>• Combined Rental Value Pool: <strong>$${totalRentAppraisal.toLocaleString()}/mo</strong></li>
+                            <li>• ${partnerBShort}'s Entitled Rent Share (${splitB}%): <strong>$${Math.round(entitledValB).toLocaleString()}/mo</strong></li>
+                        </ul>
+                        <div style="border-top: 1px dashed rgba(9, 99, 172, 0.2); padding-top: 8px; font-weight: 500; color: var(--ds-text-dark);">
+                            Adjustment Calculation: ${resultText}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 5. Update Page 6 Signatures
+            const stampPartyAName = document.getElementById('stamp-party-a-name');
+            const stampPartyASealName = document.getElementById('stamp-party-a-seal-name');
+            const labelPartyARep = document.getElementById('label-party-a-rep');
+
+            if (stampPartyAName) stampPartyAName.textContent = partnerAShort;
+            if (stampPartyASealName) stampPartyASealName.textContent = partnerAName;
+            if (labelPartyARep) labelPartyARep.textContent = `${partnerAName} (Party A Representative)`;
+
+            const stampDisplayName = document.getElementById('stamp-display-name');
+            const stampDisplaySealName = document.getElementById('stamp-display-seal-name');
+            const labelSignerName = document.getElementById('label-signer-name');
+
+            if (stampDisplayName) stampDisplayName.textContent = partnerBName;
+            if (stampDisplaySealName) stampDisplaySealName.textContent = partnerBName;
+            if (labelSignerName) labelSignerName.textContent = `${partnerBName} (Party B Representative)`;
+        }
+
         // Toggle Signature Mode (Font vs Draw)
         function switchSigMode(mode) {
             sigMode = mode;
@@ -1507,6 +1644,7 @@
 
         // Set up canvas when DOM evaluates
         window.addEventListener('load', () => {
+            hydrateContract();
             canvas = document.getElementById('sig-canvas');
             if (canvas) {
                 ctx = canvas.getContext('2d');
