@@ -626,7 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const splitB = 100 - splitA;
         if (splitA === 50) {
             if (ltvLimit >= buyoutA) {
-                return `${ltvLabel} can buy out both owners.`;
+                return `${ltvLabel} can buy out either owner.`;
             } else {
                 return `${ltvLabel} cannot buy out either owner.`;
             }
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const pctLarge = Math.max(splitA, splitB);
 
             if (ltvLimit >= buyoutLarge) {
-                return `${ltvLabel} can buy out both owners.`;
+                return `${ltvLabel} can buy out either owner.`;
             } else if (ltvLimit >= buyoutSmall) {
                 return `${ltvLabel} can buy out the ${pctSmall}% owner but not the ${pctLarge}% owner.`;
             } else {
