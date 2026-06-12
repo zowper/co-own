@@ -484,12 +484,35 @@ p {
 
 .letter-meta {
     font-family: var(--font-heading);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
     font-weight: 500;
     color: var(--color-secondary-dark);
 }
+
+.hand-drawn-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+.hand-drawn-underline::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: -4px;
+    height: 8px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M3,5 C35,2 65,8 97,4' stroke='%235A7A68' stroke-width='2.5' stroke-linecap='round' fill='none'/><path d='M6,7 C40,5 75,8 93,6' stroke='%235A7A68' stroke-width='1.5' stroke-linecap='round' fill='none'/></svg>");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+.dark-theme .hand-drawn-underline::after {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M3,5 C35,2 65,8 97,4' stroke='%23769482' stroke-width='2.5' stroke-linecap='round' fill='none'/><path d='M6,7 C40,5 75,8 93,6' stroke='%23769482' stroke-width='1.5' stroke-linecap='round' fill='none'/></svg>");
+}
+
 
 .letter-greeting {
     font-family: var(--font-heading);
