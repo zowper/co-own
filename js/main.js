@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 0. Dark Mode Toggler
-    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -8,19 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-theme');
     }
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
+    themeToggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
-    }
+    });
 
     // 1. Navigation Menu, Overlay, & Sliding Indicator Setup
     const hamburger = document.getElementById('hamburger');
+    const sidebarContainer = document.getElementById('sidebar-container');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const navOverlay = document.getElementById('nav-overlay');
@@ -55,23 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-    });
+    if (hamburger && sidebarContainer) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sidebarContainer.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+        });
+    }
 
-    navOverlay.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        navOverlay.classList.remove('active');
-    });
+    if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+            if (hamburger) hamburger.classList.remove('active');
+            if (sidebarContainer) sidebarContainer.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    }
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            navOverlay.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
+            if (sidebarContainer) sidebarContainer.classList.remove('active');
+            if (navOverlay) navOverlay.classList.remove('active');
             
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
@@ -160,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(updateNavIndicator);
     });
 
-    if (navMenu) {
-        navMenu.addEventListener('transitionend', () => {
+    if (sidebarContainer) {
+        sidebarContainer.addEventListener('transitionend', () => {
             updateNavIndicator();
         });
     }

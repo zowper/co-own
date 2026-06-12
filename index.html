@@ -13,34 +13,20 @@
     <!-- Dimming Background Mask for Mobile Sidebar -->
     <div class="nav-overlay" id="nav-overlay"></div>
 
-    <!-- Top Navigation Header -->
-    <header class="header">
-        <div class="container navbar">
-            <a href="#" class="logo" id="logo-link">
-                <!-- house outline with dual lines representing shared ownership -->
+    <!-- Mobile Header (Visible < 1024px) -->
+    <header class="mobile-header">
+        <div class="mobile-navbar">
+            <a href="#" class="logo">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3L19 9.3zM12 5.5l6 5.4v7.1h-2v-6H8v6H6v-7.1l6-5.4z"/>
                     <path d="M17 3.5l3.5 3.15V15h-1.5V7.85l-2-1.8V3.5h-2v1.05l-1-0.9V2.5h3v1z" opacity="0.75"/>
                 </svg>
+                <span>Co-own</span>
             </a>
             
-            <nav>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#proposal" class="nav-link active">Proposal</a></li>
-                    <li><a href="#strategy" class="nav-link">Strategy</a></li>
-                    <li><a href="#hoa" class="nav-link">HOAs</a></li>
-                    <li><a href="#adu" class="nav-link">Downstairs</a></li>
-                    <li><a href="#calculator" class="nav-link">Rent Splits</a></li>
-                    <li><a href="#timeline" class="nav-link">Exit Plan</a></li>
-                    <li><a href="#properties" class="nav-link">Properties</a></li>
-                    <li><a href="#safeguards" class="nav-link">Safeguards</a></li>
-                    <li><a href="#contract-teaser" class="nav-link">Agreement</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
-                </ul>
-            </nav>
-
-            <div class="nav-actions">
-                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+            <div class="mobile-nav-actions">
+                <a href="#calculator" class="btn btn-primary cta-mobile">Calculate Split</a>
+                <button class="theme-toggle-btn" aria-label="Toggle Dark Mode">
                     <!-- Moon Icon -->
                     <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -66,6 +52,57 @@
             </div>
         </div>
     </header>
+
+    <div class="layout-wrapper">
+        <!-- Sidebar Container (Left Column on Desktop, Mobile Drawer < 1024px) -->
+        <aside class="sidebar-container" id="sidebar-container">
+            <div class="sidebar-top">
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3L19 9.3zM12 5.5l6 5.4v7.1h-2v-6H8v6H6v-7.1l6-5.4z"/>
+                        <path d="M17 3.5l3.5 3.15V15h-1.5V7.85l-2-1.8V3.5h-2v1.05l-1-0.9V2.5h3v1z" opacity="0.75"/>
+                    </svg>
+                    <span>Co-own</span>
+                </a>
+                
+                <nav class="sidebar-nav">
+                    <ul class="nav-menu" id="nav-menu">
+                        <li><a href="#strategy" class="nav-link">The Vision</a></li>
+                        <li><a href="#adu" class="nav-link">The Setup</a></li>
+                        <li><a href="#calculator" class="nav-link">The Numbers</a></li>
+                        <li><a href="#safeguards" class="nav-link">The Protections</a></li>
+                        <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="sidebar-bottom">
+                <button class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <!-- Moon Icon -->
+                    <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <!-- Sun Icon -->
+                    <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <div class="sidebar-credit">
+                    Prepared by Jared, Melinda, & Nelson Carter
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
 
     <!-- Hero Section -->
     <section id="proposal" class="hero-section">
@@ -830,6 +867,9 @@
             </div>
         </div>
     </footer>
+
+    </main>
+</div>
 
     <!-- Property Comparison Floating Tray -->
     <div class="compare-tray" id="compare-tray">
