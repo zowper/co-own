@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const expensesInput = document.getElementById('monthly-expenses');
     
     const rentMainInput = document.getElementById('rent-main');
-    const rentAduInput = document.getElementById('rent-adu');
+    const rentAduInput = document.getElementById('rent-downstairs');
 
     const partnerANameInput = null;
     const partnerBNameInput = null;
@@ -213,15 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const splitLabelB = document.getElementById('split-label-b');
     
     const mainBaseLabel = document.getElementById('main-base-label');
-    const aduBaseLabel = document.getElementById('adu-base-label');
+    const aduBaseLabel = document.getElementById('downstairs-base-label');
 
     const totalMonthlyOutput = document.getElementById('total-monthly-payment');
     const mainBaseOutput = document.getElementById('main-base-payment');
-    const aduBaseOutput = document.getElementById('adu-base-payment');
+    const aduBaseOutput = document.getElementById('downstairs-base-payment');
     const equalizationAmountOutput = document.getElementById('equalization-amount');
     const equalizationDirectionOutput = document.getElementById('equalization-direction');
     const mainNetOutput = document.getElementById('main-net-payment');
-    const aduNetOutput = document.getElementById('adu-net-payment');
+    const downstairsNetOutput = document.getElementById('downstairs-net-payment');
 
     // Global timeline data array calculated dynamically
     let dynamicTimelineData = [];
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const monthlyExpenses = parseFloat(expensesInput.value) || 0;
 
         const appraisalMain = parseFloat(rentMainInput.value) || 0;
-        const appraisalAdu = parseFloat(rentAduInput.value) || 0;
+        const appraisalDownstairs = parseFloat(rentAduInput.value) || 0;
 
         // Calculate Monthly Mortgage
         const downPaymentAmount = homePrice * (downPaymentPercent / 100);
@@ -269,13 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Determine splits
         const shareMain = splitA / 100;
-        const shareAdu = splitB / 100;
+        const shareDownstairs = splitB / 100;
 
         const mainBaseShare = totalMonthlyCost * shareMain;
-        const aduBaseShare = totalMonthlyCost * shareAdu;
+        const downstairsBaseShare = totalMonthlyCost * shareDownstairs;
 
         // Rent Equalization Calculation:
-        const totalUtility = appraisalMain + appraisalAdu;
+        const totalUtility = appraisalMain + appraisalDownstairs;
         const entitledMain = totalUtility * shareMain;
         
         const equalizationPayment = entitledMain - appraisalMain; 
@@ -283,53 +283,53 @@ document.addEventListener('DOMContentLoaded', () => {
         let displayEqualization = 0;
         let directionText = "Balanced split:";
         let mainNet = mainBaseShare;
-        let aduNet = aduBaseShare;
+        let downstairsNet = downstairsBaseShare;
 
         if (equalizationPayment < 0) {
-            // Main consumed more than entitled. Main pays ADU.
+            // Main consumed more than entitled. Main pays Downstairs.
             displayEqualization = Math.abs(equalizationPayment);
             directionText = `${partnerAName} pays ${partnerBName}:`;
             mainNet = mainBaseShare + displayEqualization;
-            aduNet = aduBaseShare - displayEqualization;
+            downstairsNet = downstairsBaseShare - displayEqualization;
         } else if (equalizationPayment > 0) {
-            // ADU consumed more than entitled. ADU pays Main.
+            // Downstairs consumed more than entitled. Downstairs pays Main.
             displayEqualization = Math.abs(equalizationPayment);
             directionText = `${partnerBName} pays ${partnerAName}:`;
             mainNet = mainBaseShare - displayEqualization;
-            aduNet = aduBaseShare + displayEqualization;
+            downstairsNet = downstairsBaseShare + displayEqualization;
         }
 
         // Render Outputs
         totalMonthlyOutput.textContent = '$' + Math.round(totalMonthlyCost).toLocaleString();
         mainBaseOutput.textContent = '$' + Math.round(mainBaseShare).toLocaleString();
-        aduBaseOutput.textContent = '$' + Math.round(aduBaseShare).toLocaleString();
+        aduBaseOutput.textContent = '$' + Math.round(downstairsBaseShare).toLocaleString();
         equalizationAmountOutput.textContent = '$' + Math.round(displayEqualization).toLocaleString() + ' / mo';
         equalizationDirectionOutput.textContent = directionText;
         mainNetOutput.textContent = '$' + Math.round(mainNet).toLocaleString();
-        aduNetOutput.textContent = '$' + Math.round(aduNet).toLocaleString();
+        downstairsNetOutput.textContent = '$' + Math.round(downstairsNet).toLocaleString();
 
         // Dynamic output labels for final shares
         document.getElementById('main-name-label').textContent = `${partnerAName} Net Out-of-Pocket`;
-        document.getElementById('adu-name-label').textContent = `${partnerBName} Net Out-of-Pocket`;
+        document.getElementById('downstairs-name-label').textContent = `${partnerBName} Net Out-of-Pocket`;
 
         // Update Share Bar Visuals
         const mainBar = document.getElementById('segment-main-bar');
-        const aduBar = document.getElementById('segment-adu-bar');
+        const downstairsBar = document.getElementById('segment-downstairs-bar');
         const mainPct = document.getElementById('pct-main-label');
-        const aduPct = document.getElementById('pct-adu-label');
+        const downstairsPct = document.getElementById('pct-downstairs-label');
 
-        if (mainBar && aduBar && mainPct && aduPct) {
+        if (mainBar && downstairsBar && mainPct && downstairsPct) {
             const mainPctVal = totalMonthlyCost > 0 ? Math.round((mainNet / totalMonthlyCost) * 100) : 50;
-            const aduPctVal = 100 - mainPctVal;
+            const downstairsPctVal = 100 - mainPctVal;
 
             mainBar.style.width = mainPctVal + '%';
-            aduBar.style.width = aduPctVal + '%';
+            downstairsBar.style.width = downstairsPctVal + '%';
 
             mainPct.textContent = mainPctVal + '%';
-            aduPct.textContent = aduPctVal + '%';
+            downstairsPct.textContent = downstairsPctVal + '%';
 
             mainPct.style.display = mainPctVal < 12 ? 'none' : 'block';
-            aduPct.style.display = aduPctVal < 12 ? 'none' : 'block';
+            downstairsPct.style.display = downstairsPctVal < 12 ? 'none' : 'block';
         }
 
         // Sync with Local Storage for dynamic contract hydration
@@ -342,16 +342,16 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('coown_loan_term', loanTerm);
         localStorage.setItem('coown_monthly_expenses', monthlyExpenses);
         localStorage.setItem('coown_appraisal_main', appraisalMain);
-        localStorage.setItem('coown_appraisal_adu', appraisalAdu);
+        localStorage.setItem('coown_appraisal_downstairs', appraisalDownstairs);
         localStorage.setItem('coown_split_a', splitA);
         localStorage.setItem('coown_split_b', splitB);
         localStorage.setItem('coown_total_monthly_cost', totalMonthlyCost);
         localStorage.setItem('coown_main_base_share', mainBaseShare);
-        localStorage.setItem('coown_adu_base_share', aduBaseShare);
+        localStorage.setItem('coown_downstairs_base_share', downstairsBaseShare);
         localStorage.setItem('coown_equalization_payment', displayEqualization);
         localStorage.setItem('coown_equalization_direction', directionText);
         localStorage.setItem('coown_main_net', mainNet);
-        localStorage.setItem('coown_adu_net', aduNet);
+        localStorage.setItem('coown_downstairs_net', downstairsNet);
 
         // Notify embedded contract iframe if it exists and is loaded
         const contractIframe = document.getElementById('contract-iframe');
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const equity = val - loan;
             
-            // Buyout Needed for leaving partner (Partner B)
+            // Buyout Needed for leaving family (Family B)
             const partnerBDownPaymentShare = downPaymentAmount * shareB;
             const partnerBAppreciationShare = (val - homePrice) * shareB;
             const buyout = partnerBDownPaymentShare + partnerBAppreciationShare;
@@ -571,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityFilter = document.getElementById('city-filter');
     const sortBy = document.getElementById('sort-by');
     
-    const toggleAdu = document.getElementById('toggle-adu');
+    const toggleDownstairs = document.getElementById('toggle-downstairs');
     const toggleEntrance = document.getElementById('toggle-entrance');
     const toggleNoHoa = document.getElementById('toggle-no-hoa');
     const toggleBasement = document.getElementById('toggle-basement');
@@ -592,14 +592,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedHoa = prop.hoa_fee > 0 ? `📝 HOA: $${prop.hoa_fee}/mo` : '🚫 HOA: $0';
         
         let badgesHtml = '';
-        if (prop.adu === 'Yes') {
-            badgesHtml += `<span class="prop-badge prop-badge-adu">Basement Apartment</span>`;
+        if (prop.downstairs === 'Yes') {
+            badgesHtml += `<span class="prop-badge prop-badge-adu">Downstairs</span>`;
         }
         if (prop.private_entrance === 'Yes') {
             badgesHtml += `<span class="prop-badge prop-badge-entrance">Private Entry</span>`;
         }
         if (prop.finished_basement === 'Yes') {
-            badgesHtml += `<span class="prop-badge prop-badge-basement">Basement</span>`;
+            badgesHtml += `<span class="prop-badge prop-badge-basement">Downstairs</span>`;
         }
         if (prop.hoa_fee === 0) {
             badgesHtml += `<span class="prop-badge prop-badge-nohoa">No HOA</span>`;
@@ -703,10 +703,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Estimate rental appraisals
                     // Main house is estimated at ~0.293% of property price
-                    // Basement apartment is estimated at ~0.187% of property price
-                    // If no basement apartment, basement appraisal is lower (~0.15% of property price)
+                    // Downstairs apartment is estimated at ~0.187% of property price
+                    // If no downstairs, basement appraisal is lower (~0.15% of property price)
                     const estMainRatio = 0.00293;
-                    const estAduRatio = prop.adu === 'Yes' ? 0.00187 : 0.0015;
+                    const estAduRatio = prop.downstairs === 'Yes' ? 0.00187 : 0.0015;
                     
                     const estMain = Math.round(prop.price * estMainRatio);
                     const estAdu = Math.round(prop.price * estAduRatio);
@@ -746,7 +746,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchQuery = searchInput.value.toLowerCase().trim();
         const cityValue = cityFilter.value;
         
-        const filterAdu = toggleAdu.checked;
+        const filterAdu = toggleDownstairs.checked;
         const filterEntrance = toggleEntrance.checked;
         const filterNoHoa = toggleNoHoa.checked;
         const filterBasement = toggleBasement.checked;
@@ -768,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Toggles
-            if (filterAdu && prop.adu !== 'Yes') return false;
+            if (filterAdu && prop.downstairs !== 'Yes') return false;
             if (filterEntrance && prop.private_entrance !== 'Yes') return false;
             if (filterNoHoa && prop.hoa_fee > 0) return false;
             if (filterBasement && prop.finished_basement !== 'Yes') return false;
@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cityFilter) cityFilter.addEventListener('change', filterAndSortProperties);
     if (sortBy) sortBy.addEventListener('change', filterAndSortProperties);
     
-    [toggleAdu, toggleEntrance, toggleNoHoa, toggleBasement].forEach(toggle => {
+    [toggleDownstairs, toggleEntrance, toggleNoHoa, toggleBasement].forEach(toggle => {
         if (toggle) toggle.addEventListener('change', filterAndSortProperties);
     });
 
@@ -925,7 +925,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let yearRowHtml = '<td>Year Built</td>';
         let bedBathRowHtml = '<td>Bed/Bath</td>';
         let basementRowHtml = '<td>Finished Basement</td>';
-        let aduRowHtml = '<td>Basement Apartment</td>';
+        let aduRowHtml = '<td>Downstairs</td>';
         let entranceRowHtml = '<td>Private Entrance</td>';
         let hoaRowHtml = '<td>HOA Fee</td>';
         let ratingRowHtml = '<td>Average Rating</td>';
@@ -941,7 +941,7 @@ document.addEventListener('DOMContentLoaded', () => {
             yearRowHtml += `<td>${prop.year_built}</td>`;
             bedBathRowHtml += `<td>${prop.bedrooms} Bed / ${prop.bathrooms} Bath</td>`;
             basementRowHtml += `<td>${prop.finished_basement}</td>`;
-            aduRowHtml += `<td>${prop.adu}</td>`;
+            aduRowHtml += `<td>${prop.downstairs}</td>`;
             entranceRowHtml += `<td>${prop.private_entrance}</td>`;
             hoaRowHtml += `<td>$${prop.hoa_fee}/mo</td>`;
             ratingRowHtml += `<td style="font-weight: 600;">${prop.avg_rating || 'N/A'} / 5</td>`;
