@@ -2359,6 +2359,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         left: -280px;
         right: auto;
         width: 280px;
+        min-width: unset;
         height: 100vh;
         background-color: var(--color-surface);
         border-right: 1px solid var(--color-border);
@@ -2404,6 +2405,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
         padding: 6px;
         border-radius: var(--radius-sm);
         transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    
+    .close-sidebar-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
     .close-sidebar-btn:hover {
