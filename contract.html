@@ -943,6 +943,111 @@
                 max-width: 140px;
             }
         }
+
+        /* Print Stylesheet */
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+
+            html, body {
+                height: auto !important;
+                overflow: visible !important;
+                background-color: #FFFFFF !important;
+                background: #FFFFFF !important;
+                color: #000000 !important;
+                font-size: 10pt !important;
+            }
+
+            /* Hide DocuSign shell wrapper, navigation helper, buttons, modals, and overlays */
+            .top-accent,
+            .ds-header,
+            .ds-sidebar,
+            .ds-floating-helper,
+            .ds-modal-overlay,
+            .toast-message,
+            .sign-here-tab,
+            .ds-btn,
+            #signing-helper-bubble {
+                display: none !important;
+            }
+
+            /* Reset flex wrappers to allow natural multi-page scrolling during printing */
+            .ds-workspace {
+                display: block !important;
+                height: auto !important;
+                overflow: visible !important;
+                position: static !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .ds-document-pane {
+                display: block !important;
+                height: auto !important;
+                overflow: visible !important;
+                position: static !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background-color: transparent !important;
+                width: 100% !important;
+            }
+
+            .document-scroll-container {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                gap: 0 !important;
+            }
+
+            /* Make document pages behave as individual printed pages */
+            .contract-page {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 40px 0 !important; /* Spacing inside page for header/footer */
+                margin: 0 !important;
+                width: 100% !important;
+                height: 9.5in !important; /* Fit within US Letter height */
+                box-sizing: border-box !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                background-color: #FFFFFF !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+            }
+
+            /* Keep header and footer elements aligned */
+            .page-doc-header, .page-doc-footer {
+                display: flex !important;
+                width: 100% !important;
+                background-color: transparent !important;
+                border-color: #E2E6E9 !important;
+                color: #666666 !important;
+            }
+
+            /* Prevent page break after the last page */
+            .contract-page:last-child {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+            /* signature container styling for print */
+            .sig-container {
+                background-color: transparent !important;
+                border-color: #CCCCCC !important;
+            }
+
+            .initials-stamp-field {
+                background-color: transparent !important;
+                border-color: #CCCCCC !important;
+            }
+        }
     </style>
 </head>
 <body>
