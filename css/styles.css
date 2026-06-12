@@ -1930,11 +1930,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
 }
 
-@media (max-width: 1200px) {
-    .header-calc-btn {
-        display: none !important;
-    }
-}
 
 @media (min-width: 993px) and (max-width: 1200px) {
     .nav-link {
