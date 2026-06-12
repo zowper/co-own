@@ -462,7 +462,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Generate and update exit timeline math dynamically
-        const appreciationRate = timelineAppreciationInput ? (parseFloat(timelineAppreciationInput.value) || 5.0) : 5.0;
+        let appreciationRate = 5.0;
+        if (timelineAppreciationInput && timelineAppreciationInput.value !== '') {
+            const parsedApp = parseFloat(timelineAppreciationInput.value);
+            if (!isNaN(parsedApp)) {
+                appreciationRate = parsedApp;
+            }
+        }
+        
         const timelineSplitA = timelineSplitSlider ? (parseInt(timelineSplitSlider.value) || 50) : 50;
         const timelineSplitB = 100 - timelineSplitA;
 
@@ -471,7 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, timelineSplitA, appreciationRate);
         
-        const currentYearVal = tlRange ? (parseInt(tlRange.value) || 5) : 5;
+        let currentYearVal = 5;
+        if (tlRange && tlRange.value !== '') {
+            const parsedYear = parseInt(tlRange.value);
+            if (!isNaN(parsedYear)) {
+                currentYearVal = parsedYear;
+            }
+        }
         updateTimeline(currentYearVal);
     }
 

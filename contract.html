@@ -1601,27 +1601,32 @@
         let sigMode = "font"; // Default mode
 
         function hydrateContract() {
-            // Load variables from localStorage
-            const partnerAName = localStorage.getItem('coown_partner_a_name') || 'Jared Carter, Melinda Carter, and Nelson Carter';
-            const partnerBName = localStorage.getItem('coown_partner_b_name') || 'Guest Co-Owner';
+            // Load variables from localStorage with proper check to allow 0 values
+            const getItemWithDefault = (key, defaultValue) => {
+                const val = localStorage.getItem(key);
+                return val !== null ? val : defaultValue;
+            };
+
+            const partnerAName = getItemWithDefault('coown_partner_a_name', 'Jared Carter, Melinda Carter, and Nelson Carter');
+            const partnerBName = getItemWithDefault('coown_partner_b_name', 'Guest Co-Owner');
             
-            const homePrice = parseFloat(localStorage.getItem('coown_home_price')) || 750000;
-            const downPaymentPct = parseFloat(localStorage.getItem('coown_down_payment_pct')) || 20;
-            const downPaymentAmt = parseFloat(localStorage.getItem('coown_down_payment_amt')) || (homePrice * downPaymentPct / 100);
-            const interestRate = parseFloat(localStorage.getItem('coown_interest_rate')) || 6.25;
-            const loanTerm = parseFloat(localStorage.getItem('coown_loan_term')) || 30;
-            const monthlyExpenses = parseFloat(localStorage.getItem('coown_monthly_expenses')) || 800;
-            const appraisalMain = parseFloat(localStorage.getItem('coown_appraisal_main')) || 2200;
-            const appraisalDownstairs = parseFloat(localStorage.getItem('coown_appraisal_downstairs')) || 1400;
-            const splitA = parseInt(localStorage.getItem('coown_split_a')) || 50;
-            const splitB = parseInt(localStorage.getItem('coown_split_b')) || 50;
-            const totalMonthlyCost = parseFloat(localStorage.getItem('coown_total_monthly_cost')) || 4495;
-            const mainBaseShare = parseFloat(localStorage.getItem('coown_main_base_share')) || 2248;
-            const downstairsBaseShare = parseFloat(localStorage.getItem('coown_downstairs_base_share')) || 2248;
-            const equalizationPayment = parseFloat(localStorage.getItem('coown_equalization_payment')) || 400;
-            const equalizationDirection = localStorage.getItem('coown_equalization_direction') || 'Upstairs pays Downstairs:';
-            const mainNet = parseFloat(localStorage.getItem('coown_main_net')) || 2648;
-            const downstairsNet = parseFloat(localStorage.getItem('coown_downstairs_net')) || 1848;
+            const homePrice = parseFloat(getItemWithDefault('coown_home_price', 750000));
+            const downPaymentPct = parseFloat(getItemWithDefault('coown_down_payment_pct', 20));
+            const downPaymentAmt = parseFloat(getItemWithDefault('coown_down_payment_amt', homePrice * downPaymentPct / 100));
+            const interestRate = parseFloat(getItemWithDefault('coown_interest_rate', 6.25));
+            const loanTerm = parseFloat(getItemWithDefault('coown_loan_term', 30));
+            const monthlyExpenses = parseFloat(getItemWithDefault('coown_monthly_expenses', 800));
+            const appraisalMain = parseFloat(getItemWithDefault('coown_appraisal_main', 2200));
+            const appraisalDownstairs = parseFloat(getItemWithDefault('coown_appraisal_downstairs', 1400));
+            const splitA = parseInt(getItemWithDefault('coown_split_a', 50));
+            const splitB = parseInt(getItemWithDefault('coown_split_b', 50));
+            const totalMonthlyCost = parseFloat(getItemWithDefault('coown_total_monthly_cost', 4495));
+            const mainBaseShare = parseFloat(getItemWithDefault('coown_main_base_share', 2248));
+            const downstairsBaseShare = parseFloat(getItemWithDefault('coown_downstairs_base_share', 2248));
+            const equalizationPayment = parseFloat(getItemWithDefault('coown_equalization_payment', 400));
+            const equalizationDirection = getItemWithDefault('coown_equalization_direction', 'Upstairs pays Downstairs:');
+            const mainNet = parseFloat(getItemWithDefault('coown_main_net', 2648));
+            const downstairsNet = parseFloat(getItemWithDefault('coown_downstairs_net', 1848));
 
             // Extract contact short/first names for inline referencing
             const cleanShortName = (name) => name.split('&')[0].split(',')[0].trim();
