@@ -488,7 +488,6 @@ p {
 
 .letter-signature {
     margin-top: var(--space-lg);
-    border-top: 1px dashed var(--color-border);
     padding-top: var(--space-sm);
     display: flex;
     justify-content: flex-end;
