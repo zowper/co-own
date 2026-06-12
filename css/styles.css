@@ -2354,35 +2354,31 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     
     .mobile-header .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        max-width: calc(100% - 120px);
+        margin: 0 auto;
         margin-bottom: 0;
         flex-shrink: 0;
     }
 
     .mobile-header .logo-img {
-        height: 48px;
-        width: auto;
+        display: block;
+        max-width: 100%;
+        height: auto;
+        max-height: 48px;
+        object-fit: contain;
     }
     
     .mobile-navbar {
+        position: relative;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         height: 100%;
         padding: 0 var(--space-md);
-    }
-    
-    .mobile-nav-actions {
-        display: flex;
-        align-items: center;
-        gap: var(--space-sm);
-        flex-shrink: 0;
-    }
-    
-    .cta-mobile {
-        padding: 0.45rem 0.85rem;
-        font-size: 0.85rem;
-        border-radius: var(--radius-sm);
-        white-space: nowrap;
     }
     
     .nav-overlay {
@@ -2483,6 +2479,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
     .hamburger {
         display: flex;
+        position: absolute;
+        left: var(--space-xs);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
     }
     
     .hamburger.active span:nth-child(1) {
@@ -2500,7 +2501,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 @media (max-width: 768px) {
     .mobile-header .logo-img {
-        height: 44px;
+        max-height: 40px;
     }
 
     .letter-card {
@@ -2545,17 +2546,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         padding: 0 var(--space-xs);
     }
     .mobile-header .logo-img {
-        height: 40px;
-    }
-    .mobile-nav-actions {
-        gap: var(--space-xs);
-    }
-    .cta-mobile {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.8rem;
-    }
-    .hide-mobile-word {
-        display: none;
+        max-height: 36px;
     }
 }
 
