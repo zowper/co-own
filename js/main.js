@@ -355,11 +355,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Notify embedded contract iframe if it exists and is loaded
         const contractIframe = document.getElementById('contract-iframe');
-        if (contractIframe && contractIframe.contentWindow && typeof contractIframe.contentWindow.hydrateContract === 'function') {
+        if (contractIframe) {
             try {
-                contractIframe.contentWindow.hydrateContract();
+                if (contractIframe.contentWindow && typeof contractIframe.contentWindow.hydrateContract === 'function') {
+                    contractIframe.contentWindow.hydrateContract();
+                }
             } catch (err) {
-                console.warn("Could not hydrate contract iframe directly:", err);
+                console.warn("Could not hydrate contract iframe directly due to security/origin restrictions:", err);
             }
         }
 
