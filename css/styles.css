@@ -1112,6 +1112,14 @@ p {
     font-size: 0.9rem;
 }
 
+.input-suffix {
+    position: absolute;
+    right: var(--space-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
 .input-wrapper input[type="number"] {
     width: 100%;
     padding: 0.6rem var(--space-sm) 0.6rem 1.8rem;
@@ -1122,6 +1130,11 @@ p {
     font-size: 0.95rem;
     outline: none;
     transition: all var(--transition-fast);
+}
+
+.input-wrapper.has-suffix input[type="number"] {
+    padding-left: var(--space-sm);
+    padding-right: 1.8rem;
 }
 
 .input-wrapper input[type="number"]:focus {
