@@ -300,6 +300,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const timelineDownPaymentInput = document.getElementById('timeline-down-payment');
     const timelineInterestRateInput = document.getElementById('timeline-interest-rate');
     const timelineAppreciationInput = document.getElementById('timeline-appreciation');
+    const timelineSplitSlider = document.getElementById('timeline-split-slider');
+    const timelineSplitLabelA = document.getElementById('timeline-split-label-a');
+    const timelineSplitLabelB = document.getElementById('timeline-split-label-b');
     
     const splitLabelA = document.getElementById('split-label-a');
     const splitLabelB = document.getElementById('split-label-b');
@@ -460,7 +463,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generate and update exit timeline math dynamically
         const appreciationRate = timelineAppreciationInput ? (parseFloat(timelineAppreciationInput.value) || 5.0) : 5.0;
-        generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, splitA, appreciationRate);
+        const timelineSplitA = timelineSplitSlider ? (parseInt(timelineSplitSlider.value) || 50) : 50;
+        const timelineSplitB = 100 - timelineSplitA;
+
+        if (timelineSplitLabelA) timelineSplitLabelA.textContent = `Upstairs Family: ${timelineSplitA}%`;
+        if (timelineSplitLabelB) timelineSplitLabelB.textContent = `Downstairs Family: ${timelineSplitB}%`;
+
+        generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, timelineSplitA, appreciationRate);
         
         const currentYearVal = tlRange ? (parseInt(tlRange.value) || 5) : 5;
         updateTimeline(currentYearVal);
@@ -470,6 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dynamicTimelineData = [];
         const downPaymentAmount = homePrice * (downPaymentPercent / 100);
         const loanAmount = homePrice - downPaymentAmount;
+        const shareA = splitA / 100;
         const shareB = (100 - splitA) / 100;
         
         const r_m = (interestRate / 100) / 12;
@@ -493,25 +503,37 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const equity = val - loan;
             
-            // Buyout Needed for leaving family (Family B)
-            const partnerBDownPaymentShare = downPaymentAmount * shareB;
-            const partnerBAppreciationShare = (val - homePrice) * shareB;
-            const partnerBPrincipalShare = (loanAmount - loan) * shareB;
-            const buyout = partnerBDownPaymentShare + partnerBAppreciationShare + partnerBPrincipalShare;
+            // Buyout Needed for leaving family (Family A vs Family B)
+            const buyoutA = (downPaymentAmount * shareA) + ((val - homePrice) * shareA) + ((loanAmount - loan) * shareA);
+            const buyoutB = (downPaymentAmount * shareB) + ((val - homePrice) * shareB) + ((loanAmount - loan) * shareB);
+
+            let buyoutText = "";
+            let buyoutVal = 0;
+
+            if (splitA === 50) {
+                buyoutText = '$' + Math.round(buyoutB).toLocaleString();
+                buyoutVal = buyoutB;
+            } else {
+                const higher = Math.max(buyoutA, buyoutB);
+                const lower = Math.min(buyoutA, buyoutB);
+                buyoutText = '$' + Math.round(higher).toLocaleString() + ' or $' + Math.round(lower).toLocaleString();
+                buyoutVal = higher;
+            }
 
             // Refinance limits
             const l90 = (0.90 * val) - loan;
-            const a90 = l90 >= buyout;
+            const a90 = l90 >= buyoutVal;
             
             const l80 = (0.80 * val) - loan;
-            const a80 = l80 >= buyout;
+            const a80 = l80 >= buyoutVal;
 
             dynamicTimelineData.push({
                 year: year,
                 val: val,
                 loan: loan,
                 equity: equity,
-                buyout: buyout,
+                buyout: buyoutVal,
+                buyoutText: buyoutText,
                 l90: l90,
                 a90: a90,
                 l80: l80,
@@ -579,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tlHomeValue.textContent = '$' + Math.round(data.val).toLocaleString();
         tlMortgageLeft.textContent = '$' + Math.round(data.loan).toLocaleString();
         tlJointEquity.textContent = '$' + Math.round(data.equity).toLocaleString();
-        tlBuyoutNeeded.textContent = '$' + Math.round(data.buyout).toLocaleString();
+        tlBuyoutNeeded.textContent = data.buyoutText;
 
         // Update Chart segments
         const segEquity = document.getElementById('chart-segment-equity');
@@ -671,15 +693,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const borrowLimit90 = Math.round(data.l90);
             if (data.a90) {
-                statusHtml = `At 90% LTV, a refinance allows borrowing up to <strong>$${borrowLimit90.toLocaleString()}</strong> in cash, which is <strong>fully sufficient</strong> to fund ${partnerBName}'s $${Math.round(data.buyout).toLocaleString()} buyout.`;
+                statusHtml = `At 90% LTV, a refinance allows borrowing up to <strong>$${borrowLimit90.toLocaleString()}</strong> in cash, which is <strong>fully sufficient</strong> to fund the leaving family's <strong>${data.buyoutText}</strong> buyout.`;
                 if (data.a80) {
                     const borrowLimit80 = Math.round(data.l80);
                     statusHtml += ` Even at a conservative 80% LTV, we have <strong>$${borrowLimit80.toLocaleString()}</strong> in borrow capacity, easily covering the buyout.`;
                 } else {
-                    statusHtml += ` An 80% LTV refinance is currently short by $${Math.round(Math.abs(data.l80)).toLocaleString()}.`;
+                    const shortfall80 = data.l80 < 0 ? Math.abs(data.l80) + data.buyout : data.buyout - data.l80;
+                    statusHtml += ` An 80% LTV refinance is currently short by $${Math.round(shortfall80).toLocaleString()}.`;
                 }
             } else {
-                statusHtml = `Refinancing is not yet viable. Available cash is short of the needed buyout amount by $${Math.round(Math.abs(data.l90)).toLocaleString()}.`;
+                const shortfall90 = data.l90 < 0 ? Math.abs(data.l90) + data.buyout : data.buyout - data.l90;
+                statusHtml = `Refinancing is not yet viable. Available cash is short of the needed buyout amount by $${Math.round(shortfall90).toLocaleString()}.`;
             }
         }
         tlStatusDesc.innerHTML = statusHtml;
@@ -688,6 +712,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tlRange) {
         tlRange.addEventListener('input', (e) => {
             updateTimeline(parseInt(e.target.value));
+        });
+    }
+
+    if (timelineSplitSlider) {
+        timelineSplitSlider.addEventListener('input', (e) => {
+            calculateEqualization();
         });
     }
 
