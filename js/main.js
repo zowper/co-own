@@ -534,6 +534,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const partnerBName = 'Downstairs Family';
 
         tlYearBadge.textContent = "Year " + data.year + ".0";
+        
+        // Update active class on ticks
+        const ticks = document.querySelectorAll('.timeline-axis-ticks .timeline-tick');
+        ticks.forEach((tick, idx) => {
+            if (idx === parseInt(yearIdx)) {
+                tick.classList.add('active');
+            } else {
+                tick.classList.remove('active');
+            }
+        });
+
         tlHomeValue.textContent = '$' + Math.round(data.val).toLocaleString();
         tlMortgageLeft.textContent = '$' + Math.round(data.loan).toLocaleString();
         tlJointEquity.textContent = '$' + Math.round(data.equity).toLocaleString();

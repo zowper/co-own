@@ -1301,10 +1301,48 @@ p {
 .timeline-axis-ticks {
     display: flex;
     justify-content: space-between;
+    margin-top: var(--space-xs);
+    padding: 0 9px; /* Align ticks exactly with range thumb center */
+    min-height: 2.2rem; /* Reserve space for two lines so layout doesn't shift */
+}
+
+.timeline-tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 0;
+    overflow: visible;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.tick-year {
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--color-text-muted);
-    margin-top: var(--space-xs);
+    transition: color var(--transition-fast), font-weight var(--transition-fast), transform var(--transition-fast);
+}
+
+.tick-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-top: 2px;
+    opacity: 0.8;
+    transition: color var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.timeline-tick.active .tick-year {
+    color: var(--color-secondary-dark);
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.timeline-tick.active .tick-label {
+    color: var(--color-secondary-dark);
+    font-weight: 600;
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 /* Dynamic range slider */
