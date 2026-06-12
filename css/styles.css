@@ -132,6 +132,10 @@ body {
     overflow-x: hidden;
 }
 
+body.sidebar-active {
+    overflow: hidden;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -399,6 +403,8 @@ p {
     border: none;
     cursor: pointer;
     z-index: 1000;
+    padding: 12px;
+    box-sizing: content-box;
 }
 
 .hamburger span {
@@ -2306,7 +2312,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .sidebar-container {
         position: fixed;
         top: 0;
-        right: -300px;
+        left: auto;
+        right: -280px;
         width: 280px;
         height: 100vh;
         background-color: var(--color-surface);
@@ -2320,6 +2327,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
         justify-content: flex-start;
         gap: var(--space-md);
         box-shadow: var(--shadow-lg);
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
     
     .sidebar-container.active {

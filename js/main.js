@@ -56,9 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hamburger && sidebarContainer) {
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            sidebarContainer.classList.toggle('active');
-            navOverlay.classList.toggle('active');
+            const isActive = sidebarContainer.classList.toggle('active');
+            hamburger.classList.toggle('active', isActive);
+            if (navOverlay) navOverlay.classList.toggle('active', isActive);
+            document.body.classList.toggle('sidebar-active', isActive);
         });
     }
 
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hamburger) hamburger.classList.remove('active');
             if (sidebarContainer) sidebarContainer.classList.remove('active');
             if (navOverlay) navOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-active');
         });
     }
 
@@ -75,25 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hamburger) hamburger.classList.remove('active');
             if (sidebarContainer) sidebarContainer.classList.remove('active');
             navOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-active');
         });
     }
-
-    // Automatically close mobile sidebar on page scroll (main window scroll, not sidebar scroll)
-    window.addEventListener('scroll', (e) => {
-        if (sidebarContainer && sidebarContainer.classList.contains('active')) {
-            if (e.target === document || e.target === window || e.target === document.body) {
-                if (hamburger) hamburger.classList.remove('active');
-                sidebarContainer.classList.remove('active');
-                if (navOverlay) navOverlay.classList.remove('active');
-            }
-        }
-    }, { passive: true });
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (hamburger) hamburger.classList.remove('active');
             if (sidebarContainer) sidebarContainer.classList.remove('active');
             if (navOverlay) navOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-active');
             
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
