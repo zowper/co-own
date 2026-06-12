@@ -1199,7 +1199,7 @@
                     <div class="page-doc-content">
                         <div class="contract-section-heading">ARTICLE II: LOGISTICS, ROLES & DUAL-LIVING BOUNDARIES</div>
                         
-                        <p class="contract-para"><strong>Section 2.1 - Private Living Areas and Spatial Boundaries.</strong> The Property must feature two fully self-contained living areas, typically consisting of a Main House and a private finished basement or Accessory Dwelling Unit (ADU). To ensure mutual privacy:</p>
+                        <p class="contract-para"><strong>Section 2.1 - Private Living Areas and Spatial Boundaries.</strong> The Property must feature two fully self-contained living areas, typically consisting of a Main House and a private finished basement or Basement Apartment. To ensure mutual privacy:</p>
                         <ul class="contract-list-ul">
                             <li>Each unit shall have its own independent exterior entrance with unique secure locks. Any connecting doors between the units must remain locked at all times.</li>
                             <li>Each unit must include its own separate amenities, including a kitchen, laundry facilities, bedrooms, bathrooms, and living areas.</li>
@@ -1238,23 +1238,23 @@
                     <div class="page-doc-content">
                         <div class="contract-section-heading">ARTICLE III: RENT APPRAISAL & EQUALIZATION MATH</div>
                         
-                        <p class="contract-para"><strong>Section 3.1 - Principle of Equalization.</strong> To ensure absolute fairness, the Co-owners agree that since the Main House is larger and holds higher market rental value than the ADU, this value difference must be balanced. The Co-owners shall offset this difference using the Rent Equalization Formula.</p>
+                        <p class="contract-para"><strong>Section 3.1 - Principle of Equalization.</strong> To ensure absolute fairness, the Co-owners agree that since the Main House is larger and holds higher market rental value than the Basement Apartment, this value difference must be balanced. The Co-owners shall offset this difference using the Rent Equalization Formula.</p>
                         
-                        <p class="contract-para"><strong>Section 3.2 - Rental Valuations.</strong> Upon occupancy, and on each 12-month anniversary thereafter, the Co-owners shall obtain a professional estimate of the fair market rental value for both the Main House and the ADU from an independent local real estate professional or appraiser.</p>
+                        <p class="contract-para"><strong>Section 3.2 - Rental Valuations.</strong> Upon occupancy, and on each 12-month anniversary thereafter, the Co-owners shall obtain a professional estimate of the fair market rental value for both the Main House and the Basement Apartment from an independent local real estate professional or appraiser.</p>
                         
                         <p class="contract-para"><strong>Section 3.3 - Equalization Payment Calculation.</strong> The Rent Equalization payment shall be calculated by the Financial Administrator as follows:</p>
                         
                         <div style="background-color: #F9F9F9; border-left: 3px solid var(--ds-blue); padding: 12px; margin: 15px 0; font-size: 0.9rem;">
                             <strong>Equalization Rent Formula:</strong><br>
                             Let R<sub>Main</sub> be the appraised rental value of the Main House.<br>
-                            Let R<sub>ADU</sub> be the appraised rental value of the ADU.<br>
+                            Let R<sub>Basement</sub> be the appraised rental value of the Basement Apartment.<br>
                             Let S<sub>A</sub> and S<sub>B</sub> be the ownership splits of Party A and Party B respectively (expressed as decimals).<br><br>
-                            <strong>Rent Adjustment Payment = (R<sub>Main</sub> + R<sub>ADU</sub>) &times; S<sub>ADU_Occupant</sub> - R<sub>ADU</sub></strong><br>
-                            <em>(The occupant of the Main House shall pay the occupant of the ADU this calculated monthly difference).</em>
+                            <strong>Rent Adjustment Payment = (R<sub>Main</sub> + R<sub>Basement</sub>) &times; S<sub>Basement_Occupant</sub> - R<sub>Basement</sub></strong><br>
+                            <em>(The occupant of the Main House shall pay the occupant of the Basement Apartment this calculated monthly difference).</em>
                         </div>
                         <div id="dyn-eq-card-placeholder"></div>
  
-                        <p class="contract-para"><strong>Section 3.4 - Monthly Statement Integration.</strong> The calculated Rent Equalization adjustment will be applied to the monthly mortgage allocation. The partner residing in the Main House will pay their base share plus the adjustment, while the partner in the ADU will pay their base share minus the adjustment. This ensures the net out-of-pocket costs accurately reflect the value each party receives relative to their ownership share.</p>
+                        <p class="contract-para"><strong>Section 3.4 - Monthly Statement Integration.</strong> The calculated Rent Equalization adjustment will be applied to the monthly mortgage allocation. The partner residing in the Main House will pay their base share plus the adjustment, while the partner in the Basement Apartment will pay their base share minus the adjustment. This ensures the net out-of-pocket costs accurately reflect the value each party receives relative to their ownership share.</p>
                     </div>
 
                     <div class="page-doc-footer">
@@ -1502,7 +1502,7 @@
             const mainBaseShare = parseFloat(localStorage.getItem('coown_main_base_share')) || 2248;
             const aduBaseShare = parseFloat(localStorage.getItem('coown_adu_base_share')) || 2248;
             const equalizationPayment = parseFloat(localStorage.getItem('coown_equalization_payment')) || 400;
-            const equalizationDirection = localStorage.getItem('coown_equalization_direction') || 'Main House pays ADU:';
+            const equalizationDirection = localStorage.getItem('coown_equalization_direction') || 'Main House pays Basement:';
             const mainNet = parseFloat(localStorage.getItem('coown_main_net')) || 2648;
             const aduNet = parseFloat(localStorage.getItem('coown_adu_net')) || 1848;
 
@@ -1548,7 +1548,7 @@
                             <td style="font-weight: 600; color: var(--ds-blue);">$${Math.round(mainNet).toLocaleString()}/mo</td>
                         </tr>
                         <tr>
-                            <td><strong>Party B (${partnerBShort} — ADU Unit)</strong></td>
+                            <td><strong>Party B (${partnerBShort} — Basement Apartment)</strong></td>
                             <td><strong>${splitB}%</strong></td>
                             <td>$${Math.round(dpB).toLocaleString()}</td>
                             <td>$${Math.round(aduBaseShare).toLocaleString()}/mo</td>
@@ -1590,7 +1590,7 @@
                         <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--ds-blue); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Live Rental Equalization Adjustment</h4>
                         <ul style="list-style: none; padding-left: 0; margin-bottom: 8px;">
                             <li>• Main House Rental Value Appraisal (R<sub>Main</sub>): <strong>$${appraisalMain.toLocaleString()}/mo</strong></li>
-                            <li>• ADU Unit Rental Value Appraisal (R<sub>ADU</sub>): <strong>$${appraisalAdu.toLocaleString()}/mo</strong></li>
+                            <li>• Basement Apartment Rental Value Appraisal (R<sub>Basement</sub>): <strong>$${appraisalAdu.toLocaleString()}/mo</strong></li>
                             <li>• Combined Rental Value Pool: <strong>$${totalRentAppraisal.toLocaleString()}/mo</strong></li>
                             <li>• ${partnerBShort}'s Entitled Rent Share (${splitB}%): <strong>$${Math.round(entitledValB).toLocaleString()}/mo</strong></li>
                         </ul>

@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let badgesHtml = '';
         if (prop.adu === 'Yes') {
-            badgesHtml += `<span class="prop-badge prop-badge-adu">ADU</span>`;
+            badgesHtml += `<span class="prop-badge prop-badge-adu">Basement Apartment</span>`;
         }
         if (prop.private_entrance === 'Yes') {
             badgesHtml += `<span class="prop-badge prop-badge-entrance">Private Entry</span>`;
@@ -703,8 +703,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Estimate rental appraisals
                     // Main house is estimated at ~0.293% of property price
-                    // ADU basement is estimated at ~0.187% of property price
-                    // If no ADU, basement appraisal is lower (~0.15% of property price)
+                    // Basement apartment is estimated at ~0.187% of property price
+                    // If no basement apartment, basement appraisal is lower (~0.15% of property price)
                     const estMainRatio = 0.00293;
                     const estAduRatio = prop.adu === 'Yes' ? 0.00187 : 0.0015;
                     
@@ -925,7 +925,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let yearRowHtml = '<td>Year Built</td>';
         let bedBathRowHtml = '<td>Bed/Bath</td>';
         let basementRowHtml = '<td>Finished Basement</td>';
-        let aduRowHtml = '<td>ADU Ready</td>';
+        let aduRowHtml = '<td>Basement Apartment</td>';
         let entranceRowHtml = '<td>Private Entrance</td>';
         let hoaRowHtml = '<td>HOA Fee</td>';
         let ratingRowHtml = '<td>Average Rating</td>';
