@@ -2325,11 +2325,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: auto;
-        max-width: calc(100% - 120px);
+        width: 70%;
+        max-width: 70%;
         margin: 0;
         margin-bottom: 0;
         flex-shrink: 0;
+        z-index: 1001;
     }
 
     .mobile-header .logo-img {
@@ -2380,7 +2381,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     
     .sidebar-header-wrapper {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         width: 100%;
         margin-bottom: var(--space-md);
@@ -2389,8 +2390,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     
     .sidebar-top .logo {
-        display: flex !important;
-        margin-bottom: 0;
+        display: none !important;
     }
     
     .close-sidebar-btn {
