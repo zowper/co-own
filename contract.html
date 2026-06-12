@@ -316,9 +316,11 @@
         .contract-page {
             background-color: #FFFFFF;
             border: 1px solid #C0C6CC;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 0; /* Sharp edges for sheet of paper */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
+                        0 10px 20px rgba(0, 0, 0, 0.08),
+                        0 25px 50px rgba(0, 0, 0, 0.12); /* Layered paper drop shadow */
             width: 100%;
-            min-height: 1050px;
             padding: 60px 70px;
             position: relative;
             font-family: 'Merriweather', Georgia, serif;
@@ -328,7 +330,18 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        @media (min-width: 769px) {
+            .contract-page {
+                aspect-ratio: 8.5 / 11;
+                height: auto;
+                min-height: 1060px;
+            }
+        }
+
 
         /* Header of the Page sheet */
         .page-doc-header {
@@ -1012,6 +1025,7 @@
                 margin: 0 !important;
                 width: 100% !important;
                 height: 9.5in !important; /* Fit within US Letter height */
+                aspect-ratio: auto !important;
                 box-sizing: border-box !important;
                 page-break-after: always !important;
                 break-after: page !important;
@@ -1022,6 +1036,7 @@
                 flex-direction: column !important;
                 justify-content: space-between !important;
             }
+
 
             /* Keep header and footer elements aligned */
             .page-doc-header, .page-doc-footer {
