@@ -204,8 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const rentMainInput = document.getElementById('rent-main');
     const rentAduInput = document.getElementById('rent-adu');
 
-    const partnerANameInput = document.getElementById('partner-a-name');
-    const partnerBNameInput = document.getElementById('partner-b-name');
+    const partnerANameInput = null;
+    const partnerBNameInput = null;
     const appreciationRateInput = document.getElementById('appreciation-rate');
     const splitSlider = document.getElementById('split-slider');
     
@@ -227,8 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let dynamicTimelineData = [];
 
     function calculateEqualization() {
-        const partnerAName = partnerANameInput.value.trim() || 'Partner A';
-        const partnerBName = partnerBNameInput.value.trim() || 'Partner B';
+        const partnerAName = 'Upstairs Family';
+        const partnerBName = 'Downstairs Family';
         
         const splitA = parseInt(splitSlider.value) || 50;
         const splitB = 100 - splitA;
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = dynamicTimelineData[yearIdx];
         if (!data) return;
 
-        const partnerBName = partnerBNameInput.value.trim() || 'Partner B';
+        const partnerBName = 'Downstairs Family';
 
         tlYearBadge.textContent = "Year " + data.year + ".0";
         tlHomeValue.textContent = '$' + Math.round(data.val).toLocaleString();
