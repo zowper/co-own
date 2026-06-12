@@ -264,6 +264,20 @@
                     <div class="calc-subheading">Equalization Inputs</div>
                     <form class="calc-form" onsubmit="return false;">
                         <div class="input-group">
+                            <label for="partner-a-name">Partner A Name (Main)</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="partner-a-name" value="Jared & Melinda" placeholder="e.g. Jared & Melinda">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="partner-b-name">Partner B Name (ADU)</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="partner-b-name" value="Nelson" placeholder="e.g. Nelson">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
                             <label for="home-price">Home Price</label>
                             <div class="input-wrapper">
                                 <span class="input-prefix">$</span>
@@ -295,7 +309,15 @@
                             </div>
                         </div>
 
-                        <div class="input-group calc-full">
+                        <div class="input-group">
+                            <label for="appreciation-rate">Annual Appreciation (%)</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">%</span>
+                                <input type="number" id="appreciation-rate" value="5.0" min="0" max="20" step="0.1">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
                             <label for="monthly-expenses">Monthly Partnership Bills (Property Tax, Insurance, reserves)</label>
                             <div class="input-wrapper">
                                 <span class="input-prefix">$</span>
@@ -303,12 +325,13 @@
                             </div>
                         </div>
 
-                        <!-- Split Selection -->
+                        <!-- Split Selection Slider -->
                         <div class="input-group calc-full">
                             <label>Ownership Split (Governs Down Payment & Joint Bills)</label>
-                            <div class="split-selector">
-                                <div class="split-option active" data-split="50-50">50% / 50% Split</div>
-                                <div class="split-option" data-split="60-40">60% (Main) / 40% (ADU)</div>
+                            <div class="split-slider-wrapper" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 5px;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);" id="split-label-a">Jared & Melinda: 50%</span>
+                                <input type="range" id="split-slider" min="30" max="70" value="50" step="1" style="flex-grow: 1;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);" id="split-label-b">Nelson: 50%</span>
                             </div>
                         </div>
 
@@ -364,11 +387,11 @@
                         
                         <div class="outputs-splits">
                             <div class="output-split-item">
-                                <span class="output-split-label">Main House Base Share</span>
+                                <span class="output-split-label" id="main-base-label">Main House Base Share</span>
                                 <span class="output-split-val" id="main-base-payment">$2,248</span>
                             </div>
                             <div class="output-split-item">
-                                <span class="output-split-label">ADU Unit Base Share</span>
+                                <span class="output-split-label" id="adu-base-label">ADU Unit Base Share</span>
                                 <span class="output-split-val" id="adu-base-payment">$2,248</span>
                             </div>
                         </div>

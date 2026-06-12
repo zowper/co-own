@@ -80,17 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const rentMainInput = document.getElementById('rent-main');
     const rentAduInput = document.getElementById('rent-adu');
 
-    const splitOptions = document.querySelectorAll('.split-option');
-    let currentSplit = '50-50'; // Default 50/50 split
-
-    splitOptions.forEach(opt => {
-        opt.addEventListener('click', () => {
-            splitOptions.forEach(o => o.classList.remove('active'));
-            opt.classList.add('active');
-            currentSplit = opt.getAttribute('data-split');
-            calculateEqualization();
-        });
-    });
+    const partnerANameInput = document.getElementById('partner-a-name');
+    const partnerBNameInput = document.getElementById('partner-b-name');
+    const appreciationRateInput = document.getElementById('appreciation-rate');
+    const splitSlider = document.getElementById('split-slider');
+    
+    const splitLabelA = document.getElementById('split-label-a');
+    const splitLabelB = document.getElementById('split-label-b');
+    
+    const mainBaseLabel = document.getElementById('main-base-label');
+    const aduBaseLabel = document.getElementById('adu-base-label');
 
     const totalMonthlyOutput = document.getElementById('total-monthly-payment');
     const mainBaseOutput = document.getElementById('main-base-payment');
@@ -100,7 +99,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainNetOutput = document.getElementById('main-net-payment');
     const aduNetOutput = document.getElementById('adu-net-payment');
 
+    // Global timeline data array calculated dynamically
+    let dynamicTimelineData = [];
+
     function calculateEqualization() {
+        const partnerAName = partnerANameInput.value.trim() || 'Partner A';
+        const partnerBName = partnerBNameInput.value.trim() || 'Partner B';
+        
+        const splitA = parseInt(splitSlider.value) || 50;
+        const splitB = 100 - splitA;
+
+        // Update slider labels
+        splitLabelA.textContent = `${partnerAName}: ${splitA}%`;
+        splitLabelB.textContent = `${partnerBName}: ${splitB}%`;
+
+        // Update list labels
+        mainBaseLabel.textContent = `${partnerAName} Base Share`;
+        aduBaseLabel.textContent = `${partnerBName} Base Share`;
+
         const homePrice = parseFloat(homePriceInput.value) || 0;
         const downPaymentPercent = parseFloat(downPaymentInput.value) || 0;
         const interestRate = parseFloat(interestRateInput.value) || 0;
@@ -128,22 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalMonthlyCost = monthlyMortgage + monthlyExpenses;
 
         // Determine splits
-        let shareMain = 0.5;
-        let shareAdu = 0.5;
-
-        if (currentSplit === '60-40') {
-            shareMain = 0.6;
-            shareAdu = 0.4;
-        }
+        const shareMain = splitA / 100;
+        const shareAdu = splitB / 100;
 
         const mainBaseShare = totalMonthlyCost * shareMain;
         const aduBaseShare = totalMonthlyCost * shareAdu;
 
         // Rent Equalization Calculation:
-        // Total utility = appraisalMain + appraisalAdu
-        // Entitled Main = Total * shareMain
-        // Entitled ADU = Total * shareAdu
-        // Diff = Entitled Main - appraisalMain
         const totalUtility = appraisalMain + appraisalAdu;
         const entitledMain = totalUtility * shareMain;
         
@@ -155,15 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let aduNet = aduBaseShare;
 
         if (equalizationPayment < 0) {
-            // Main consumed more than entitled (appraisalMain > entitledMain). Main pays ADU.
+            // Main consumed more than entitled. Main pays ADU.
             displayEqualization = Math.abs(equalizationPayment);
-            directionText = "Main House pays ADU:";
+            directionText = `${partnerAName} pays ${partnerBName}:`;
             mainNet = mainBaseShare + displayEqualization;
             aduNet = aduBaseShare - displayEqualization;
         } else if (equalizationPayment > 0) {
             // ADU consumed more than entitled. ADU pays Main.
             displayEqualization = Math.abs(equalizationPayment);
-            directionText = "ADU pays Main House:";
+            directionText = `${partnerBName} pays ${partnerAName}:`;
             mainNet = mainBaseShare - displayEqualization;
             aduNet = aduBaseShare + displayEqualization;
         }
@@ -176,6 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
         equalizationDirectionOutput.textContent = directionText;
         mainNetOutput.textContent = '$' + Math.round(mainNet).toLocaleString();
         aduNetOutput.textContent = '$' + Math.round(aduNet).toLocaleString();
+
+        // Dynamic output labels for final shares
+        document.getElementById('main-name-label').textContent = `${partnerAName} Net Out-of-Pocket`;
+        document.getElementById('adu-name-label').textContent = `${partnerBName} Net Out-of-Pocket`;
 
         // Update Share Bar Visuals
         const mainBar = document.getElementById('segment-main-bar');
@@ -196,28 +207,94 @@ document.addEventListener('DOMContentLoaded', () => {
             mainPct.style.display = mainPctVal < 12 ? 'none' : 'block';
             aduPct.style.display = aduPctVal < 12 ? 'none' : 'block';
         }
+
+        // Sync with Local Storage for dynamic contract hydration
+        localStorage.setItem('coown_partner_a_name', partnerAName);
+        localStorage.setItem('coown_partner_b_name', partnerBName);
+        localStorage.setItem('coown_home_price', homePrice);
+        localStorage.setItem('coown_down_payment_pct', downPaymentPercent);
+        localStorage.setItem('coown_down_payment_amt', downPaymentAmount);
+        localStorage.setItem('coown_interest_rate', interestRate);
+        localStorage.setItem('coown_loan_term', loanTerm);
+        localStorage.setItem('coown_monthly_expenses', monthlyExpenses);
+        localStorage.setItem('coown_appraisal_main', appraisalMain);
+        localStorage.setItem('coown_appraisal_adu', appraisalAdu);
+        localStorage.setItem('coown_split_a', splitA);
+        localStorage.setItem('coown_split_b', splitB);
+        localStorage.setItem('coown_total_monthly_cost', totalMonthlyCost);
+        localStorage.setItem('coown_main_base_share', mainBaseShare);
+        localStorage.setItem('coown_adu_base_share', aduBaseShare);
+        localStorage.setItem('coown_equalization_payment', displayEqualization);
+        localStorage.setItem('coown_equalization_direction', directionText);
+        localStorage.setItem('coown_main_net', mainNet);
+        localStorage.setItem('coown_adu_net', aduNet);
+
+        // Generate and update exit timeline math dynamically
+        const appreciationRate = parseFloat(appreciationRateInput.value) || 5.0;
+        generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, splitA, appreciationRate);
+        
+        const currentYearVal = parseInt(tlRange.value) || 5;
+        updateTimeline(currentYearVal);
     }
 
-    [homePriceInput, downPaymentInput, interestRateInput, loanTermInput, expensesInput, rentMainInput, rentAduInput].forEach(input => {
-        input.addEventListener('input', calculateEqualization);
+    function generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, splitA, appreciationRate) {
+        dynamicTimelineData = [];
+        const downPaymentAmount = homePrice * (downPaymentPercent / 100);
+        const loanAmount = homePrice - downPaymentAmount;
+        const shareB = (100 - splitA) / 100;
+        
+        const r_m = (interestRate / 100) / 12;
+        const N = loanTerm * 12;
+
+        for (let year = 0; year <= 10; year++) {
+            // Home Value appreciation
+            const val = homePrice * Math.pow(1 + (appreciationRate / 100), year);
+            
+            // Remaining Mortgage Balance
+            let loan = 0;
+            if (loanAmount > 0) {
+                const n = year * 12;
+                if (r_m === 0) {
+                    loan = loanAmount * (1 - n / N);
+                } else {
+                    loan = loanAmount * (Math.pow(1 + r_m, N) - Math.pow(1 + r_m, n)) / (Math.pow(1 + r_m, N) - 1);
+                }
+                loan = Math.max(0, loan);
+            }
+            
+            const equity = val - loan;
+            
+            // Buyout Needed for leaving partner (Partner B)
+            const partnerBDownPaymentShare = downPaymentAmount * shareB;
+            const partnerBAppreciationShare = (val - homePrice) * shareB;
+            const buyout = partnerBDownPaymentShare + partnerBAppreciationShare;
+
+            // Refinance limits
+            const l90 = (0.90 * val) - loan;
+            const a90 = l90 >= buyout;
+            
+            const l80 = (0.80 * val) - loan;
+            const a80 = l80 >= buyout;
+
+            dynamicTimelineData.push({
+                year: year,
+                val: val,
+                loan: loan,
+                equity: equity,
+                buyout: buyout,
+                l90: l90,
+                a90: a90,
+                l80: l80,
+                a80: a80
+            });
+        }
+    }
+
+    [homePriceInput, downPaymentInput, interestRateInput, loanTermInput, expensesInput, rentMainInput, rentAduInput, partnerANameInput, partnerBNameInput, appreciationRateInput, splitSlider].forEach(input => {
+        if (input) {
+            input.addEventListener('input', calculateEqualization);
+        }
     });
-
-    calculateEqualization();
-
-    // 4. Refinancing Timeline Slider
-    const timelineData = [
-        { year: 0, val: 800000, loan: 725000, equity: 75000, buyout: 37500, l90: -5000, a90: false, l80: -85000, a80: false },
-        { year: 1, val: 840000, loan: 716504, equity: 123496, buyout: 57500, l90: 39496, a90: false, l80: -44504, a80: false },
-        { year: 2, val: 882000, loan: 707463, equity: 174537, buyout: 78500, l90: 86337, a90: true, l80: -1863, a80: false },
-        { year: 3, val: 926100, loan: 697839, equity: 228261, buyout: 100550, l90: 135651, a90: true, l80: 43041, a80: false },
-        { year: 4, val: 972405, loan: 687596, equity: 284809, buyout: 123703, l90: 187568, a90: true, l80: 90328, a80: false },
-        { year: 5, val: 1021025, loan: 676695, equity: 344330, buyout: 148013, l90: 242228, a90: true, l80: 140125, a80: false },
-        { year: 6, val: 1072077, loan: 665092, equity: 406985, buyout: 173538, l90: 299776, a90: true, l80: 192569, a80: true },
-        { year: 7, val: 1125680, loan: 652744, equity: 472936, buyout: 200340, l90: 360369, a90: true, l80: 247801, a80: true },
-        { year: 8, val: 1181964, loan: 639600, equity: 542364, buyout: 228482, l90: 424168, a90: true, l80: 305971, a80: true },
-        { year: 9, val: 1241063, loan: 625612, equity: 615451, buyout: 258031, l90: 491345, a90: true, l80: 367238, a80: true },
-        { year: 10, val: 1303116, loan: 610723, equity: 692393, buyout: 289058, l90: 562081, a90: true, l80: 431769, a80: true }
-    ];
 
     const tlRange = document.getElementById('timeline-range');
     const tlYearBadge = document.getElementById('timeline-year-badge');
@@ -231,8 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const ltv80Badge = document.getElementById('ltv-80-badge');
 
     function updateTimeline(yearIdx) {
-        const data = timelineData[yearIdx];
+        const data = dynamicTimelineData[yearIdx];
         if (!data) return;
+
+        const partnerBName = partnerBNameInput.value.trim() || 'Partner B';
 
         tlYearBadge.textContent = "Year " + data.year + ".0";
         tlHomeValue.textContent = '$' + Math.round(data.val).toLocaleString();
@@ -330,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const borrowLimit90 = Math.round(data.l90);
             if (data.a90) {
-                statusHtml = `At 90% LTV, a refinance allows borrowing up to <strong>$${borrowLimit90.toLocaleString()}</strong> in cash, which is <strong>fully sufficient</strong> to fund the $${Math.round(data.buyout).toLocaleString()} buyout.`;
+                statusHtml = `At 90% LTV, a refinance allows borrowing up to <strong>$${borrowLimit90.toLocaleString()}</strong> in cash, which is <strong>fully sufficient</strong> to fund ${partnerBName}'s $${Math.round(data.buyout).toLocaleString()} buyout.`;
                 if (data.a80) {
                     const borrowLimit80 = Math.round(data.l80);
                     statusHtml += ` Even at a conservative 80% LTV, we have <strong>$${borrowLimit80.toLocaleString()}</strong> in borrow capacity, easily covering the buyout.`;
@@ -348,9 +427,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tlRange.addEventListener('input', (e) => {
             updateTimeline(parseInt(e.target.value));
         });
-        
-        updateTimeline(5);
     }
+
+    // Run first calculation on load
+    calculateEqualization();
 
     // 5. Dynamic Property Showcase Controller
     const searchInput = document.getElementById('search-input');
