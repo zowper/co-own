@@ -507,24 +507,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const buyoutA = (downPaymentAmount * shareA) + ((val - homePrice) * shareA) + ((loanAmount - loan) * shareA);
             const buyoutB = (downPaymentAmount * shareB) + ((val - homePrice) * shareB) + ((loanAmount - loan) * shareB);
 
+            // Refinance limits
+            const l90 = (0.90 * val) - loan;
+            const l80 = (0.80 * val) - loan;
+
+            const canBuyoutA = l80 >= buyoutA;
+            const canBuyoutB = l80 >= buyoutB;
+
             let buyoutText = "";
+            let buyoutHtml = "";
             let buyoutVal = 0;
 
             if (splitA === 50) {
-                buyoutText = '$' + Math.round(buyoutB).toLocaleString();
+                const formattedVal = '$' + Math.round(buyoutB).toLocaleString();
+                buyoutText = formattedVal;
+                buyoutHtml = formattedVal + (canBuyoutB ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
                 buyoutVal = buyoutB;
             } else {
                 const higher = Math.max(buyoutA, buyoutB);
                 const lower = Math.min(buyoutA, buyoutB);
-                buyoutText = '$' + Math.round(higher).toLocaleString() + ' or $' + Math.round(lower).toLocaleString();
+                const isHigherA = buyoutA >= buyoutB;
+                const canBuyoutHigher = isHigherA ? canBuyoutA : canBuyoutB;
+                const canBuyoutLower = isHigherA ? canBuyoutB : canBuyoutA;
+
+                const formattedHigher = '$' + Math.round(higher).toLocaleString();
+                const formattedLower = '$' + Math.round(lower).toLocaleString();
+
+                buyoutText = formattedHigher + ' or ' + formattedLower;
+                
+                const htmlHigher = formattedHigher + (canBuyoutHigher ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
+                const htmlLower = formattedLower + (canBuyoutLower ? '<span class="buyout-checkmark" title="80% LTV loan is sufficient to buy out this owner">✓</span>' : '');
+
+                buyoutHtml = `${htmlHigher} <span style="font-size: 0.9rem; color: var(--color-text-muted); font-weight: normal;">or</span> ${htmlLower}`;
                 buyoutVal = higher;
             }
 
-            // Refinance limits
-            const l90 = (0.90 * val) - loan;
             const a90 = l90 >= buyoutVal;
-            
-            const l80 = (0.80 * val) - loan;
             const a80 = l80 >= buyoutVal;
 
             dynamicTimelineData.push({
@@ -534,6 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 equity: equity,
                 buyout: buyoutVal,
                 buyoutText: buyoutText,
+                buyoutHtml: buyoutHtml,
                 l90: l90,
                 a90: a90,
                 l80: l80,
@@ -601,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tlHomeValue.textContent = '$' + Math.round(data.val).toLocaleString();
         tlMortgageLeft.textContent = '$' + Math.round(data.loan).toLocaleString();
         tlJointEquity.textContent = '$' + Math.round(data.equity).toLocaleString();
-        tlBuyoutNeeded.textContent = data.buyoutText;
+        tlBuyoutNeeded.innerHTML = data.buyoutHtml;
 
 
         // Update badges

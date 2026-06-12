@@ -1418,6 +1418,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     color: var(--color-primary);
 }
 
+.buyout-checkmark {
+    color: #2a5c43;
+    font-weight: 700;
+    margin-left: 6px;
+    font-size: 1.15rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .timeline-status-card {
     grid-column: span 4;
     background-color: var(--color-surface-alt);
