@@ -496,7 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Buyout Needed for leaving family (Family B)
             const partnerBDownPaymentShare = downPaymentAmount * shareB;
             const partnerBAppreciationShare = (val - homePrice) * shareB;
-            const buyout = partnerBDownPaymentShare + partnerBAppreciationShare;
+            const partnerBPrincipalShare = (loanAmount - loan) * shareB;
+            const buyout = partnerBDownPaymentShare + partnerBAppreciationShare + partnerBPrincipalShare;
 
             // Refinance limits
             const l90 = (0.90 * val) - loan;
