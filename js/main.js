@@ -353,6 +353,16 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('coown_main_net', mainNet);
         localStorage.setItem('coown_adu_net', aduNet);
 
+        // Notify embedded contract iframe if it exists and is loaded
+        const contractIframe = document.getElementById('contract-iframe');
+        if (contractIframe && contractIframe.contentWindow && typeof contractIframe.contentWindow.hydrateContract === 'function') {
+            try {
+                contractIframe.contentWindow.hydrateContract();
+            } catch (err) {
+                console.warn("Could not hydrate contract iframe directly:", err);
+            }
+        }
+
         // Generate and update exit timeline math dynamically
         const appreciationRate = parseFloat(appreciationRateInput.value) || 5.0;
         generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, splitA, appreciationRate);

@@ -1642,9 +1642,53 @@
         let isDrawing = false;
         let canvasHasDrawing = false;
 
-        // Set up canvas when DOM evaluates
         window.addEventListener('load', () => {
             hydrateContract();
+            
+            // Adjustments when loaded inside an iframe (embedded in main page)
+            if (window.self !== window.top) {
+                // 1. Hide the Close button
+                const closeBtn = document.querySelector('a[href="index.html#contract-teaser"].ds-btn-secondary');
+                if (closeBtn) {
+                    closeBtn.style.display = 'none';
+                }
+                
+                // 2. Make logo title static (prevent iframe reloading main page recursive loops)
+                const logoLink = document.querySelector('.ds-logo');
+                if (logoLink) {
+                    logoLink.removeAttribute('href');
+                    logoLink.style.cursor = 'default';
+                    logoLink.title = 'Sample Operating Agreement';
+                }
+
+                // 3. Customize "Back to Proposal" button to close overlay and scroll parent page to FAQ
+                const successBtn = document.querySelector('.success-box .ds-btn-finish');
+                if (successBtn) {
+                    successBtn.innerText = 'Continue to FAQ';
+                    successBtn.removeAttribute('href');
+                    successBtn.style.cursor = 'pointer';
+                    successBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.getElementById('success-overlay').classList.remove('active');
+                        try {
+                            const parentFaq = window.parent.document.getElementById('faq');
+                            if (parentFaq) {
+                                parentFaq.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        } catch (err) {
+                            console.warn("Could not scroll parent page to FAQ:", err);
+                        }
+                    });
+                }
+            }
+
+            // Storage sync fallback in case direct updates miss
+            window.addEventListener('storage', (e) => {
+                if (e.key && e.key.startsWith('coown_')) {
+                    hydrateContract();
+                }
+            });
+
             canvas = document.getElementById('sig-canvas');
             if (canvas) {
                 ctx = canvas.getContext('2d');
