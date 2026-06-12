@@ -88,8 +88,39 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navOverlay) navOverlay.classList.remove('active');
             document.body.classList.remove('sidebar-active');
             
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
+            // Determine if the clicked link is a sub-link or main-link
+            const isSub = link.classList.contains('sub-link');
+            const parentGroup = link.closest('.nav-item-group');
+            const mainLink = isSub ? parentGroup.querySelector('.main-link') : link;
+            
+            // Remove active classes
+            document.querySelectorAll('.main-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.sub-link').forEach(l => l.classList.remove('active-sub'));
+            
+            // Set active class on main link
+            if (mainLink) mainLink.classList.add('active');
+            
+            // Set active-sub class on the specific sub-link
+            if (isSub) {
+                link.classList.add('active-sub');
+            } else if (parentGroup) {
+                // If main link is clicked, default to its first sub-link
+                const firstSub = parentGroup.querySelector('.sub-link');
+                if (firstSub) {
+                    firstSub.classList.add('active-sub');
+                }
+            }
+            
+            // Handle expanding parent group and collapsing others
+            if (parentGroup) {
+                document.querySelectorAll('.nav-item-group').forEach(group => {
+                    if (group === parentGroup) {
+                        group.classList.add('expanded');
+                    } else {
+                        group.classList.remove('expanded');
+                    }
+                });
+            }
             
             // Instantly update the indicator position
             updateNavIndicator();
@@ -103,9 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Map the nav links to their corresponding section elements for Scroll Spy
+    // Map only the sub-links to their corresponding section elements for Scroll Spy
     const sectionsToWatch = [];
-    navLinks.forEach(link => {
+    const subLinks = document.querySelectorAll('.sub-link');
+    subLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (href && href.startsWith('#') && href.length > 1) {
             const section = document.querySelector(href);
@@ -139,15 +171,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Default to the first section (Proposal) if none matched yet
+        // Default to the first section (Strategy/Combining Power) if none matched yet
         if (!currentActive && sectionsToWatch.length > 0) {
             currentActive = sectionsToWatch[0];
         }
 
         if (currentActive) {
             let changed = false;
-            navLinks.forEach(link => {
-                if (link === currentActive.link) {
+            const activeSubLink = currentActive.link;
+            const parentGroup = activeSubLink.closest('.nav-item-group');
+            const parentMainLink = parentGroup ? parentGroup.querySelector('.main-link') : null;
+
+            // Update sub-links active-sub state
+            subLinks.forEach(link => {
+                if (link === activeSubLink) {
+                    if (!link.classList.contains('active-sub')) {
+                        link.classList.add('active-sub');
+                        changed = true;
+                    }
+                } else {
+                    if (link.classList.contains('active-sub')) {
+                        link.classList.remove('active-sub');
+                        changed = true;
+                    }
+                }
+            });
+
+            // Update main-links active state (for sliding indicator)
+            document.querySelectorAll('.main-link').forEach(link => {
+                if (link === parentMainLink) {
                     if (!link.classList.contains('active')) {
                         link.classList.add('active');
                         changed = true;
@@ -159,6 +211,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+
+            // Expand active group, collapse others
+            if (parentGroup) {
+                document.querySelectorAll('.nav-item-group').forEach(group => {
+                    if (group === parentGroup) {
+                        if (!group.classList.contains('expanded')) {
+                            group.classList.add('expanded');
+                            changed = true;
+                        }
+                    } else {
+                        if (group.classList.contains('expanded')) {
+                            group.classList.remove('expanded');
+                            changed = true;
+                        }
+                    }
+                });
+            }
 
             if (changed) {
                 updateNavIndicator();
@@ -180,6 +249,25 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNavIndicator();
         });
     }
+
+    // Track submenu height transitions to keep sliding indicator perfectly synced
+    document.querySelectorAll('.nav-submenu').forEach(submenu => {
+        submenu.addEventListener('transitionstart', () => {
+            let start = null;
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                updateNavIndicator();
+                if (progress < 450) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
+        });
+        submenu.addEventListener('transitionend', () => {
+            updateNavIndicator();
+        });
+    });
 
     // Initialize indicator position on page load
     setTimeout(() => {
