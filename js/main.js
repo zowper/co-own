@@ -1,21 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 0. Dark Mode Toggler
-    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        document.body.classList.add('dark-theme');
-    }
-
-    themeToggleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    });
-
     // 1. Navigation Menu, Overlay, & Sliding Indicator Setup
     const hamburger = document.getElementById('hamburger');
     const sidebarContainer = document.getElementById('sidebar-container');

@@ -47,70 +47,7 @@
     --color-header-bg: rgba(250, 245, 235, 0.85);
 }
 
-/* Dark Theme Variables */
-.dark-theme {
-    --color-bg: #130B07;              /* Deep Roasted Cocoa Background */
-    --color-surface: #20130C;         /* Rich Chocolate Surface */
-    --color-surface-alt: #2D1D13;     /* Muted Cocoa */
-    --color-surface-card: #281A11;
-    
-    --color-primary: #FAF5EB;         /* Soft Sand Heading Text */
-    --color-primary-light: #EADFCD;   /* Cashmere Sand */
-    --color-primary-dark: #FFFFFF;
-    
-    --color-secondary: #769482;       /* Sage Green Accent */
-    --color-secondary-dark: #8EAE9B;  /* Lighter Sage for Dark BG */
-    --color-accent: #5A7A68;          /* Deep Sage */
-    --color-accent-hover: #6F907D;
-    
-    --color-text-main: #EADFCD;       /* Sand Body Text */
-    --color-text-muted: #CFBDB3;      /* Cashmere Muted Text */
-    --color-border: rgba(250, 245, 235, 0.08); /* Light Border */
-    --color-border-hover: rgba(250, 245, 235, 0.15);
-    
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.4);
-    --color-header-bg: rgba(19, 11, 7, 0.85);
-}
 
-/* Theme Toggle Button Styles */
-.theme-toggle-btn {
-    background: none;
-    border: 1px solid var(--color-border);
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    padding: 0;
-}
-
-.theme-toggle-btn:hover {
-    background-color: rgba(90, 122, 104, 0.1);
-    border-color: var(--color-secondary);
-    transform: scale(1.05);
-}
-
-.theme-toggle-btn svg {
-    width: 18px;
-    height: 18px;
-    stroke: currentColor;
-    fill: none;
-    transition: transform var(--transition-normal);
-}
-
-/* Light mode icon visibility */
-body:not(.dark-theme) .theme-icon-sun {
-    display: none;
-}
-body.dark-theme .theme-icon-moon {
-    display: none;
-}
 
 /* Reset and Globals */
 *, *::before, *::after {
@@ -340,9 +277,7 @@ p {
     color: #FFFFFF !important;
 }
 
-.dark-theme .nav-link.active {
-    color: #20130C !important;
-}
+
 
 .nav-link.active:hover {
     background-color: transparent;
@@ -446,9 +381,7 @@ p {
     gap: var(--space-sm);
 }
 
-.sidebar-bottom .theme-toggle-btn {
-    align-self: flex-start;
-}
+
 
 .sidebar-credit {
     font-size: 0.8rem;
@@ -551,10 +484,7 @@ p {
     transition: background var(--transition-normal);
 }
 
-/* In dark theme, we blend better with the dark background */
-.dark-theme .hero-banner-overlay {
-    background: linear-gradient(90deg, rgba(19, 11, 7, 0.95) 0%, rgba(19, 11, 7, 0.7) 45%, rgba(19, 11, 7, 0.2) 100%);
-}
+
 
 .hero-banner-content {
     position: relative;
@@ -597,9 +527,7 @@ p {
     .hero-banner-overlay {
         background: linear-gradient(180deg, rgba(32, 18, 10, 0.8) 0%, rgba(32, 18, 10, 0.9) 100%);
     }
-    .dark-theme .hero-banner-overlay {
-        background: linear-gradient(180deg, rgba(19, 11, 7, 0.8) 0%, rgba(19, 11, 7, 0.92) 100%);
-    }
+
     .hero-banner-title {
         font-size: 2.2rem;
         text-align: center;
@@ -689,9 +617,7 @@ p {
     pointer-events: none;
 }
 
-.dark-theme .hand-drawn-underline::after {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M3,5 C35,2 65,8 97,4' stroke='%23769482' stroke-width='2.5' stroke-linecap='round' fill='none'/><path d='M6,7 C40,5 75,8 93,6' stroke='%23769482' stroke-width='1.5' stroke-linecap='round' fill='none'/></svg>");
-}
+
 
 
 .letter-greeting {
@@ -1084,14 +1010,7 @@ p {
     color: var(--color-primary-dark);
 }
 
-/* Light / dark context fixes */
-.dark-theme .segment-adu {
-    color: var(--color-primary-dark);
-    background-color: #769482; /* Lighter Sage */
-}
-.dark-theme .segment-main {
-    background-color: var(--color-secondary-dark);
-}
+
 
 .share-pct-label {
     font-size: 0.75rem;
@@ -1126,12 +1045,7 @@ p {
 .dot-adu {
     background-color: var(--color-surface-alt);
 }
-.dark-theme .dot-main {
-    background-color: var(--color-secondary-dark);
-}
-.dark-theme .dot-adu {
-    background-color: #769482;
-}
+
 
 /* Calculator Style */
 .calc-grid {
@@ -1512,11 +1426,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     color: var(--color-primary-dark);
 }
 
-.dark-theme .segment-buyout-needed {
-    background-color: var(--color-surface);
-    color: var(--color-primary-light);
-    border: 1px solid var(--color-border);
-}
+
 
 .segment-excess-refi {
     background-color: rgba(90, 122, 104, 0.25); /* Soft Sage glow */
@@ -1524,11 +1434,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     border: 1.5px dashed var(--color-secondary);
 }
 
-.dark-theme .segment-excess-refi {
-    background-color: rgba(142, 174, 155, 0.15);
-    color: var(--color-primary-light);
-    border-color: var(--color-secondary-dark);
-}
+
 
 .chart-segment-val {
     font-size: 0.7rem;
@@ -2442,9 +2348,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         color: var(--color-primary);
     }
     
-    .sidebar-bottom .theme-toggle-btn {
-        display: none;
-    }
+
 
     /* Staggered slide-in animations for navigation items inside the mobile drawer */
     .sidebar-container .nav-menu li {
@@ -2570,17 +2474,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     transform: translateY(-1px);
 }
 
-.dark-theme .prop-calc-load-btn {
-    background-color: var(--color-surface-alt);
-    color: var(--color-primary);
-    border-color: var(--color-border);
-}
 
-.dark-theme .prop-calc-load-btn:hover {
-    background-color: var(--color-secondary);
-    color: #FFFFFF;
-    border-color: var(--color-secondary);
-}
 
 @keyframes flashGlow {
     0% {
