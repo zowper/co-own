@@ -594,6 +594,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tlMortgageLeft = document.getElementById('tl-mortgage-left');
     const tlJointEquity = document.getElementById('tl-joint-equity');
     const tlBuyoutNeeded = document.getElementById('tl-buyout-needed');
+    const tlLtv90 = document.getElementById('tl-ltv-90');
+    const tlLtv80 = document.getElementById('tl-ltv-80');
     const tlStatusDesc = document.getElementById('tl-status-desc');
     
     const ltv90Badge = document.getElementById('ltv-90-badge');
@@ -621,6 +623,12 @@ document.addEventListener('DOMContentLoaded', () => {
         tlMortgageLeft.textContent = '$' + Math.round(data.loan).toLocaleString();
         tlJointEquity.textContent = '$' + Math.round(data.equity).toLocaleString();
         tlBuyoutNeeded.innerHTML = data.buyoutHtml;
+        if (tlLtv90) {
+            tlLtv90.textContent = '$' + Math.max(0, Math.round(data.l90)).toLocaleString();
+        }
+        if (tlLtv80) {
+            tlLtv80.textContent = '$' + Math.max(0, Math.round(data.l80)).toLocaleString();
+        }
 
 
         // Update badges
