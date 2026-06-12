@@ -21,7 +21,6 @@
                     <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3L19 9.3zM12 5.5l6 5.4v7.1h-2v-6H8v6H6v-7.1l6-5.4z"/>
                     <path d="M17 3.5l3.5 3.15V15h-1.5V7.85l-2-1.8V3.5h-2v1.05l-1-0.9V2.5h3v1z" opacity="0.75"/>
                 </svg>
-                <span>Co-own</span>
             </a>
             
             <nav>
@@ -37,6 +36,24 @@
 
             <div class="nav-actions">
                 <a href="#calculator" class="btn btn-secondary" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 20px;">Equalization Calculator</a>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <!-- Moon Icon -->
+                    <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <!-- Sun Icon -->
+                    <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
                 <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
                     <span></span>
                     <span></span>
@@ -46,8 +63,28 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-badge">Davis County Co-Ownership Initiative</span>
+                <h1 class="hero-title">Co-Own the Future of <span class="highlight-text">Homeownership</span></h1>
+                <p class="hero-subtitle">Pool resources. Double your purchasing power. Bypass entry-level competition and secure a premium turnkey home while retaining complete spatial privacy and building personal wealth.</p>
+                <div class="hero-actions">
+                    <a href="#calculator" class="btn btn-primary">Calculate Your Split</a>
+                    <a href="#properties" class="btn btn-secondary">Browse Matchable Homes</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="assets/coownership_hero.png" alt="Modern architectural rendering of a premium family co-ownership home setup">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Personal Proposal Letter -->
-    <section class="section letter-section">
+    <section class="section letter-section reveal-on-scroll">
         <div class="container">
             <div class="letter-card">
                 <div class="letter-header">
@@ -61,8 +98,7 @@
                     <p>This page serves as an introduction to this concept. It transparently outlines the market math, the daily logistics, the legal safeguards, and the exact 5-year exit strategy. We invite you to read through it, analyze the numbers, and see if we can build something exceptional together.</p>
                 </div>
                 <div class="letter-signature">
-                    <div class="letter-names">Jared, Melinda, and Nelson Carter</div>
-                    <div style="font-size: 0.85rem; color: var(--color-text-muted);">May 2026</div>
+                    <div class="letter-names">Love,<br>Jared, Melinda, and Nelson Carter</div>
                 </div>
                 <div class="letter-ps">
                     <strong>P.S.</strong> We put this in writing so you can review it completely pressure-free. We know this type of arrangement is unique, and above all, we value our relationship with you. If it is a fit, we are thrilled to take this journey together; if not, there are absolutely no worries—we extend this invitation with love and respect.
@@ -72,7 +108,7 @@
     </section>
 
     <!-- Section 1: The Strategy & Buying Dirt -->
-    <section id="strategy" class="section">
+    <section id="strategy" class="section reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>1. The Strategy: Maximizing Purchasing Power</h2>
@@ -94,7 +130,7 @@
                             <th>Financial Metric</th>
                             <th>Renting ($1,850/mo)</th>
                             <th>Buying a Townhome ($375k)</th>
-                            <th>Buying an Entry SFH ($350k)</th>
+                            <th>Buying an Entry SFH ($375k)</th>
                             <th class="highlight-col">Co-Owning a Premium SFH ($750k Total)</th>
                         </tr>
                     </thead>
@@ -124,7 +160,7 @@
                             <td><strong>Equity Gained (5 Yrs)</strong></td>
                             <td>$0</td>
                             <td>~$70,000</td>
-                            <td>~$85,000 - $90,000</td>
+                            <td>~$90,000 - $95,000</td>
                             <td class="highlight-col"><strong>$100,000+ (Per Family)</strong></td>
                         </tr>
                         <tr>
@@ -141,7 +177,7 @@
     </section>
 
     <!-- Section 2: HOA Analysis -->
-    <section id="hoa" class="section section-alt">
+    <section id="hoa" class="section section-alt reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>2. HOAs: Analyzing Non-Recoverable Costs</h2>
@@ -187,7 +223,7 @@
     </section>
 
     <!-- Section 3: Living Logistics & ADU Visual -->
-    <section id="adu" class="section">
+    <section id="adu" class="section reveal-on-scroll">
         <div class="container split-layout">
             <div>
                 <div class="section-header" style="margin-bottom: var(--space-md);">
@@ -198,9 +234,7 @@
                 
                 <ul class="checklist-ul" style="margin-bottom: var(--space-md);">
                     <li><strong>Separate Entryways:</strong> Completely independent front doors (zero shared indoor access).</li>
-                    <li><strong>Fully Equipped Kitchens:</strong> Separate cooking spaces, stoves, and refrigerators.</li>
-                    <li><strong>Private Laundry:</strong> Independent washer/dryer sets for each unit.</li>
-                    <li><strong>Acoustic Privacy:</strong> Built-in soundproofing between levels to ensure quiet, stress-free daily living.</li>
+                    <li><strong>Independent Spaces:</strong> The main home and ADU must have their own full kitchens, laundry, bedrooms, bathrooms, and living rooms.</li>
                 </ul>
 
                 <p>To ensure this arrangement remains completely professional, we will divide the property's management duties into two distinct, equal roles: <strong>The Financial Administrator</strong> (handles the joint books, calculating the mortgage, taxes, utilities, and supplying digital receipts) and <strong>The Property Manager</strong> (manages physical maintenance, lawn care scheduling, HVAC servicing, and vendor repairs).</p>
@@ -209,13 +243,13 @@
             <!-- Real ADU Image -->
             <div class="adu-image-box">
                 <img src="assets/basement_adu.jpg" alt="Ideal setup: single-family home with a private daylight basement ADU layout.">
-                <div class="adu-image-caption">Visualizing the ideal ADU configuration: Independent private entrance, daylight window layouts, and separate living zones.</div>
+                <div class="adu-image-caption">Ideal ADUs have independent private entrances, daylight window layouts, and completely separate living zones.</div>
             </div>
         </div>
     </section>
 
     <!-- Section 4: Rent Equalization & Calculator -->
-    <section id="calculator" class="section section-alt">
+    <section id="calculator" class="section section-alt reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>4. The Financial Architecture & Equalization</h2>
@@ -310,6 +344,23 @@
                             <div class="output-label-total">Total Monthly Mortgage & Joint Bills</div>
                             <div class="output-value-total" id="total-monthly-payment">$4,495</div>
                         </div>
+
+                        <!-- Out-of-Pocket Contribution Share Bar -->
+                        <div class="share-breakdown-container">
+                            <div class="share-breakdown-label">Net Out-of-Pocket Shares</div>
+                            <div class="share-breakdown-bar" id="share-breakdown-bar">
+                                <div class="share-segment segment-main" id="segment-main-bar" style="width: 50%;">
+                                    <span class="share-pct-label" id="pct-main-label">50%</span>
+                                </div>
+                                <div class="share-segment segment-adu" id="segment-adu-bar" style="width: 50%;">
+                                    <span class="share-pct-label" id="pct-adu-label">50%</span>
+                                </div>
+                            </div>
+                            <div class="share-breakdown-legend">
+                                <span class="legend-item"><span class="legend-dot dot-main"></span>Main House Partner</span>
+                                <span class="legend-item"><span class="legend-dot dot-adu"></span>ADU Partner</span>
+                            </div>
+                        </div>
                         
                         <div class="outputs-splits">
                             <div class="output-split-item">
@@ -352,7 +403,7 @@
     </section>
 
     <!-- Section 5: Refinancing Exit Strategy Timeline -->
-    <section id="timeline" class="section">
+    <section id="timeline" class="section reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>5. The 5-Year Exit & Refinance Math</h2>
@@ -386,42 +437,73 @@
                 </div>
                 
                 <!-- Results boxes -->
-                <div class="timeline-results-grid">
-                    <div class="timeline-data-box">
-                        <span class="timeline-data-label">Home Value</span>
-                        <span class="timeline-data-value" id="tl-home-value">$1,021,025</span>
-                    </div>
-                    <div class="timeline-data-box">
-                        <span class="timeline-data-label">Remaining Mortgage</span>
-                        <span class="timeline-data-value" id="tl-mortgage-left">$676,695</span>
-                    </div>
-                    <div class="timeline-data-box">
-                        <span class="timeline-data-label">Total Joint Equity</span>
-                        <span class="timeline-data-value" id="tl-joint-equity">$344,330</span>
-                    </div>
-                    <div class="timeline-data-box">
-                        <span class="timeline-data-label">Leaving Partner Share</span>
-                        <span class="timeline-data-value" id="tl-buyout-needed" style="color: var(--color-accent);">$172,165</span>
-                    </div>
-                    
-                    <!-- LTV Feasibility status -->
-                    <div class="timeline-status-card">
-                        <div style="text-align: left;">
-                            <h5 style="margin-bottom: 2px; font-weight: 500;">Refinancing Buyout Feasibility</h5>
-                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0;" id="tl-status-desc">
-                                At 90% LTV, we can borrow up to <strong>$242,227</strong> to cash out the departing partner.
-                            </p>
+                <div class="timeline-content-layout">
+                    <div class="timeline-results-grid">
+                        <div class="timeline-data-box">
+                            <span class="timeline-data-label">Home Value</span>
+                            <span class="timeline-data-value" id="tl-home-value">$1,021,025</span>
+                        </div>
+                        <div class="timeline-data-box">
+                            <span class="timeline-data-label">Remaining Mortgage</span>
+                            <span class="timeline-data-value" id="tl-mortgage-left">$676,695</span>
+                        </div>
+                        <div class="timeline-data-box">
+                            <span class="timeline-data-label">Total Joint Equity</span>
+                            <span class="timeline-data-value" id="tl-joint-equity">$344,330</span>
+                        </div>
+                        <div class="timeline-data-box">
+                            <span class="timeline-data-label">Leaving Partner Share</span>
+                            <span class="timeline-data-value" id="tl-buyout-needed" style="color: var(--color-accent);">$172,165</span>
                         </div>
                         
-                        <div style="display: flex; gap: var(--space-xs);">
-                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">90% LTV</span>
-                                <span class="status-badge status-yes" id="ltv-90-badge">Yes</span>
+                        <!-- LTV Feasibility status -->
+                        <div class="timeline-status-card">
+                            <div style="text-align: left;">
+                                <h5 style="margin-bottom: 2px; font-weight: 500;">Refinancing Buyout Feasibility</h5>
+                                <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0;" id="tl-status-desc">
+                                    At 90% LTV, we can borrow up to <strong>$242,227</strong> to cash out the departing partner.
+                                </p>
                             </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">80% LTV</span>
-                                <span class="status-badge status-no" id="ltv-80-badge">No</span>
+                            
+                            <div style="display: flex; gap: var(--space-xs);">
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                    <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">90% LTV</span>
+                                    <span class="status-badge status-yes" id="ltv-90-badge">Yes</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                    <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">80% LTV</span>
+                                    <span class="status-badge status-no" id="ltv-80-badge">No</span>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Dynamic Vertical Chart -->
+                    <div class="timeline-chart-container">
+                        <div class="chart-vertical-bar-wrapper">
+                            <span class="chart-bar-title">Asset Value</span>
+                            <div class="chart-vertical-bar bar-asset">
+                                <div class="chart-segment segment-equity" id="chart-segment-equity" style="height: 34%;" title="Joint Equity">
+                                    <span class="chart-segment-val" id="chart-val-equity">$344k</span>
+                                </div>
+                                <div class="chart-segment segment-loan" id="chart-segment-loan" style="height: 66%;" title="Remaining Loan">
+                                    <span class="chart-segment-val" id="chart-val-loan">$676k</span>
+                                </div>
+                            </div>
+                            <span class="chart-bar-label" id="chart-lbl-val">$1.02M</span>
+                        </div>
+
+                        <div class="chart-vertical-bar-wrapper">
+                            <span class="chart-bar-title">Buyout Feasibility</span>
+                            <div class="chart-vertical-bar bar-buyout">
+                                <div class="chart-segment segment-excess-refi" id="chart-segment-excess" style="height: 39%;" title="Excess Refi Capacity">
+                                    <span class="chart-segment-val" id="chart-val-excess">$94k</span>
+                                </div>
+                                <div class="chart-segment segment-buyout-needed" id="chart-segment-buyout" style="height: 61%;" title="Buyout Needed">
+                                    <span class="chart-segment-val" id="chart-val-buyout">$148k</span>
+                                </div>
+                            </div>
+                            <span class="chart-bar-label" id="chart-lbl-refi">$242k Max</span>
                         </div>
                     </div>
                 </div>
@@ -430,7 +512,7 @@
     </section>
 
     <!-- Section 6: Real Property Showcase -->
-    <section id="properties" class="section section-alt">
+    <section id="properties" class="section section-alt reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>6. Local Davis County Property Analysis</h2>
@@ -439,66 +521,83 @@
             
             <p>These homes feature large overall square footage, zero HOA fees (or minor neighborhood HOAs), and layouts highly suitable for converting to or currently housing independent basement ADU living spaces.</p>
             
-            <div class="prop-grid">
-                <!-- Property 1 Kaysville -->
-                <div class="prop-card">
-                    <div class="prop-img-wrapper">
-                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2151129_23ef4540cfd9ad1a6d2d698470a18cf8_69dfaf037b4e5.jpg" alt="1453 S 400 E, Kaysville, UT 84037">
-                        <span class="prop-rating-tag">Rating: 4.4 / 5</span>
-                    </div>
-                    <div class="prop-details">
-                        <div class="prop-price">$680,000</div>
-                        <div class="prop-address">1453 S 400 E<br>Kaysville, UT 84037</div>
-                        <div class="prop-meta-grid">
-                            <span>📐 4,080 Sq. Ft.</span>
-                            <span>🌳 0.18 Acres</span>
-                            <span>🏠 Built in 2002</span>
-                            <span>🚫 HOA: $0</span>
+            <!-- Interactive Filter Card -->
+            <div class="filter-card">
+                <div class="filter-controls-row">
+                    <div class="filter-col search-col">
+                        <label for="search-input">Search Properties</label>
+                        <div class="filter-input-wrapper">
+                            <input type="text" id="search-input" placeholder="Search address, city...">
                         </div>
                     </div>
-                </div>
-                
-                <!-- Property 2 Clinton -->
-                <div class="prop-card">
-                    <div class="prop-img-wrapper">
-                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2152933_2af9c1d506df911485de3cef8e85c14e_69ea54a816c50.jpg" alt="1333 N 1590 W, Clinton, UT 84015">
-                        <span class="prop-rating-tag">Rating: 4.65 / 5</span>
+                    <div class="filter-col select-col">
+                        <label for="city-filter">City</label>
+                        <select id="city-filter">
+                            <option value="all">All Cities</option>
+                            <option value="Clearfield">Clearfield</option>
+                            <option value="Layton">Layton</option>
+                            <option value="Syracuse">Syracuse</option>
+                            <option value="West Point">West Point</option>
+                            <option value="Clinton">Clinton</option>
+                            <option value="Kaysville">Kaysville</option>
+                            <option value="Farmington">Farmington</option>
+                            <option value="South Weber">South Weber</option>
+                            <option value="Riverdale">Riverdale</option>
+                        </select>
                     </div>
-                    <div class="prop-details">
-                        <div class="prop-price">$695,000</div>
-                        <div class="prop-address">1333 N 1590 W<br>Clinton, UT 84015</div>
-                        <div class="prop-meta-grid">
-                            <span>📐 3,927 Sq. Ft.</span>
-                            <span>🌳 0.37 Acres</span>
-                            <span>🏠 Built in 2005</span>
-                            <span>🚫 HOA: $0</span>
-                        </div>
+                    <div class="filter-col select-col">
+                        <label for="sort-by">Sort By</label>
+                        <select id="sort-by">
+                            <option value="rating-desc">Rating: High to Low</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="sqft-desc">Sq. Ft.: High to Low</option>
+                        </select>
                     </div>
                 </div>
+                <div class="filter-toggles-row">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="toggle-adu">
+                        <span class="custom-checkbox"></span>
+                        <span>Has ADU</span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="toggle-entrance">
+                        <span class="custom-checkbox"></span>
+                        <span>Private Entrance</span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="toggle-no-hoa">
+                        <span class="custom-checkbox"></span>
+                        <span>No HOA Fee</span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="toggle-basement">
+                        <span class="custom-checkbox"></span>
+                        <span>Finished Basement</span>
+                    </label>
+                </div>
+            </div>
 
-                <!-- Property 3 Syracuse -->
-                <div class="prop-card">
-                    <div class="prop-img-wrapper">
-                        <img src="https://assets.utahrealestate.com/photos/2048x1536/2156837_347f4963a1bef5a6fe47cf27a0fa84ae_69ff8f8f429e4.jpg" alt="1372 S Homestead Ln, Syracuse, UT 84075">
-                        <span class="prop-rating-tag">Rating: 4.6 / 5</span>
-                    </div>
-                    <div class="prop-details">
-                        <div class="prop-price">$750,000</div>
-                        <div class="prop-address">1372 S Homestead Ln<br>Syracuse, UT 84075</div>
-                        <div class="prop-meta-grid">
-                            <span>📐 4,852 Sq. Ft.</span>
-                            <span>🌳 0.31 Acres</span>
-                            <span>🏠 Built in 2019</span>
-                            <span>📝 HOA: $30/mo</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Results Count Summary -->
+            <div class="results-meta-row">
+                <span id="results-count" class="results-count-text">Showing 0 of 0 properties</span>
+            </div>
+
+            <!-- Dynamic Property Grid -->
+            <div class="prop-grid" id="prop-grid">
+                <!-- Dynamically populated by main.js -->
+            </div>
+
+            <!-- Pagination Action -->
+            <div id="show-more-container" class="show-more-container">
+                <button id="btn-show-more" class="btn btn-primary">Show More Properties</button>
             </div>
         </div>
     </section>
 
     <!-- Section 7: Mutual Safeguards & Operating Agreement -->
-    <section id="safeguards" class="section">
+    <section id="safeguards" class="section reveal-on-scroll">
         <div class="container">
             <div class="section-header">
                 <h2>7. Safeguards: Building a Bulletproof Partnership</h2>
@@ -531,11 +630,36 @@
         </div>
     </section>
 
-    <!-- Section 8: Exit Strategies (FAQ and Contact) -->
-    <section id="faq" class="section">
+    <!-- Section 8: Sample Contract & Details -->
+    <section id="contract-teaser" class="section section-alt reveal-on-scroll">
+        <div class="container">
+            <div class="contract-teaser-card">
+                <div class="contract-teaser-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                </div>
+                <div class="contract-teaser-content">
+                    <h2>I want to know all the details!</h2>
+                    <p>Okay, feel free to read through this sample contract! It's not finalized and we can change anything you want, but it will give you a good idea of what we have in mind.</p>
+                    <div class="contract-teaser-actions">
+                        <a href="contract.html" class="btn btn-primary">
+                            <span>View Contract</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-left: 2px;">
+                                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Exit Strategies (FAQ and Contact) -->
+    <section id="faq" class="section reveal-on-scroll">
         <div class="container">
             <div class="section-header">
-                <h2>8. Frequently Asked Questions & Exit Scenarios</h2>
+                <h2>9. Frequently Asked Questions & Exit Scenarios</h2>
                 <p>Transparent answers on how we handle changing life circumstances and the end of the 5-year timeline.</p>
             </div>
             
@@ -621,6 +745,34 @@
         </div>
     </footer>
 
+    <!-- Property Comparison Floating Tray -->
+    <div class="compare-tray" id="compare-tray">
+        <div class="compare-tray-content">
+            <div class="compare-tray-title">Compare Properties (<span id="compare-count">0</span>/3 selected)</div>
+            <div class="compare-thumbnails" id="compare-thumbnails">
+                <!-- Selected properties thumbnails will appear here -->
+            </div>
+            <div class="compare-tray-actions">
+                <button class="btn btn-primary" id="btn-compare-now" disabled>Compare Now</button>
+                <button class="btn btn-secondary" id="btn-compare-clear" style="padding: 0.4rem 0.9rem; font-size: 0.85rem; border-color: rgba(255,255,255,0.2); color: white;">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div class="compare-modal-overlay" id="compare-modal-overlay">
+        <div class="compare-modal">
+            <div class="compare-modal-header">
+                <h3>Property Comparison Table</h3>
+                <button class="compare-modal-close" id="compare-modal-close">&times;</button>
+            </div>
+            <div class="compare-modal-body" id="compare-modal-body">
+                <!-- side by side table comparison will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/properties-data.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
