@@ -2318,12 +2318,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     
     .mobile-header .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 80%;
+        width: auto;
         max-width: calc(100% - 120px);
-        margin: 0 auto;
+        margin: 0;
         margin-bottom: 0;
         flex-shrink: 0;
     }
