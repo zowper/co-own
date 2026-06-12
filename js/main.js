@@ -298,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5-Year Exit & Refinance inputs
     const timelineHomeValueInput = document.getElementById('timeline-home-value');
     const timelineDownPaymentInput = document.getElementById('timeline-down-payment');
+    const timelineInterestRateInput = document.getElementById('timeline-interest-rate');
     const timelineAppreciationInput = document.getElementById('timeline-appreciation');
     
     const splitLabelA = document.getElementById('split-label-a');
@@ -335,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const homePrice = timelineHomeValueInput ? (parseFloat(timelineHomeValueInput.value) || 0) : 750000;
         const downPaymentPercent = timelineDownPaymentInput ? (parseFloat(timelineDownPaymentInput.value) || 0) : 20;
-        const interestRate = 6.25;
+        const interestRate = timelineInterestRateInput ? (parseFloat(timelineInterestRateInput.value) || 0) : 6.25;
         const loanTerm = 30;
         const monthlyExpenses = globalMonthlyExpenses;
 
@@ -531,6 +532,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (timelineDownPaymentInput) {
         timelineDownPaymentInput.addEventListener('input', (e) => {
+            calculateEqualization();
+        });
+    }
+    if (timelineInterestRateInput) {
+        timelineInterestRateInput.addEventListener('input', (e) => {
             calculateEqualization();
         });
     }
