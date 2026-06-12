@@ -232,15 +232,14 @@ p {
     margin-bottom: var(--space-lg);
 }
 
-.logo svg {
-    fill: currentColor;
-    width: 26px;
-    height: 26px;
-    color: var(--color-secondary);
+.logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
     transition: transform var(--transition-normal);
 }
 
-.logo:hover svg {
+.logo:hover .logo-img {
     transform: scale(1.05);
 }
 
@@ -2210,8 +2209,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
     margin-bottom: var(--space-xs);
 }
 
-.footer-brand .logo svg {
-    color: var(--color-secondary);
+.footer-brand .logo .logo-img {
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+}
+
+.footer-brand .logo:hover .logo-img {
+    opacity: 1;
 }
 
 .footer-brand p {

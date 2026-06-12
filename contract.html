@@ -83,10 +83,15 @@
             color: #000000;
         }
 
-        .ds-logo svg {
-            fill: #0963AC;
-            width: 22px;
-            height: 22px;
+        .ds-logo-img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .ds-logo:hover .ds-logo-img {
+            transform: scale(1.05);
         }
 
         .ds-doc-title {
@@ -1075,11 +1080,7 @@
     <header class="ds-header">
         <div class="ds-header-left">
             <a href="index.html#contract-teaser" class="ds-logo" title="Return to Landing Page">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.5 12.5 L17 8 L21.5 12.5 L20 12.5 V21 H14 V12.5 Z M15.5 14 H18.5 V17 H15.5 Z" opacity="0.75"/>
-                    <path fill-rule="evenodd" d="M1.5 9.5 L8 3 L14.5 9.5 L13 9.5 V21 H3 V9.5 Z M4.5 11 H6.5 V13.5 H4.5 Z M9.5 11 H11.5 V13.5 H9.5 Z M7 16.5 H9 V21 H7 Z"/>
-                </svg>
-                <span>Co-own</span>
+                <img src="https://raw.githubusercontent.com/zowper/co-own/main/assets/Springboard-Logo.png" alt="Springboard Logo" class="ds-logo-img">
             </a>
             <div class="ds-doc-title">Co-ownership Operating Agreement Draft.html</div>
             <span class="ds-badge">Draft</span>
