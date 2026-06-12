@@ -519,73 +519,42 @@
                 </div>
                 
                 <!-- Results boxes -->
-                <div class="timeline-content-layout">
-                    <div class="timeline-results-grid">
-                        <div class="timeline-data-box">
-                            <span class="timeline-data-label">Home Value</span>
-                            <span class="timeline-data-value" id="tl-home-value">$1,021,025</span>
-                        </div>
-                        <div class="timeline-data-box">
-                            <span class="timeline-data-label">Remaining Mortgage</span>
-                            <span class="timeline-data-value" id="tl-mortgage-left">$676,695</span>
-                        </div>
-                        <div class="timeline-data-box">
-                            <span class="timeline-data-label">Total Joint Equity</span>
-                            <span class="timeline-data-value" id="tl-joint-equity">$344,330</span>
-                        </div>
-                        <div class="timeline-data-box">
-                            <span class="timeline-data-label">Leaving Family Share</span>
-                            <span class="timeline-data-value" id="tl-buyout-needed" style="color: var(--color-accent);">$172,165</span>
+                <div class="timeline-results-grid">
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Home Value</span>
+                        <span class="timeline-data-value" id="tl-home-value">$1,021,025</span>
+                    </div>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Remaining Mortgage</span>
+                        <span class="timeline-data-value" id="tl-mortgage-left">$676,695</span>
+                    </div>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Total Joint Equity</span>
+                        <span class="timeline-data-value" id="tl-joint-equity">$344,330</span>
+                    </div>
+                    <div class="timeline-data-box">
+                        <span class="timeline-data-label">Leaving Family Share</span>
+                        <span class="timeline-data-value" id="tl-buyout-needed" style="color: var(--color-accent);">$172,165</span>
+                    </div>
+                    
+                    <!-- LTV Feasibility status -->
+                    <div class="timeline-status-card">
+                        <div style="text-align: left;">
+                            <h5 style="margin-bottom: 2px; font-weight: 500;">Refinancing Buyout Feasibility</h5>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0;" id="tl-status-desc">
+                                At 90% LTV, we can borrow up to <strong>$242,227</strong> to cash out the departing family.
+                            </p>
                         </div>
                         
-                        <!-- LTV Feasibility status -->
-                        <div class="timeline-status-card">
-                            <div style="text-align: left;">
-                                <h5 style="margin-bottom: 2px; font-weight: 500;">Refinancing Buyout Feasibility</h5>
-                                <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 0;" id="tl-status-desc">
-                                    At 90% LTV, we can borrow up to <strong>$242,227</strong> to cash out the departing family.
-                                </p>
+                        <div style="display: flex; gap: var(--space-xs);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">90% LTV</span>
+                                <span class="status-badge status-yes" id="ltv-90-badge">Yes</span>
                             </div>
-                            
-                            <div style="display: flex; gap: var(--space-xs);">
-                                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                                    <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">90% LTV</span>
-                                    <span class="status-badge status-yes" id="ltv-90-badge">Yes</span>
-                                </div>
-                                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                                    <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">80% LTV</span>
-                                    <span class="status-badge status-no" id="ltv-80-badge">No</span>
-                                </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase;">80% LTV</span>
+                                <span class="status-badge status-no" id="ltv-80-badge">No</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Dynamic Vertical Chart -->
-                    <div class="timeline-chart-container">
-                        <div class="chart-vertical-bar-wrapper">
-                            <span class="chart-bar-title">Asset Value</span>
-                            <div class="chart-vertical-bar bar-asset">
-                                <div class="chart-segment segment-equity" id="chart-segment-equity" style="height: 34%;" title="Joint Equity">
-                                    <span class="chart-segment-val" id="chart-val-equity">$344k</span>
-                                </div>
-                                <div class="chart-segment segment-loan" id="chart-segment-loan" style="height: 66%;" title="Remaining Loan">
-                                    <span class="chart-segment-val" id="chart-val-loan">$676k</span>
-                                </div>
-                            </div>
-                            <span class="chart-bar-label" id="chart-lbl-val">$1.02M</span>
-                        </div>
-
-                        <div class="chart-vertical-bar-wrapper">
-                            <span class="chart-bar-title">Buyout Feasibility</span>
-                            <div class="chart-vertical-bar bar-buyout">
-                                <div class="chart-segment segment-excess-refi" id="chart-segment-excess" style="height: 39%;" title="Excess Refi Capacity">
-                                    <span class="chart-segment-val" id="chart-val-excess">$94k</span>
-                                </div>
-                                <div class="chart-segment segment-buyout-needed" id="chart-segment-buyout" style="height: 61%;" title="Buyout Needed">
-                                    <span class="chart-segment-val" id="chart-val-buyout">$148k</span>
-                                </div>
-                            </div>
-                            <span class="chart-bar-label" id="chart-lbl-refi">$242k Max</span>
                         </div>
                     </div>
                 </div>
