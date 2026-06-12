@@ -619,8 +619,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tlLtv80 = document.getElementById('tl-ltv-80');
     const tlStatusDesc = document.getElementById('tl-status-desc');
     
-    const ltv90Badge = document.getElementById('ltv-90-badge');
-    const ltv80Badge = document.getElementById('ltv-80-badge');
+    
+
 
     function getLtvBuyoutStatus(ltvLabel, ltvLimit, buyoutA, buyoutB, splitA) {
         const splitB = 100 - splitA;
@@ -676,22 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        // Update badges
-        if (data.a90) {
-            ltv90Badge.textContent = "Yes";
-            ltv90Badge.className = "status-badge status-yes";
-        } else {
-            ltv90Badge.textContent = "No";
-            ltv90Badge.className = "status-badge status-no";
-        }
 
-        if (data.a80) {
-            ltv80Badge.textContent = "Yes";
-            ltv80Badge.className = "status-badge status-yes";
-        } else {
-            ltv80Badge.textContent = "No";
-            ltv80Badge.className = "status-badge status-no";
-        }
 
         // Description text updates
         const line1 = getLtvBuyoutStatus("A 90% LTV loan", data.l90, data.buyoutA, data.buyoutB, data.splitA);
