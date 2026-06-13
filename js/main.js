@@ -748,7 +748,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `
             <div class="prop-card">
                 <div class="prop-img-wrapper">
-                    <img src="${prop.photo_url}" alt="${prop.street}, ${prop.city}, UT" loading="lazy">
+                    <img src="${prop.photo_url || prop['Photo URL']}" alt="${prop.street}, ${prop.city}, UT" loading="lazy">
                     <span class="prop-rating-tag" title="Jared: ${prop.jared_rating || 'N/A'}★, Gemini: ${prop.gemini_rating || 'N/A'}★">★ ${prop.avg_rating || 'N/A'}</span>
                 </div>
                 <div class="prop-details">
@@ -1010,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prop = PROPERTIES_DATA.find(p => p.mls === mls);
                 if (prop) {
                     const img = document.createElement('img');
-                    img.src = prop.photo_url;
+                    img.src = prop.photo_url || prop['Photo URL'];
                     img.className = 'compare-thumb-img';
                     img.alt = prop.street;
                     img.title = prop.street + ' - Click to remove';
@@ -1076,7 +1076,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         props.forEach(prop => {
             headerRowHtml += `<th>MLS #${prop.mls}</th>`;
-            imgRowHtml += `<td><img src="${prop.photo_url}" class="compare-table-img" alt="${prop.street}"></td>`;
+            imgRowHtml += `<td><img src="${prop.photo_url || prop['Photo URL']}" class="compare-table-img" alt="${prop.street}"></td>`;
             priceRowHtml += `<td style="font-weight: 700; color: var(--color-accent);">$${prop.price.toLocaleString()}</td>`;
             addressRowHtml += `<td>${prop.street}, ${prop.city}</td>`;
             sqftRowHtml += `<td>${prop.sq_ft.toLocaleString()} sq ft</td>`;
