@@ -292,6 +292,8 @@ p {
 .nav-item-group {
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 2;
 }
 
 .nav-submenu {
