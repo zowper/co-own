@@ -473,8 +473,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const timelineSplitA = timelineSplitSlider ? (parseInt(timelineSplitSlider.value) || 50) : 50;
         const timelineSplitB = 100 - timelineSplitA;
 
-        if (timelineSplitLabelA) timelineSplitLabelA.textContent = `Upstairs Family: ${timelineSplitA}%`;
-        if (timelineSplitLabelB) timelineSplitLabelB.textContent = `Downstairs Family: ${timelineSplitB}%`;
+        if (timelineSplitLabelA) timelineSplitLabelA.textContent = `${timelineSplitA}%`;
+        if (timelineSplitLabelB) timelineSplitLabelB.textContent = `${timelineSplitB}%`;
 
         generateTimelineData(homePrice, downPaymentPercent, interestRate, loanTerm, timelineSplitA, appreciationRate);
         
