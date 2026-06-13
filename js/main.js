@@ -652,7 +652,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const partnerBName = 'Downstairs Family';
 
-        tlYearBadge.textContent = "Year " + data.year + ".0";
+        if (tlYearBadge) {
+            tlYearBadge.textContent = "Year " + data.year + ".0";
+        }
         
         // Update active class on ticks
         const ticks = document.querySelectorAll('.timeline-axis-ticks .timeline-tick');
