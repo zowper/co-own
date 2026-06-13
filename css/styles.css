@@ -1290,13 +1290,59 @@ p {
 /* Refinancing Timeline Component */
 .timeline-inputs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
     margin-bottom: var(--space-lg);
     background-color: var(--color-surface-alt);
     padding: var(--space-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
+}
+
+.timeline-inputs-grid .timeline-slider-span {
+    grid-column: 1 / -1;
+    margin-top: var(--space-xs);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+}
+
+/* 3 columns: fits when screen is between 768px and 991px */
+@media (max-width: 991px) {
+    .timeline-inputs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .timeline-inputs-grid .timeline-slider-span {
+        grid-column: 2 / span 2;
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+    }
+}
+
+/* 2 columns: fits when screen is between 480px and 767px */
+@media (max-width: 767px) {
+    .timeline-inputs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .timeline-inputs-grid .timeline-slider-span {
+        grid-column: 1 / span 2;
+        border-top: 1px solid var(--color-border);
+        padding-top: var(--space-md);
+        margin-top: var(--space-xs);
+    }
+}
+
+/* 1 column: fits when screen is below 480px */
+@media (max-width: 480px) {
+    .timeline-inputs-grid {
+        grid-template-columns: 1fr;
+    }
+    .timeline-inputs-grid .timeline-slider-span {
+        grid-column: 1;
+        border-top: 1px solid var(--color-border);
+        padding-top: var(--space-md);
+        margin-top: var(--space-xs);
+    }
 }
 
 .timeline-slider-container {
